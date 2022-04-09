@@ -1,0 +1,44 @@
+
+  <div class=" sidebar ftco-animate">
+    <!-- <div class="sidebar-box">
+      <form action="{% url 'resaneh:search' %}" class="search-form">
+        <div class="form-group">
+          <input type="text" class="form-control text-center" name='q' placeholder="جست و جو کنید">
+          <button  class="fa fa-search" style="position:absolute; border:none; background-color:white;"><i class="bi bi-search"></i></button>
+        </div>
+      </form>
+    </div> -->
+    <div class="sidebar-box ftco-animate">
+      <div class="categories">
+        <h3 class="text-center">دسته‌بندی‌ها</h3>
+        <ul class="p-0">
+
+          {% for cat in category %}
+          {% if cat.parent == None %}
+          <li>
+            <div class="row d-flex justify-content-between">
+              <div class="col-2">
+                {%if cat.children.active %}
+                <a href="#apps-{{cat.title}}" data-toggle="collapse" aria-expanded="false" class="">
+                  <span class="fa fa-chevron-down"></span>
+                </a>
+                {% endif %}
+              </div>
+              <div class="col-10">
+                <a href="{% url 'resaneh:resaneh' cat.slug %}" class="text-center">{{cat.title}}</a>
+              </div>
+            </div>
+
+            {%if cat.children.active %}
+            {% include 'resaneh/partials/category_loop.html' %}
+            {% endif %}
+          </li>
+          {% endif %}
+          {% endfor %}
+
+        </ul>
+
+
+      </div>
+    </div>
+  </div>

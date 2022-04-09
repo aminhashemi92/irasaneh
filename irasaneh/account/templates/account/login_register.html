@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <title>Liquor Store - Free Bootstrap 4 Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="{% static 'home/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ===============================================-->
+  <!--    Main Content-->
+  <!-- ===============================================-->
+  <main class="main" id="top">
+
+
+    <!-- ============================================-->
+    <br>
+    <br>
+    <div class="cont">
+      <form id="main-form" action="" method="POST">
+        {% csrf_token %}
+        <div class="form1 sign-in text-right">
+          <h2 class="text-center my-3">خوش آمدید.</h2>
+          <label class="label1">
+            <span class="span1">شناسه کاربری</span>
+            <input class="input1" type="text" id="input-phone" name="phone" />
+          </label>
+          <br>
+          <label class="label1">
+            <span class="span1">رمز ورود</span>
+            <input class="input1" type="password" id="input-password" name="password" />
+          </label>
+          <a href="#">
+            <p class="forgot-pass">رمز عبور خود را فراموش کردید؟</p>
+          </a>
+          {% for message in messages %}
+          <p class="forgot-pass messages text-danger">{{message}}</p>
+          {% endfor %}
+          <div class="d-flex justify-content-center ">
+            <button type="submit" form="main-form" value="Submit" class="submit subbut">ورود</button>
+          </div>
+        </div>
+      </form>
+
+
+
+      <div class="sub-cont">
+        <div class="img1">
+          <div class="img__text m--up">
+            <a href="{% url 'home:homepage' %}"><img class="my-5" src="{% static 'home/images/whitelogo.png' %}" height="70" alt="logo"></a>
+            <h5 class="pt-5" style="color:white;">اگر عضو نیستید، برای ثبت نام اینجا کلیک کنید.<h3>
+          </div>
+          <div class="img__text m--in">
+            <a href="{% url 'home:homepage' %}"><img class="my-5" src="{% static 'home/images/whitelogo.png' %}" height="70" alt="logo"></a>
+            <h5 class="pt-5" style="color:white;">اگر از قبل ثبت نام کردید، برای ورود اینجا کلیک کنید.<h3>
+          </div>
+          <div class="img__btn">
+            <span class="m--up" style="color:white;">ثبت نام</span>
+            <span class="m--in" style="color:white;">ورود</span>
+          </div>
+        </div>
+
+
+        <form id="main-form2" action="" method="POST">
+          {% csrf_token %}
+          <div class="form2 sign-up text-right py-3">
+            <h2 class="text-center">حساب کاربری خود را بسازید.</h2>
+            <br>
+            <label class="label1">
+              <span class="span1">تلفن همراه</span>
+              {{form.phone}}
+              <!-- {{form.username.help_text}} -->
+              <!-- <input type="username" /> -->
+            </label>
+            <br>
+            <label class="label1" data-bs-toggle="tooltip" data-bs-placement="right" title="گذرواژه شما نمی‌تواند شبیه سایر اطلاعات شخصی شما باشد.
+رمز عبور شما می‌بایست حداقل از 8 حرف تشکیل شده باشد.
+گذرواژه شما نمی تواند یک گذرواژه معمول باشد.
+گذرواژه شما نمی تواند کلا عدد باشد">
+              <span class="span1">رمز ورود</span>
+              {{form.password1}}
+              <!-- <div data-bs-toggle="tooltip" title="Disabled tooltip"> -->
+              <!-- {{form.password1.help_text}} -->
+              <!-- </div> -->
+              <!-- <input type="password" /> -->
+            </label>
+            <br>
+            <label class="label1" data-bs-toggle="tooltip" data-bs-placement="right" title="گذرواژه شما نمی‌تواند شبیه سایر اطلاعات شخصی شما باشد.
+رمز عبور شما می‌بایست حداقل از 8 حرف تشکیل شده باشد.
+گذرواژه شما نمی تواند یک گذرواژه معمول باشد.
+گذرواژه شما نمی تواند کلا عدد باشد">
+              <span class="span1">تکرار رمز ورود</span>
+              {{form.password2}}
+              <!-- {{form.password2.help_text}} -->
+              <!-- <input type="password" /> -->
+            </label>
+            <br>
+              {% for message in messages %}
+              <p class="forgot-pass messages text-danger">{{message}}</p>
+              {% endfor %}
+              <div class="d-flex justify-content-center ">
+                <button type="submit" form="main-form2" value="Submit" class="submit subbut">ثبت نام</button>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <script>
+      document.querySelector('.img__btn').addEventListener('click', function() {
+        document.querySelector('.cont').classList.toggle('s--signup');
+      });
+    </script>
+    <!-- <section> close ============================-->
+    <!-- ============================================-->
+
+  </main>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+
+
+
+
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+
+
+
+</body>
+
+</html>

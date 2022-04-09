@@ -1,0 +1,102 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{%block title%}|پروفایل
+{% endblock %}
+
+{% block header %}
+پروفایل
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+<div class="col-md-12">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">مشخصات من</h3>
+    </div>
+    <div class="card-body">
+      <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-6">
+            {{ form1.firstname|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form1.lastname|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            <!-- {{ form1.company|as_crispy_field }} -->
+            <div class="form-group">
+              <label >
+                شرکت
+              </label>
+              <div>
+                <input type="text" class="textinput textInput form-control" value="{{user.profile.company.name}}" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            {{ form1.role|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form1.sphone|as_crispy_field }}
+            {{ form1.mphone|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form1.pic|as_crispy_field }}
+          </div>
+
+        </div>
+        <button name="profile" class="btn btn-success">ارسال</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% if user.profile.position == 'm' %}
+<div class="col-md-12">
+  <div class="card card-warning">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">شرکت من</h3>
+    </div>
+    <div class="card-body">
+      <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-6">
+            {{ form2.name|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form2.logo|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form2.sphone|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form2.mphone|as_crispy_field }}
+          </div>
+
+        </div>
+        <button name="company" class="btn btn-success">ارسال</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+{% endblock %}

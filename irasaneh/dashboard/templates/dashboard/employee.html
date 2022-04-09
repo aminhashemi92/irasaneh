@@ -1,0 +1,62 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{%block title%}|کارمندها
+{% endblock %}
+
+{% block header %}
+کارمندها
+{% endblock %}
+
+{% block content %}
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-0 float-left pt-1">لیست کارمندان</h3>
+
+                <div class="card-tools mb-0 float-right">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0 table-striped" style="height: 300px;">
+                <table class="table table-head-fixed">
+                  <thead>
+                    <tr class="small">
+                      <th>کد</th>
+                      <th>نام</th>
+                      <th>نام‌خانوادگی</th>
+                      <th>تاریخ عضویت</th>
+                      <th>تعداد رسانه</th>
+                      <th>سطح دسترسی</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                      <td>{{employee.id}}</td>
+                      <td>{{employee.firstname}}</td>
+                      <td>{{employee.lastname}}</td>
+                      <td>{{employee.jpublish}}</td>
+                      <td>{{employee.user.resaneh.all.count}}</td>
+                      <td>{{employee.get_position_display}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>‍
+{% endblock %}

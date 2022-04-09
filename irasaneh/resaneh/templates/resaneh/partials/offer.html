@@ -1,0 +1,22 @@
+<div class="block-21 mb-4 d-flex">
+  <a href="{{offer.slug}}" class="blog-img mr-4" style="background-image:url('{{offer.resanehimage.first.image.url}}')"></a>
+  <div class="text">
+    <h3 class="heading"><a href="{{offer.slug}}">{{offer.name}}</a></h3>
+    <div class="meta">
+      <div><a href="#"><span class="fa fa-user"> </span> {{offer.company}}</a></div>
+      <div><a href="#"><span class="fa fa-dollar"></span> {{offer.price}}</a></div>
+      <div><a href="#"><span class="fa fa-flag"></span>
+          {% if offer.category.all %}
+          {% for category in offer.category.all %}
+          <span>
+            {{ category }}
+            {% if forloop.counter < offer.category.all.count %}
+            ،
+            {% endif %}
+          </span>
+          {% endfor %}
+          {% endif %}
+        </a></div>
+    </div>
+  </div>
+</div>

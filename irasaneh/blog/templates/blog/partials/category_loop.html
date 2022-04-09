@@ -1,0 +1,21 @@
+<ul class="collapse list-unstyled" id="apps-{{cat.title}}">
+  {% for cat in cat.children.active %}
+  <li>
+    <div class="row d-flex justify-content-between">
+      <div class="col-3">
+        {%if cat.children.active %}
+        <a href="#apps-{{cat.title}}" data-toggle="collapse" aria-expanded="false" class="">
+          <span class="fa fa-chevron-down"></span>
+        </a>
+        {% endif %}
+      </div>
+      <div class="col-9">
+        <a href="{% url 'blog:category' cat.slug %}" class="text-center">{{cat.title}}</a>
+      </div>
+    </div>
+    {%if cat.children.active %}
+      {% include 'blog/partials/category_loop.html' %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

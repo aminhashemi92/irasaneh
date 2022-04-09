@@ -1,0 +1,162 @@
+{% extends 'home/main.html' %}
+
+{% load static %}
+{% load  resaneh_tags %}
+
+{%block title%}|وبلاگ|جستجو
+{% endblock %}
+
+
+
+{% block content %}
+
+<!-- ============================================-->
+<!-- <blog heading> begin ============================-->
+<section class="hero-wrap hero-wrap-2" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) , url('{% static "home/images/prod-5.jpg" %}');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate mb-5 text-center">
+        <p class="breadcrumbs mb-3">
+          <span class="mr-2">
+            <a href="{%url 'home:homepage' %}">خانه <i class="fa fa-chevron-left"></i></a>
+          </span>
+          <span class="mr-2">
+            <a href="{% url 'blog:blog' %}"> رسانه <i class="fa fa-chevron-left"></i></a>
+          </span>
+          <span>جستجو <i class="fa fa-chevron-left"></i></span>
+        </p>
+        <h2 class="mb-0 bread">{{search}}</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <blog heading> close ============================-->
+<!-- ============================================-->
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+
+        <!-- sorts -->
+        <div class="row mb-4">
+          <div class="col-md-12 d-flex justify-content-start align-items-start">
+            <i class="bi bi-sort-down"></i>
+            <h4 class="product-select">مرتب‌سازی:</h4>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> مرتبط‌ترین
+            </button>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> پرفروش‌ترین
+            </button>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> پربازدیدترین
+            </button>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> جدیدترین
+            </button>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> ارزان‌ترین
+            </button>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> گران‌ترین
+            </button>
+          </div>
+        </div>
+        <!-- end sorts -->
+
+        <!-- resanehs -->
+        <div class="row">
+          {% for resaneh in resanehs %}
+          <div class="col-md-4 d-flex">
+            <div class="product ftco-animate">
+              <div class="img d-flex align-items-center justify-content-center" style="background-image: url('{{resaneh.resanehimage.first.image.url}}');">
+                <div class="desc">
+                  <p class="meta-prod d-flex">
+                    <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a> -->
+                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                    <a href="{% url 'resaneh:details' resaneh.slug %}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                  </p>
+                </div>
+              </div>
+              <div class="text text-center">
+                <!-- <span class="sale">فروش ویژه</span> -->
+                <!-- <span class="seller">Best Seller</span> -->
+                <!-- <span class="new">New Arrival</span> -->
+                <span class="category">{{resaneh.provider}}</span>
+                <h2>{{resaneh.name}}</h2>
+                <span class="price text-danger">{{resaneh.get_category_display}}</span>
+                <br>
+                <span class="price">{{resaneh.address|truncatewords:5}}</span>
+                <!-- <p class="mb-0"><span class="price price-sale">۱۲۵ میلیون</span> <span class="price">۱۱۰میلیون</span></p> -->
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- paginator -->
+        {% if resanehs.has_other_pages %}
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                {% if resanehs.has_previous %}
+                <li><a href="{% url 'resaneh:resaneh' resanehs.previous_page_number %}">&lt;</a></li>
+                <!-- <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li> -->
+                {% else %}
+                <!-- <li class="disabled"><span>&lt;</span></li> -->
+                <!-- <li class="disabled"><span>&laquo;</span></li> -->
+                {% endif %}
+                {% for i in resanehs.paginator.page_range %}
+                {% if resanehs.number == i %}
+                <li class="active"><span>{{ i }}</span></li>
+                <!-- <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li> -->
+                {% else %}
+                <li><a href="{% url 'resaneh:resaneh' i %}?q={{search}}">{{ i }}</a></li>
+                <!-- <li><a href="?page={{ i }}">{{ i }}</a></li> -->
+                {% endif %}
+                {% endfor %}
+                {% if resanehs.has_next %}
+                <li><a href="{% url 'resaneh:resaneh' resanehs.next_page_number %}?q={{search}}">&gt;</a></li>
+                <!-- <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li> -->
+                {% else %}
+                <!-- <li class="disabled"><span>&gt;</span></li> -->
+                <!-- <li class="disabled"><span>&raquo;</span></li> -->
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="col-md-3">
+    {% category_sidebar %}
+
+        <div class="sidebar-box ftco-animate">
+          <h3>پیشنهاد ویژه ماه</h3>
+          {% offer %}
+        </div>
+
+
+        <!-- <div class="sidebar-box ftco-animate">
+  <h3>فیلترها</h3>
+    <select class="selectpicker" multiple>
+      <option>پمپ بنزین</option>
+      <option>بنر</option>
+      <option>بنر کوچک</option>
+      <option>بنر بزرگ</option>
+      <option>بنر</option>
+      <option>بنر</option>
+    </select>
+  </div> -->
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

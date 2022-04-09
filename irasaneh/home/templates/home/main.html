@@ -1,0 +1,342 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <!-- ===============================================-->
+  <!-- tags-->
+  <!-- ===============================================-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="آی‌رسانه">
+  <meta name="author" content="AminHashemi92.com">
+
+  <!-- ===============================================-->
+  <!--    mobile tags-->
+  <!-- ===============================================-->
+  <meta property="og:title" content="آی‌رسانه" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://irasaneh.com" />
+  <meta property="og:description" content="آی‌رسانه کاوشگر هوشمند رسانه" />
+  <!-- <meta property="og:image" content="{% static 'home/css/theme.css' %}" /> -->
+  <!-- <meta name="theme-color" content="#ffffff"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+
+  <!-- ===============================================-->
+  <!--     page title-->
+  <!-- ===============================================-->
+  <title>آی‌رسانه{%block title%}{% endblock %}</title>
+
+
+  <!-- ===============================================-->
+  <!--     stylesheet-->
+  <!-- ===============================================-->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'home/css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/deque-patterns.min.css' %}">
+
+
+  <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+  <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+  {% block contentcss %}
+  {% endblock %}
+
+  <!-- ===============================================-->
+  <!--     jquery-->
+  <!-- ===============================================-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+  <!-- ============================================-->
+  <!-- <nav> begin ============================-->
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand " href="{% url 'home:homepage' %}"><img id="logo" src="{%static '/home/images/whitelogo.png' %}" style="width:120px;"></a>
+      <!-- <a class="navbar-brand" href="index.html">Liquor <span>store</span></a> -->
+
+
+      <!-- icons -->
+      <!-- icon shop -->
+      <!-- <div class="order-lg-last btn-group">
+        {% if user.is_authenticated %}
+        <a href="#" class="btn-cart dropdown-toggle dropdown-toggle-split " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="flaticon-heart ic" style="color:white;"></span> -->
+
+      <!-- <div class="d-flex justify-content-center align-items-center"><small>3</small></div> -->
+      <!-- </a> -->
+
+
+      <!-- <div class="dropdown-menu dropdown-menu-left">
+          <div class="dropdown-item d-flex align-items-start" href="#">
+            <div class="img" style="background-image: url('{% static "home/images/prod-1.jpg" %}' );">
+            </div>
+            <div class="text pl-3">
+              <h4>Bacardi 151</h4>
+              <p class="mb-0"><a href="#" class="price">$25.99</a><span class="quantity ml-3">Quantity: 01</span></p>
+            </div>
+          </div>
+          <div class="dropdown-item d-flex align-items-start" href="#">
+            <div class="img" style="background-image: url('{% static "home/images/prod-2.jpg" %}');"></div>
+            <div class="text pl-3">
+              <h4>Jim Beam Kentucky Straight</h4>
+              <p class="mb-0"><a href="#" class="price">$30.89</a><span class="quantity ml-3">Quantity: 02</span></p>
+            </div>
+          </div>
+          <div class="dropdown-item d-flex align-items-start" href="#">
+            <div class="img" style="background-image: url('{% static "home/images/prod-3.jpg" %}');"></div>
+            <div class="text pl-3">
+              <h4>Citadelle</h4>
+              <p class="mb-0"><a href="#" class="price">$22.50</a><span class="quantity ml-3">Quantity: 01</span></p>
+            </div>
+          </div>
+          <a class="dropdown-item text-center btn-link d-block w-100" href="cart.html">
+            View All
+            <span class="ion-ios-arrow-round-forward"></span>
+          </a>
+        </div> -->
+      <!-- {% endif %}
+      </div> -->
+
+      <div class="order-lg-last btn-group">
+        {% if user.is_authenticated %}
+        <!-- icon profile  -->
+          <a href="#" class="btn-cart dropdown-toggl dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fa fa-user-o ic" style="color:white;"></span>
+
+            <!-- <i class="bi bi-person-square " style="color:white;"></i> -->
+            <!-- <i class="bi bi-person-circle" style="color:white; font-size:2rem;"></i> -->
+          </a>
+          <div class="dropdown-menu dropdown-menu-lef text-right">
+            {% if request.user.profile %}
+            <a class="dropdown-item d-flex align-items-center px-2 py-3" href="#">
+              <div class="img" style="background-image: url('{{user.profile.pic.url}}' ); border-radius:50%;"></div>
+              <div class="text text-center">
+                <h6>{%if user.profile.firstname%}{{user.profile.firstname}}{% endif %} {% if user.profile.lastname %}{{user.profile.lastname}} {% endif %}</h6>
+              </div>
+            </a>
+            <a class="dropdown-item py-2 px-3 display-6" href="{% url 'dashboard:profile' %}">
+              <h4 style="font-size:14px;">پروفایل کاربری</h4>
+            </a>
+            <a class="dropdown-item py-2 px-3" href="{% url 'dashboard:dashboard' %}">
+              <h4 style="font-size:14px;">داشبورد</h4>
+            </a>
+            <!-- <a class="dropdown-item py-2 px-3" href="#">
+              <h4 style="font-size:14px;">پیام‌ها</h4>
+            </a>
+            <a class="dropdown-item py-2 px-3" href="#">
+              <h4 style="font-size:14px;">کمپین‌ها</h4>
+            </a>
+            <a class="dropdown-item py-2 px-3" href="#">
+              <h4 style="font-size:14px;">علاقه‌مندی‌ها</h4>
+            </a> -->
+            <a class="dropdown-item py-2 px-3" href="{% url 'account:logout_page' %}">
+              <h4 style="font-size:14px;"><span class="fa  fa-sign-out"></span> خروج از حساب کاربری </h4>
+            </a>
+            {% else %}
+            <a class="dropdown-item d-flex align-items-center px-2 py-3 text-center" href="{% url 'dashboard:profile' %}">
+              ابتدا باید حساب کاربری خودرا تکمیل نمایید
+            </a>
+            <a class="dropdown-item py-2 px-3 display-6" href="{% url 'dashboard:profile' %}">
+              <h4 style="font-size:14px;">پروفایل کاربری</h4>
+            </a>
+            {% endif %}
+          </div>
+
+        {% else%}
+        <a href="{% url 'account:login_register' %}" class="nav-link text-white border border-white rounded">عضویت/ ورود</a>
+
+        {% endif %}
+      </div>
+
+
+      <!-- small mode -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> منو
+      </button>
+      <!--  -->
+
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="{% url 'home:homepage' %}" class="nav-link">خانه</a></li>
+          <li class="nav-item active"><a href="{% url 'resaneh:resaneh' %}" class="nav-link">رسانه‌ها</a></li>
+          <!-- <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">رسانه</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item text-right" href="product-single.html">رسانه‌ها</a>
+              <a class="dropdown-item text-right" href="product.html">رسانه‌دارها</a>
+            </div>
+          </li> -->
+          <li class="nav-item active"><a href="{% url 'blog:blog' %}" class="nav-link">وبلاگ</a></li>
+          <li class="nav-item active"><a href="#" class="nav-link">مشاوره</a></li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle " href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">آی‌رسانه</a>
+            <div class="dropdown-menu  text-right" aria-labelledby="dropdown04">
+              <a href="{% url 'home:contact' %}" class="dropdown-item" href="product.html">تماس با‌ما</a>
+              <a href="{% url 'home:about' %}" class="dropdown-item" href="product-single.html">درباره‌ی ما</a>
+              <a href="{% url 'home:faq' %}" class="dropdown-item" href="cart.html">پرسش‌های متداول</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item active"><a href="{% url 'home:contact' %}" class="nav-link">تماس با ما</a></li>
+          <li class="nav-item active"><a href="{% url 'home:about' %}" class="nav-link">درباه‌ما</a></li>
+          <li class="nav-item active"><a href="{% url 'home:faq' %}" class="nav-link">پرسش‌های متداول</a></li> -->
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- <nav> close ============================-->
+  <!-- ============================================-->
+
+
+
+
+  {% block content %}
+
+  {% endblock %}
+
+
+
+
+  <!-- ============================================-->
+  <!-- <footer> begin ============================-->
+  <footer class="ftco-footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-sm-12 col-md">
+          <div class="ftco-footer-widget mb-4">
+            <a class="navbar-brand " href="index.html"><img id="logo" src="{%static '/home/images/whitelogo.png' %}" style="width:170px;"></a>
+            <br>
+            <ul class="ftco-footer-social list-unstyled mt-2">
+              <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-4">
+            <h2 class="ftco-heading-2">حساب کاربری</h2>
+            <ul class="list-unstyled">
+              <li><a href="#"><span class="mr-2"></span>ورود</a></li>
+              <li><a href="#"><span class="mr-2"></span>عضویت</a></li>
+              <li><a href="#"><span class="mr-2"></span>تنظیمات</a></li>
+              <li><a href="#"><span class="mr-2"></span>سبد خرید</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-4">
+            <h2 class="ftco-heading-2">دباره‌ما</h2>
+            <ul class="list-unstyled">
+              <li><a href="#"><span class="mr-2"></span>تماس با ما</a></li>
+              <li><a href="#"><span class="mr-2"></span>ارتباط با ما</a></li>
+              <li><a href="#"><span class="mr-2"></span>پرسش‌های متداول</a></li>
+              <li><a href="#"><span class="mr-2"></span>آدرس</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">دسترسی آسان</h2>
+            <ul class="list-unstyled">
+              <li><a href="#"><span class="mr-2"></span>رسانه‌ها</a></li>
+              <li><a href="#"><span class="mr-2"></span>رسانه‌دارها</a></li>
+              <li><a href="#"><span class="mr-2"></span>فروش ویژه</a></li>
+              <li><a href="#"><span class="mr-2"></span>تخفیفات</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">ارتباط با ما</h2>
+            <div class="block-23 mb-3" style="direction:ltr;">
+              <ul>
+                <li><span class="icon fa fa-map marker"></span><span class="text">ایران، تهران، ملاصدرا، شماره ۲۴</span></li>
+                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+۹۸۲۱۲۲۲۲۲۲۲</span></a></li>
+                <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">info@irasaneh.com</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid px-0 py-5 bg-black">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+            <p class="mb-0" style="color: rgba(255,255,255,.5);">
+
+              Copyright &copy;<script>
+                document.write(new Date().getFullYear());
+              </script>
+              <!-- All rights reserved | This template is made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+               -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- <footer> close ============================-->
+  <!-- ============================================-->
+
+
+  <!-- ===============================================-->
+  <!--    loader-->
+  <!-- ===============================================-->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#006386" />
+    </svg></div>
+  <!-- ===============================================-->
+
+
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+  <script src="{% static 'home/js/jquery.min.js' %}"></script>
+  <script src="{% static 'home/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'home/js/popper.min.js' %}"></script>
+  <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'home/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'home/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'home/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'home/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'home/js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'home/js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'home/js/google-map.js' %}"></script>
+  <script src="{% static 'home/js/main.js' %}"></script>
+  <script src="{% static 'home/js/jQuery.persianNumbers-1.0.js' %}"></script>
+  <script src="{% static 'home/js/jQuery.persianNumbers-1.0.min.js' %}"></script>
+  <script src="{% static 'home/js/deque-patterns.min.js' %}"></script>
+  <!-- ===============================================-->
+
+  {% block scripts%}
+
+  {% endblock %}
+
+</body>
+
+</html>

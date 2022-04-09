@@ -1,0 +1,187 @@
+{% extends 'home/main.html' %}
+
+{% load static %}
+{% load comment_tags %}
+{% load ratings %}
+
+{% block title %}|عنوان مقاله
+{% endblock %}
+
+{% block content %}
+<!-- ============================================-->
+<!-- <blog heading> begin ============================-->
+<section class="hero-wrap hero-wrap-2 " style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) , url('{{article.thumbnail.url}}');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate mb-5 text-center">
+        <p class="breadcrumbs mb-3">
+          <span class="mr-2 ">
+            <a href="{% url 'home:homepage' %}">خانه <i class="fa fa-chevron-left"></i></a>
+          </span>
+          <span>
+            <a href="{% url 'blog:blog' %}">وبلاگ <i class="fa fa-chevron-left"></i></a>
+          </span>
+        </p>
+        <h2 class="mb-0 text-white">{{article.title}}</h2>
+        <div class="mt-3">
+          {% ratings article %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <blog heading> close ============================-->
+<!-- ============================================-->
+
+<!-- ============================================-->
+<!-- <section> begin ============================-->
+
+<section class="ftco-section ftco-degree-bg pb-0 ">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ftco-animate text-right">
+        <p>
+          <img src="images/image_1.jpg" alt="" class="img-fluid">
+        </p>
+
+        <div class="row d-flex justify-content-between">
+          <div class="col-8 text-justify">
+            <h4 class="mb-3">
+              {{article.minidescription}}
+            </h4>
+          </div>
+          <div class="col-4">
+            <!-- <img src="{{article.thumbnail.url}}"> -->
+            <!-- <div class="img d-flex align-items-center justify-content-center" style="background-image: url('{{article.thumbnail.url}}');"> -->
+            <img src="{{article.thumbnail.url}}" class="img-thumbnail">
+            <!-- <a href="#" class="block-20 img" style="background-image: url('{{article.thumbnail.url}}');">
+            </a> -->
+          </div>
+        </div>
+
+
+
+        <div class="block-21 mb-4 d-flex">
+          <div class="text text-justify">
+            <div class="meta">
+
+              <div><a href="#"><span class="fa fa-calendar"></span> {{article.jpublish}}</a></div>
+              <div><a href="#"><span class="fa fa-user"></span>
+                  {% if article.author.get_full_name %}
+                  {{article.author.get_full_name}}
+                  {% else %}
+                  {{article.author}}
+                  {% endif %}
+                </a></div>
+              <div><a href="#"><span class="fa fa-comment"></span>
+
+                  {% get_comments_count article user %}
+                </a></div>
+
+              <div><a href="#"><span class="fa fa-eye"></span>
+
+                  {{ article.hits.count }}
+                </a></div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <p class="text-justify">
+          {{article.description|safe}}
+        </p>
+
+
+
+
+        <div class="tag-widget post-tag-container mb-5 mt-5">
+          <div class="tagcloud">
+            {% for cat in article.category_published.all %}
+            <a href="{% url 'blog:category' cat.slug %}" class="tag-cloud-link">{{cat.title}}</a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- <div class="about-author d-flex p-4 bg-light">
+          <div class="bio ml-5">
+            <img src="{% static 'home/images/person_1.jpg' %}" alt="Image placeholder" class="img-fluid mb-4">
+          </div>
+          <div class="desc">
+            <h3>امین هاشمی</h3>
+            <p>لورم ایپس لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+              وم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+          </div>
+        </div> -->
+
+
+      </div>
+      <!-- .col-md-8 -->
+
+      <!-- left sidebar -->
+      <div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
+        <div class="sidebar-box ftco-animate text-right">
+          <h3 class="text-center">آخرین خبرها</h3>
+          {% for lastarticle in lastarticles %}
+          <div class="block-21 mb-4 d-flex">
+            <div class="text text-justify">
+              <h3 class="heading"><a href="{% url 'blog:single' lastarticle.slug %}">
+                  {{lastarticle.title}}
+                </a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="fa fa-calendar"></span>{{lastarticle.jpublish}}</a></div>
+                <div><a href="#"><span class="fa fa-user"></span>
+                    {% if lastarticle.author.get_full_name %}
+                    {{lastarticle.author.get_full_name}}
+                    {% else %}
+                    {{lastarticle.author}}
+                    {% endif %}
+                  </a></div>
+                <div><a href="#"><span class="fa fa-comment"></span>
+                    {% get_comments_count lastarticle user %}</a></div>
+                <div><a href="#"><span class="fa fa-eye"></span>
+                    {{ lastarticle.hits.count }} </a></div>
+              </div>
+            </div>
+            <a class="blog-img mr-4" style="background-image: url({{lastarticle.thumbnail.url}});"></a>
+          </div>
+          {% endfor %}
+
+        </div>
+        <hr>
+        <div class="sidebar-box ftco-animate">
+          <h3 class="text-center"> دسته‌بندی‌ها</h3>
+          <div class="tagcloud">
+            {% for tag in tags %}
+            <a href="{% url 'blog:category' tag.slug %}" class="tag-cloud-link">{{tag.title}}</a>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section> <!-- .section -->
+
+<!-- <section> close ============================-->
+<!-- ============================================-->
+<section class="mb-4 ">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ftco-animate text-right">
+        {% render_comments article request %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

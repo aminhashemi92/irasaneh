@@ -1,0 +1,35 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{%  block title %} آی‌رسانه | پنل مدیریتی {% endblock %}
+
+{% block extrastyle %}
+
+<style>
+
+  @font-face {
+    font-family: Shabnam;
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.eot');
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.woff') format('woff'),
+         url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.ttf') format('truetype');
+    font-weight: normal;
+
+  }
+
+  body, input, tr, th, td, select{
+    font-family: "Shabnam", cursive !important;
+    /* font-weight:200; */
+  }
+
+
+
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">ورود به سامانه مدیریت سایت</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

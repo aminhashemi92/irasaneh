@@ -1,0 +1,341 @@
+{% extends 'home/main.html' %}
+{% load resaneh_tags %}
+{% load ratings %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block title %}|رسانه‌ها
+{% if category %}
+|{{category}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- ============================================-->
+<!-- <blog heading> begin ============================-->
+<section class="hero-wrap hero-wrap-2" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) , url('{% static "home/images/prod-5.jpg" %}');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate mb-5 text-center">
+        <p class="breadcrumbs mb-3"><span class="mr-2"><a href="index.html">خانه <i class="fa fa-chevron-left"></i></a></span> <span>رسانه‌ها<i class="fa fa-chevron-left"></i></span></p>
+        <h2 class="mb-0 bread">
+          {% if category %}
+          {{category}}
+          {% else %}
+          رسانه‌ها
+          {% endif %}
+        </h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <blog heading> close ============================-->
+<!-- ============================================-->
+
+<!-- ============================================-->
+<!-- <section> begin ============================-->
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+
+        <!-- sorts -->
+        <div class="row mb-4">
+          <div class="col-md-12 d-flex justify-content-start align-items-start">
+            <i class="bi bi-sort-down"></i>
+            <h4 class="product-select">مرتب‌سازی:</h4>
+
+            <form class="" method="get">
+              <input class="navbar-toggler" style="color:grey; font-size: 15px;" type="submit" name="price" value="گران‌ترین">
+              <input class="navbar-toggler" style="color:grey; font-size: 15px;" type="submit" name="price" value="ارزان‌ترین">
+
+              <input class="navbar-toggler" style="color:grey; font-size: 15px;" type="submit" name="created" value="جدید‌ترین">
+              <input class="navbar-toggler" style="color:grey; font-size: 15px;" type="submit" name="created" value="قدیمی‌ترین">
+              <input class="navbar-toggler" style="color:grey; font-size: 15px;" type="submit" name="viewed" value="پربازدیدترین">
+
+              <div style="display:None;">
+
+                {{filter.form.q}}
+                {{filter.form.company}}
+                {{filter.form.industry}}
+                {{filter.form.showtype}}
+                {{filter.form.structuretype}}
+                {{filter.form.place}}
+                {{filter.form.price_l}}
+                {{filter.form.price_g}}
+              </div>
+
+            </form>
+
+            <!-- <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> ارزان‌ترین
+            </button>
+            <button class="navbar-toggler" style="color:grey; font-size: 15px;" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> گران‌ترین
+            </button> -->
+
+
+          </div>
+        </div>
+        <!-- end sorts -->
+
+
+        <!-- resanehs -->
+        <div class="row">
+          {% for resaneh in resanehs %}
+          <div class="col-md-4 d-flex">
+            <div class="product ftco-animate">
+              <div class="img d-flex align-items-center justify-content-center" style="background-image: url('{{resaneh.resanehimage.first.image.url}}');">
+                <div class="desc ">
+                  <p class="meta-prod d-flex justify-content-center">
+                    <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a> -->
+                    <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a> -->
+                    <a href="{% url 'resaneh:details' resaneh.slug %}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                  </p>
+                  <div class="">
+                    {% ratings resaneh read_only=True template_name='star_ratings/widget.html' %}
+                  </div>
+                </div>
+              </div>
+              <div class="text text-center">
+                <!-- <span class="sale">فروش ویژه</span> -->
+                <!-- <span class="seller">Best Seller</span> -->
+                <!-- <span class="new">New Arrival</span> -->
+                <span class="category">{{resaneh.company}}</span>
+                <!-- <p>Views: {% get_hit_count for resaneh %}</p> -->
+
+                <h2>{{resaneh.name}}</h2>
+                <span class="price text-danger">
+                  {% if resaneh.category.all %}
+                  {% for category in resaneh.category.all %}
+                  <span class="text-primary">
+                    {{ category }}
+                    {% if forloop.counter < resaneh.category.all.count %}
+                    ،
+                    {% endif %}
+                  </span>
+                  {% endfor %}
+                  {% endif %}</span>
+                <br>
+                <span class="price">{{resaneh.address|truncatewords:5}}</span>
+                <br>
+                <span class="price text-danger">{{resaneh.price}}</span>
+                <!-- <p class="mb-0"><span class="price price-sale">۱۲۵ میلیون</span> <span class="price">۱۱۰میلیون</span></p> -->
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- paginator -->
+        {% if resanehs.has_other_pages %}
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                {% if resanehs.has_previous %}
+                <li><a href="
+                  {% if category %}
+                    {% url 'resaneh:resaneh' category.slug resanehs.previous_page_number %}?{{data}}
+                  {% else %}
+                    {% url 'resaneh:resaneh' page=resanehs.previous_page_number %}?{{data}}
+                  {% endif %}
+                  ">&lt;</a></li>
+                <!-- <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li> -->
+                {% else %}
+                <!-- <li class="disabled"><span>&lt;</span></li> -->
+                <!-- <li class="disabled"><span>&laquo;</span></li> -->
+                {% endif %}
+                {% for i in resanehs.paginator.page_range %}
+                {% if resanehs.number == i %}
+                <li class="active"><span>{{ i }}</span></li>
+                <!-- <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li> -->
+                {% else %}
+                <li><a href="
+                  {% if category %}
+                    {% url 'resaneh:resaneh' category.slug i %}?{{data}}
+                  {% else %}
+                    {% url 'resaneh:resaneh' page=i %}?{{data}}
+                  {% endif %}">{{ i }}</a></li>
+                <!-- <li><a href="?page={{ i }}">{{ i }}</a></li> -->
+                {% endif %}
+                {% endfor %}
+                {% if resanehs.has_next %}
+                <li><a href="
+                  {% if category %}
+                    {% url 'resaneh:resaneh' category.slug resanehs.next_page_number %}?{{data}}
+                  {% else %}
+                    {% url 'resaneh:resaneh' page=resanehs.next_page_number %}?{{data}}
+                  {% endif %}
+                  ">&gt;</a></li>
+                <!-- <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li> -->
+                {% else %}
+                <!-- <li class="disabled"><span>&gt;</span></li> -->
+                <!-- <li class="disabled"><span>&raquo;</span></li> -->
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="col-md-3">
+        {% category_sidebar %}
+
+        <hr>
+        <div class="text-center sidebar-box ftco-animate">
+          <h3>پیشنهاد ویژه ماه</h3>
+          {% offer %}
+        </div>
+
+        <hr>
+
+        <div class="sidebar-box ftco-animate">
+          <div class="categories text-center">
+            <h3>جست و جوهای مرتبط</h3>
+
+            <form class="" action="">
+              <div class="sidebar-box">
+                <div class="form-place">
+                  {{filter.form.q}}
+                  <!-- <input type="text" class="form-control text-center" name='q' placeholder="جست و جو کنید"> -->
+                </div>
+              </div>
+
+              <ul class="p-0">
+                <li>
+                  <a href="#company" data-toggle="collapse" aria-expanded="false" class="text-center">رسانه‌دارها <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="company">
+                    {% for company in filter.form.company %}
+
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{company}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+                <li>
+                  <a href="#industry" data-toggle="collapse" aria-expanded="false" class="text-center">صنعت‌ها <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="industry">
+                    {% for industry in filter.form.industry %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{industry}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+                <li>
+                  <a href="#showtype" data-toggle="collapse" aria-expanded="false" class="text-center">نوع نمایش <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="showtype">
+                    {% for showtype in filter.form.showtype %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{showtype}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+                <li>
+                  <a href="#structuretype" data-toggle="collapse" aria-expanded="false" class="text-center">نوع سازه <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="structuretype">
+                    {% for structuretype in filter.form.structuretype %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{structuretype}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+                <li>
+                  <a href="#place" data-toggle="collapse" aria-expanded="false" class="text-center">جایگاه‌ها <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="place">
+                    {% for place in filter.form.place %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{place}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+                <li>
+                  <a href="#price" data-toggle="collapse" aria-expanded="false" class="text-center">قیمت <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="price">
+
+                    <!-- <div class='multi-range' data-lbound='10' data-ubound='50'>
+                      <hr />
+                      <input type='range' name="price_g"  min='{{min_price}}' max='{{max_price}}' step='5' value='10' oninput='this.parentNode.dataset.lbound=this.value;' />
+                      <input type='range' name="price_l" min='{{min_price}}' max='{{max_price}}' step='5' value='50' oninput='this.parentNode.dataset.ubound=this.value;' />
+                    </div> -->
+
+
+                    <li class="text-right">
+                      <div class="form-check">
+                        <label for="">کمترین قیمت:</label>
+                        <input type="text" name="price_g" value="" min="{{min_price}}" max="{{max_price}}">
+                      </div>
+                    </li>
+
+                    <li class="text-right">
+                      <div class="form-check">
+                        <label for="">بیشترین قیمت:</label>
+                        <input type="text" name="price_l" value="" max="{{max_price}}" min="{{min_price}}">
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+              </ul>
+              <br>
+
+              <button class="btn btn-success " type="submit" name="Filter">فیلتر کردن</button>
+
+
+              <div style="display:None;">
+                {{filter.form.price}}
+                {{filter.form.created}}
+                {{filter.form.viewed}}
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+
+        <!-- <div class="sidebar-box ftco-animate">
+  <h3>فیلترها</h3>
+    <select class="selectpicker" multiple>
+      <option>پمپ بنزین</option>
+      <option>بنر</option>
+      <option>بنر کوچک</option>
+      <option>بنر بزرگ</option>
+      <option>بنر</option>
+      <option>بنر</option>
+    </select>
+  </div> -->
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section> close ============================-->
+<!-- ============================================-->
+
+
+{% endblock %}
