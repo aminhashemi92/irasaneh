@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 import os
 
 
@@ -22,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--y4bz6&zc6kro8(pl!x-tcn1fpe^#=+cp@^cvpx1^9a(1wp23='
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -137,8 +138,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+#درحالت تست فعال بشه
+# STATIC_ROOT = BASE_DIR / 'static'
+
+#درحالت دپلوی فعال بشه
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # STATICFILES_DIRS=[
 #     os.path.join(BASE_DIR,'static')

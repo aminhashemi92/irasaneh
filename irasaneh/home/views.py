@@ -8,11 +8,13 @@ def homepage(request):
     articles = Article.objects.filter(status="p").order_by('-publish')[:4]
     resanehs = Resaneh.objects.filter(status="p").order_by('-publish')[:4]
     categories = Category.objects.filter(status=True, parent=None)
+    allresanehcount = Resaneh.objects.all().count()
 
     context ={
         "articles" : articles,
         "resanehs" : resanehs,
         "categories" : categories,
+        "allresanehcount" : allresanehcount,
         }
     return render(request,"home/homepage.html", context)
     # return render(request, "home/homepage.html")
