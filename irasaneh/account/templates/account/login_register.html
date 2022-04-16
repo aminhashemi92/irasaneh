@@ -7,6 +7,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="{% static 'home/css/style.css' %}" rel="stylesheet">
+
+  <style>
+  @font-face {
+   font-family: 'Shabnam';
+   src: url('{% static "home/fonts/Sahel.eot" %}');
+   src: url('{% static "home/fonts/Sahel.eot?#iefix" %}') format('embedded-opentype'),
+          url('{% static "home/fonts/Sahel.woff" %}') format('woff'),
+          url('{% static "home/fonts/Sahel.ttf" %}')  format('truetype'),
+          url('{% static "home/fonts/Sahel.svg#svgFontName" %}') format('svg');
+    font-weight: normal;
+ }
+  </style>
 </head>
 
 <body>
@@ -26,7 +38,7 @@
           <h2 class="text-center my-3">خوش آمدید.</h2>
           <label class="label1">
             <span class="span1">شناسه کاربری</span>
-            <input class="input1" type="text" id="input-phone" name="phone" />
+            <input class="input1" type="text" id="input-phone" name="phone" placeholder="09123456789"/>
           </label>
           <br>
           <label class="label1">

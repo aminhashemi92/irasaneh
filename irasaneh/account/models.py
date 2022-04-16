@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.html import format_html
 from django.urls import reverse
 from extensions.utils import jalali_converter
+from django.core.validators import RegexValidator
 
 # Manager
 class CustomUserManager(BaseUserManager):
@@ -37,7 +38,7 @@ class CustomUserManager(BaseUserManager):
 # Model
 class CustomUser(AbstractUser):
     username = None
-    phone = models.CharField(max_length=10, unique=True, verbose_name='Phone Number', blank=False, help_text='Enter 10 digits phone number')
+    phone = models.CharField(max_length=11, validators=[RegexValidator( regex=r'^[0]{1}[9]{1}[0-9]{9}', message='مقدار وارد شده صحیح نمی‌باشد',)], unique=True, verbose_name='Phone Number', blank=False, help_text='Enter 10 digits phone number')
 
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = []
@@ -69,7 +70,6 @@ class Company(models.Model):
 # Model
 class Profile(models.Model):
     ROLE_CHOICES =(
-        ('d', 'رسانه‌دار'),
         ('k', 'رسانه‌خواه'),
         ('b', 'رسانه‌دار و رسانه‌خواه'),
     )
@@ -78,16 +78,18 @@ class Profile(models.Model):
         ('m', 'مدیر'),
     )
 
-    user = models.OneToOneField(CustomUser, null = True, on_delete = models.CASCADE, blank=True, verbose_name="کاربر", related_name="profile")
-    firstname = models.CharField(max_length=200, null=True, verbose_name="نام",  blank=True)
-    lastname = models.CharField(max_length=200, null=True, verbose_name="نام‌خانوادگی",  blank=True)
+    user = models.OneToOneField(CustomUser, null = True, on_delete = models.CASCADE, verbose_name="کاربر", related_name="profile")
+    firstname = models.CharField(max_length=200, null=True, verbose_name="نام")
+    lastname = models.CharField(max_length=200, null=True, verbose_name="نام‌خانوادگی")
     company = models.ForeignKey(Company, default=None, null=True, related_name="profile", verbose_name="شرکت", on_delete=models.CASCADE, blank=True)
-    role = models.CharField(max_length=1, null=True, choices = ROLE_CHOICES, verbose_name="نقش", blank=True)
+    role = models.CharField(max_length=1, null=True, choices = ROLE_CHOICES, verbose_name="نقش", blank=True, default="k")
     position = models.CharField(max_length=1, null=True, choices = POSITION_CHOICES, verbose_name="جایگاه", blank=True, default='c')
     date_created = models.DateTimeField(auto_now_add = True, null=True, verbose_name="تاریخ ایجاد",  blank=True)
     pic = models.ImageField(upload_to="profileimages", null=True, verbose_name="تصویر", default="profileimages/profi.png")
     sphone = models.CharField(max_length=200, null=True, verbose_name="تلفن ثابت", blank=True)
     mphone = models.CharField(max_length=200, null=True, verbose_name="تلفن همراه", blank=True)
+    status = models.BooleanField(default=False, verbose_name="درخواست رسانه‌دار شدن")
+
 
     class Meta:
         verbose_name = "حساب کاربری"

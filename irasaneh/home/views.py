@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from blog.models import Article
 from resaneh.models import Resaneh, Category
+from .forms import ContactUsForm
+from extensions.utils import get_client_ip
+from .models import ContactUs
 
 # Create your views here.
 def homepage(request):
@@ -10,11 +13,32 @@ def homepage(request):
     categories = Category.objects.filter(status=True, parent=None)
     allresanehcount = Resaneh.objects.all().count()
 
+    ip_address = get_client_ip(request)
+
+    # try:
+    #     contact = ContactUs.objects.get(ip_address=ip_address)
+    # except ContactUs.DoesNotExist:
+    #     contact = None
+
+    # print(contact)
+
+    form = ContactUsForm()
+    # form.fields['ip_address'].initial = ip_address
+    if request.POST:
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            obj.ip_address = ip_address
+            obj.save()
+            return redirect('/')
+
     context ={
         "articles" : articles,
         "resanehs" : resanehs,
         "categories" : categories,
         "allresanehcount" : allresanehcount,
+        "form" : form,
+        # "contact" : contact,
         }
     return render(request,"home/homepage.html", context)
     # return render(request, "home/homepage.html")
@@ -25,7 +49,21 @@ def about(request):
 
 
 def contact(request):
-    return render(request, "home/contact.html")
+    form = ContactUsForm()
+    # form.fields['ip_address'].initial = ip_address
+    if request.POST:
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # obj.ip_address = ip_address
+            # obj.save()
+            # return redirect('/')
+
+    context ={
+        "form" : form,
+        }
+
+    return render(request, "home/contact.html", context)
 
 
 def faq(request):

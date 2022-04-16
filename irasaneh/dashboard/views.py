@@ -62,7 +62,6 @@ def profile(request):
         form1 = ProfileForm(instance = profile)
         form2 = CompanyForm(instance = company)
         if 'profile' in request.POST:
-            print("profile")
             form1 = ProfileForm(request.POST, request.FILES, instance=profile)
             if form1.is_valid():
                 form1.save()
@@ -74,6 +73,11 @@ def profile(request):
             if form2.is_valid():
                 form2.save()
                 messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
+
+        elif 'req' in request.POST:
+            profile.status = True
+            profile.save()
+            return redirect('dashboard:profile')
                 # return redirect('/dashboard')
         # update = form.save(commit=False)
     	# 	update.user = request.user

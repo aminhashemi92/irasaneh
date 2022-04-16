@@ -30,9 +30,9 @@ admin.site.register(get_user_model(), CustomUserAdmin)
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'company','role', 'position','pic_tag')
+    list_display = ('user', 'company','status','role', 'position','pic_tag')
     ordering = ['user', 'company']
-    list_filter = ('role', 'position')
+    list_filter = ('role', 'position','status')
     search_fields = ('company','user',)
 
 admin.site.register(Profile,ProfileAdmin)

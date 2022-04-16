@@ -63,7 +63,31 @@
 </div>
 
 
-
+{% if user.profile.role == 'k' %}
+<div class="col-md-12">
+  <div class="card card-danger">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">درخواست رسانه‌دار شدن</h3>
+    </div>
+    <div class="card-body">
+      {% if user.profile.status == False %}
+      <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row text-bold">
+          اگر می‌خواهید به عنوان رسانه‌دار فعالیت کنید، درخواست خود را ارسال نمایید.
+        </div>
+        <br>
+        <button name="req" class="btn btn-success">ارسال</button>
+      </form>
+      {% else %}
+      <div class="row text-bold">
+      درخواست شما در دست بررسی است.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
 
 
 {% if user.profile.position == 'm' %}

@@ -1,10 +1,74 @@
 {% extends 'home/main.html' %}
-
+{% load crispy_forms_tags %}
 {% load static %}
 {% load ratings %}
 
 {%block title%}
 کاوشگر هوشمند رسانه
+{% endblock %}
+
+{% block modal %}
+
+<div class="my-modal" style="">
+  {% if not user.is_authenticated %}
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">با شما تماس می‌گیریم.</h4>
+          <button type="button" class="amin btn-close" data-bs-dismiss="modal" style="margin:0px;"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row text-right">
+              <div class="col-12">
+                {{ form.title|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.firstname|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.lastname|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.role|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.mphone|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ form.description|as_crispy_field }}
+              </div>
+
+            </div>
+            <button name="contact" class="btn btn-success">ارسال</button>
+          </form>
+
+          <div class="col-12 text-right">
+
+          </div>
+        </div>
+        <button type='text' class="btn btn-primary">
+          <a href="#" class="text-white"> تماس با پشتیبانی: ۰۲۱۴۴۴۴۴۴۴</a></button>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+
+
+
 {% endblock %}
 
 {% block content %}
@@ -14,10 +78,11 @@
 <div class="hero-wrap" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
   <div class="container">
-    <div class="row no-gutters slider-text align-items-center justify-content-center">
+    <div class="row no-gutters slider-text align-items-center">
       <div class="col-md-8 ftco-animate d-flex align-items-end">
-        <div class="text w-100 text-center">
-          <h1 class="mb-4"><span>کاوشگر هوشمند رسانه</span></h1>
+        <div class="text w-100 text-center" style="padding-left:150px">
+          <h1 class="mb-4"><span>آی رسانه</span></h1>
+          <h2 class="mb-4 text-white"><span style="font-size:3rem;">کاوشگر هوشمند رسانه</span></h2>
           <!-- <h1 class="mb-4">کاوشگر <span>هوشمند</span> رسانه <span></span></h1> -->
           <p><a href="{% url 'home:contact' %}" class="btn btn-primary py-2 px-4">تماس با ما</a> <a href="{% url 'home:about' %}" class="btn btn-white btn-outline-white py-2 px-4">درباره ما</a></p>
         </div>
@@ -31,7 +96,7 @@
 
 <!-- ============================================-->
 <!-- <gray section> begin ============================-->
-<section class="ftco-intro">
+<section class="ftco-intro" style="display:None;">
   <div class="container">
     <div class="row no-gutters">
       <div class="col-md-4 d-flex">
@@ -82,15 +147,22 @@
     <div class="row">
       <div class="col-md-6 img img-3 d-flex justify-content-center align-items-center" style="background-image: url('{% static "home/images/about1.png" %}');">
       </div>
-      <div class="col-md-6 wrap-about pl-md-5 ftco-animate py-5">
+      <div class="col-md-6 wrap-about pl-md-5 ftco-animate pr-5">
         <div class="heading-section text-right ">
           <span class="subheading ">هدف ما</span>
           <h2 class="mb-4">تولید متن تصادفی</h2>
 
-          <p class="text-justify">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
-            با هدف بهبود ابزارهای کاربردی می باشد. </p>
-          <p class="text-justify">کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در
-            این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+          <p class="text-justify pr-3" style="font-size:18px;">
+            <span class="fw-bold">آی‌رسانه</span>
+            آی‌رسانه "كاوشگر هوشمند رسانه" است.
+          </p>
+          <p class="text-justify pr-3" style="font-size:18px;">
+            در آی‌رسانه افراد صاحب رسانه (فضای مناسب برای تبليغ سايرين)، رسانه‌هاي خود را معرفي و در معرض ديد مخاطبان سايت قرار مي‌دهند.
+          </p>
+          <p class="text-justify pr-3" style="font-size:18px;">
+            افرادي كه صاحب كسب و كار هستند و نياز به انجام تبليغات براي معرفي محصول و برند خود دارند، مي‌توانند براساس شهر / استان، موقعيت قرار‌گيري رسانه (پمپ بنزين/ ايستگاه مترو)، نوع رسانه (ويديو وال/بيلبورد...)، مخاطب هدف (بيننده‌هاي رسانه) و
+            بودجه‌ی مد نظر خود براي اجاره رسانه، جستجو انجام دهند تا به‌صورت هدفمند به بهترين رسانه براي تبليغ خود هدايت شوند.
+          </p>
           <p class="year">
             <span>تعداد رسانه‌ها تا این لحظه‌</span>
             <strong class="number" data-number="{{allresanehcount}}">0</strong>
@@ -149,7 +221,7 @@
     </div>
     <div class="row">
       {% for resaneh in resanehs %}
-      <div class="col-md-3 d-flex">
+      <div class="col-md-6 d-flex">
         <div class="product ftco-animate">
           <div class="img d-flex align-items-center justify-content-center" style="background-image: url('{{resaneh.resanehimage.first.image.url}}');">
             <div class="desc ">
@@ -342,5 +414,20 @@
 </section>
 <!-- <blog section> close ============================-->
 <!-- ============================================-->
+
+{% endblock %}
+
+
+{% block scripts%}
+<script type="text/javascript">
+  $(window).on('load', function() {
+    let key = localStorage.getItem('show')
+    if (key == null) {
+      $('#myModal').modal('show');
+      localStorage.setItem('show', true)
+    }
+  });
+</script>
+
 
 {% endblock %}

@@ -8,7 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 
 from .forms import UserAdminCreationForm
 from .decorators import unathenticated_user
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 
@@ -30,7 +30,15 @@ def login_register(request):
         user = authenticate(request, username=phone, password=password)
         if user is not None:
             login(request,user)
-            return redirect('/')
+            try:
+                profile = Profile.objects.get(user=user)
+            except Profile.DoesNotExist:
+                profile = None
+
+            if profile != None:
+                return redirect('/')
+            else:
+                return redirect('dashboard:profile')
         else:
             messages.info(request, "نام‌کاربری یا رمز عبور اشتباه است!")
             return redirect('account:login_register')
@@ -42,7 +50,7 @@ def login_register(request):
             messages.success(request, phone + ' کاربر جدید با موفقیت اضافه شد! ' )
             return redirect('account:login_register')
         else:
-            messages.info(request, "نام کاربری یا ایمیل تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است!")
+            messages.info(request, "نام‌کاربری و یا رمزعبور مناسب انتخاب نشده‌است!")
 			# messages.info(request, "نام‌کاربری تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است.")
 
     # form = CreateUserForm()
@@ -66,7 +74,7 @@ def login_register(request):
 	# 			return redirect('register_login:register_login')
 	# 		else:
 	# 			# messages.info(request, "نام‌کاربری تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است.")
-	# 			messages.info(request, "نام کاربری یا ایمیل تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است!")
+	# 			messages.info(request, "نام کاربری یا  تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است!")
 
 
     context={'form':form}

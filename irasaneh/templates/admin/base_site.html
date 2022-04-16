@@ -7,16 +7,15 @@
 
 <style>
 
-  @font-face {
-    font-family: Shabnam;
-    src: url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.eot');
-    src: url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.eot?#iefix') format('embedded-opentype'),
-         url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.woff2') format('woff2'),
-         url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.woff') format('woff'),
-         url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/Shabnam.ttf') format('truetype');
-    font-weight: normal;
-
-  }
+ @font-face {
+ font-family: 'Shabnam';
+ src: url('{% static "home/fonts/Sahel.eot" %}');
+ src: url('{% static "home/fonts/Sahel.eot?#iefix" %}') format('embedded-opentype'),
+        url('{% static "home/fonts/Sahel.woff" %}') format('woff'),
+        url('{% static "home/fonts/Sahel.ttf" %}')  format('truetype'),
+        url('{% static "home/fonts/Sahel.svg#svgFontName" %}') format('svg');
+  font-weight: normal;
+}
 
   body, input, tr, th, td, select{
     font-family: "Shabnam", cursive !important;

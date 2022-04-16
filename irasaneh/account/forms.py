@@ -17,13 +17,22 @@ class UserAdminCreationForm(UserCreationForm):
             visible.field.widget.attrs['class'] = 'input1'
 
         self.fields['phone'].widget.attrs.pop('autofocus', None)
+        self.fields['phone'].widget.attrs['placeholder'] = '09123456789'
+
+        # widgets = {
+        #     'phone': TextInput(attrs={
+        #         'placeholder': "09123456789",
+        #         }),
+        # }
 
 
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['firstname', 'lastname', 'company', 'role', 'pic', 'sphone', 'mphone']
-
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['role'].widget.attrs['disabled'] = True
 
 class CompanyForm(ModelForm):
     class Meta:
