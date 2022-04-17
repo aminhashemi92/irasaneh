@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'resaneh.apps.ResanehConfig',
     'dashboard.apps.DashboardConfig',
+    'cities.apps.CitiesConfig',
     'django_summernote',
     'comment',
     'crispy_forms',

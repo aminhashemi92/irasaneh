@@ -3,8 +3,8 @@
   <div class="text">
     <h3 class="heading"><a href="{{offer.slug}}">{{offer.name}}</a></h3>
     <div class="meta">
-      <div><a href="#"><span class="fa fa-user"> </span> {{offer.company}}</a></div>
-      <div><a href="#"><span class="fa fa-dollar"></span> {{offer.price}}</a></div>
+      <div><a href="#"><span class="fa fa-map-marker"> </span> {{offer.address}}</a></div>
+      <div><a href="#"><span class="fa fa-industry"></span> {{offer.place}}</a></div>
       <div><a href="#"><span class="fa fa-flag"></span>
           {% if offer.category.all %}
           {% for category in offer.category.all %}

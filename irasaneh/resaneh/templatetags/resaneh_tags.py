@@ -1,5 +1,5 @@
 from django import template
-from ..models import Category, Resaneh
+from ..models import Category, Resaneh, Offer
 from django.db.models import Count
 # from register_login.models import User
 
@@ -21,9 +21,13 @@ def category_sidebar():
 
 @register.inclusion_tag("resaneh/partials/offer.html")
 def offer():
-    offer = Resaneh.objects.filter(status='p').order_by('viewed')
+    offer = Offer.objects.filter(status=True).last()
+    if offer.is_active():
+        resaneh = offer.resaneh
+    else:
+        resaneh = None
     return {
-        "offer" : offer[0],
+        "offer" : resaneh,
     }
 
 

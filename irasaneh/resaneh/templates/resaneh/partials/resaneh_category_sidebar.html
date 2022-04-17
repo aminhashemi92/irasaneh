@@ -1,44 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="font-size:18px;">دسته‌بندی‌ها:</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
 
-  <div class=" sidebar ftco-animate">
-    <!-- <div class="sidebar-box">
-      <form action="{% url 'resaneh:search' %}" class="search-form">
-        <div class="form-group">
-          <input type="text" class="form-control text-center" name='q' placeholder="جست و جو کنید">
-          <button  class="fa fa-search" style="position:absolute; border:none; background-color:white;"><i class="bi bi-search"></i></button>
-        </div>
-      </form>
-    </div> -->
-    <div class="sidebar-box ftco-animate">
-      <div class="categories">
-        <h3 class="text-center">دسته‌بندی‌ها</h3>
-        <ul class="p-0">
+        <!-- Dropdown -->
+        {% for cat in category %}
+        {% if cat.parent == None %}
+        <li class="nav-item dropdown ">
+          <a class="nav-link {%if cat.children.active %} dropdown-toggle {% endif %}" href="{% url 'resaneh:resaneh' cat.slug %}" id="navbarDropdownMenuLinkRight-{{cat.title}}" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            {{cat.title}}
+          </a>
 
-          {% for cat in category %}
-          {% if cat.parent == None %}
-          <li>
-            <div class="row d-flex justify-content-between">
-              <div class="col-2">
-                {%if cat.children.active %}
-                <a href="#apps-{{cat.title}}" data-toggle="collapse" aria-expanded="false" class="">
-                  <span class="fa fa-chevron-down"></span>
-                </a>
-                {% endif %}
-              </div>
-              <div class="col-10">
-                <a href="{% url 'resaneh:resaneh' cat.slug %}" class="text-center">{{cat.title}}</a>
-              </div>
-            </div>
+          {%if cat.children.active %}
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkRigh-{{cat.title}}t">
+            {% for cat in cat.children.active %}
 
-            {%if cat.children.active %}
-            {% include 'resaneh/partials/category_loop.html' %}
-            {% endif %}
-          </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'resaneh:resaneh' cat.slug %}"> {{cat.title}} {% if cat.children.active %} &raquo;{% endif %} </a>
+
+              {%if cat.children.active %}
+              {% include 'resaneh/partials/category_loop.html' %}
+              {% endif %}
+              {% endfor %}
+            </li>
+
+          </ul>
           {% endif %}
-          {% endfor %}
-
-        </ul>
+        </li>
 
 
-      </div>
+        {% endif %}
+        {% endfor %}
+      </ul>
     </div>
   </div>
+</nav>

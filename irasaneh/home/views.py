@@ -5,6 +5,7 @@ from resaneh.models import Resaneh, Category
 from .forms import ContactUsForm
 from extensions.utils import get_client_ip
 from .models import ContactUs
+from django.contrib import messages
 
 # Create your views here.
 def homepage(request):
@@ -30,6 +31,7 @@ def homepage(request):
             obj = form.save()
             obj.ip_address = ip_address
             obj.save()
+            messages.success(request,'پیام شما با موفقیت ارسال گردید.')
             return redirect('/')
 
     context ={
@@ -55,6 +57,7 @@ def contact(request):
         form = ContactUsForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,'پیام شما با موفقیت ارسال گردید.')
             # obj.ip_address = ip_address
             # obj.save()
             # return redirect('/')

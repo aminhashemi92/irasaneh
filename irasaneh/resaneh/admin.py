@@ -143,11 +143,19 @@ class StructureTypeAdmin(admin.ModelAdmin):
 admin.site.register(StructureType,StructureTypeAdmin)
 
 
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ('resaneh', 'jstart', 'jend', 'jcreated', 'status', 'is_active')
+    list_filter = (['status',])
+    search_fields = ('resaneh', )
+    actions = [make_active, make_diactive]
+
+admin.site.register(Offer,OfferAdmin)
+
 
 @admin.register(Resaneh)
 class ResanehAdmin(admin.ModelAdmin):
     inlines = [ResanehImageAdmin]
-    list_display = ('name','company','place','category_to_str','showtype_to_str','industry_to_str','tag_to_str','status',)
+    list_display = ('name','company','place','category_to_str','showtype_to_str','status',)
     list_filter = ( 'status', 'company','place')
     search_fields = ('name', 'detail')
     prepopulated_fields = {'slug':('name',)}

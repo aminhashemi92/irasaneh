@@ -18,9 +18,9 @@
       <div class="modal-content">
 
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">با شما تماس می‌گیریم.</h4>
-          <button type="button" class="amin btn-close" data-bs-dismiss="modal" style="margin:0px;"></button>
+        <div class="modal-header text-center">
+          <h4 class="modal-title text-center">با شما تماس می‌گیریم.</h4>
+          <!-- <button type="button" class="amin btn-close" data-bs-dismiss="modal" style="margin:0px;"></button> -->
         </div>
 
         <!-- Modal body -->
@@ -75,7 +75,7 @@
 
 <!-- ============================================-->
 <!-- <home heading> begin ============================-->
-<div class="hero-wrap" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="0.5">
+<div class="hero-wrap" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="1">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-center">
@@ -149,12 +149,12 @@
       </div>
       <div class="col-md-6 wrap-about pl-md-5 ftco-animate pr-5">
         <div class="heading-section text-right ">
-          <span class="subheading ">هدف ما</span>
-          <h2 class="mb-4">تولید متن تصادفی</h2>
+          <span class="subheading ">اهداف</span>
+          <h2 class="mb-4">آی‌رسانه</h2>
 
           <p class="text-justify pr-3" style="font-size:18px;">
-            <span class="fw-bold">آی‌رسانه</span>
-            آی‌رسانه "كاوشگر هوشمند رسانه" است.
+            <span class="h5">آی‌رسانه</span>
+            "كاوشگر هوشمند رسانه" است.
           </p>
           <p class="text-justify pr-3" style="font-size:18px;">
             در آی‌رسانه افراد صاحب رسانه (فضای مناسب برای تبليغ سايرين)، رسانه‌هاي خود را معرفي و در معرض ديد مخاطبان سايت قرار مي‌دهند.
@@ -211,6 +211,13 @@
 
 <!-- ============================================-->
 <!-- <last rasanehs section> begin ============================-->
+
+
+
+
+
+
+
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center pb-5">
@@ -219,51 +226,90 @@
         <h2>آخرین رسانه‌ها</h2>
       </div>
     </div>
-    <div class="row">
-      {% for resaneh in resanehs %}
-      <div class="col-md-6 d-flex">
-        <div class="product ftco-animate">
-          <div class="img d-flex align-items-center justify-content-center" style="background-image: url('{{resaneh.resanehimage.first.image.url}}');">
-            <div class="desc ">
-              <p class="meta-prod d-flex justify-content-center">
-                <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a> -->
-                <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a> -->
-                <a href="{% url 'resaneh:details' resaneh.slug %}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+
+    <div class="shop-default shop-cards shop-tech">
+      <div class="row">
+        {% for resaneh in resanehs %}
+        <div class="col-md-6 mb-4">
+          <div class="block product no-border z-depth-2-top z-depth-2--hover ftco-animate">
+            <div class="block-image">
+              <a href="{% url 'resaneh:details' resaneh.slug %}">
+                <img src="{{resaneh.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:350px; width:550px;">
+              </a>
+              <!-- <span class="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span> -->
+            </div>
+            <div class="block-body text-center">
+              <h3 class="heading heading-5 strong-600 text-capitalize">
+                <a href="{% url 'resaneh:details' resaneh.slug %}">
+                  {{resaneh.name}}
+                </a>
+              </h3>
+              <p class="product-description">
+                {{resaneh.address}}
               </p>
-              <div class="">
-                {% ratings resaneh read_only=True template_name='star_ratings/widget.html' %}
+              <p class="">
+                {{resaneh.place}}
+              </p>
+              <span class="price text-danger">
+                {% if resaneh.category.all %}
+                {% for category in resaneh.category.all %}
+                <span class="text-primary">
+                  {{ category }}
+                  {% if forloop.counter < resaneh.category.all.count %}
+                  ،
+                  {% endif %}
+                </span>
+                {% endfor %}
+                {% endif %}</span>
+
+              <div class="product-colors mt-2">
+                <div class="">
+                  {% ratings resaneh read_only=True template_name='star_ratings/widgetresaneh.html' %}
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center pt-2 px-3">
+                <div class="tagcloud ">
+                  <!-- <span class="text-right">
+                    تگ‌ها:
+                  </span> -->
+                  {% if resaneh.tag.all %}
+                  {% for tag in resaneh.tag.all|slice:":4"  %}
+                  <a href="#" class="tag-cloud-link">{{tag}}</a>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="product-buttons mt-2">
+                <div class="row align-items-center">
+                  <!-- <div class="col-2">
+                    <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Favorite">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare">
+                      <i class="fa fa-share"></i>
+                    </button>
+                  </div> -->
+                  <div class="col-12">
+                    <a href="{% url 'resaneh:details' resaneh.slug %}">
+                    <button type="button" class="btn btn-block btn-primary btn-circle btn-icon-left">
+                      مشاهده جزییات
+                    </button>
+                  </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="text text-center">
-            <!-- <span class="sale">فروش ویژه</span> -->
-            <!-- <span class="seller">Best Seller</span> -->
-            <!-- <span class="new">New Arrival</span> -->
-            <span class="category">{{resaneh.company}}</span>
 
-
-            <h2>{{resaneh.name}}</h2>
-            <span class="price text-danger">
-              {% if resaneh.category.all %}
-              {% for category in resaneh.category.all %}
-              <span class="text-primary">
-                {{ category }}
-                {% if forloop.counter < resaneh.category.all.count %}
-                ،
-                {% endif %}
-              </span>
-              {% endfor %}
-              {% endif %}</span>
-            <br>
-            <span class="price">{{resaneh.address|truncatewords:5}}</span>
-            <br>
-            <span class="price text-danger">{{resaneh.price}}</span>
-            <!-- <p class="mb-0"><span class="price price-sale">۱۲۵ میلیون</span> <span class="price">۱۱۰میلیون</span></p> -->
-          </div>
         </div>
+        {% endfor %}
+
       </div>
-      {% endfor %}
     </div>
+
+
     <div class="row justify-content-center">
       <div class="col-md-4">
         <a href="{% url 'resaneh:resaneh' %}" class="btn btn-primary d-block">مشاهده‌ی همه‌ی رسانه‌ها <span class="fa fa-long-arrow-left"></span></a>
@@ -388,6 +434,7 @@
       {% for article in articles %}
       <div class="col-lg-6 d-flex align-items-stretch ftco-animate">
         <div class="blog-entry d-flex">
+
           <a href="{% url 'blog:single' article.slug %}" class="block-20 img" style="background-image: url('{{article.thumbnail.url}}');">
           </a>
           <div class="text p-4 bg-light">

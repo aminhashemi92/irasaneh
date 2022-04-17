@@ -10,6 +10,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from comment.models import Comment
 from hitcount.models import HitCountMixin, HitCount
 from star_ratings.models import Rating
+from cities.models import *
 # from comment.models import Comment
 
 # Managers
@@ -140,6 +141,13 @@ class Resaneh(models.Model):
     dimensions = models.CharField(max_length=200, verbose_name="ابعاد", blank=True)
     area =  models.CharField(max_length=200, verbose_name="مساحت", blank=True)
     areadetail = models.CharField(max_length=200, verbose_name="جزییات مساحت", blank=True)
+
+    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL, related_name="resaneh", verbose_name="کشور", blank=True)
+    state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL, related_name="resaneh", verbose_name="استان", blank=True)
+    city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL, related_name="resaneh", verbose_name="شهر", blank=True)
+    zone = models.ForeignKey(Zone, null=True, on_delete=models.SET_NULL, related_name="resaneh", verbose_name="منطقه", blank=True)
+
+
     address = models.CharField(max_length=200, verbose_name="آدرس", blank=True)
     location = PlainLocationField(default='35.69977923732504,411.33733749345987',zoom=7, blank=True)
 
@@ -166,6 +174,8 @@ class Resaneh(models.Model):
     comments = GenericRelation(Comment)
     viewed = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
     ratings = GenericRelation(Rating, related_query_name='resaneh')
+
+
 
 
     class Meta:
@@ -198,6 +208,7 @@ class ResanehImage(models.Model):
     resaneh = models.ForeignKey(Resaneh, default=None, related_name="resanehimage", verbose_name="رسانه", on_delete=models.CASCADE, blank=True)
     image = models.FileField(upload_to='resanehimages', verbose_name="عکس")
 
+
     class Meta:
         verbose_name = "عکس‌های رسانه"
         verbose_name_plural = "عکس‌های رسانه‌ها"
@@ -208,3 +219,38 @@ class ResanehImage(models.Model):
     def image_tag(self):
         return format_html("<img style='width:55px;' src='{}'>".format(self.image.url))
     image_tag.short_description = "تصویر"
+
+
+class Offer(models.Model):
+    resaneh = models.ForeignKey(Resaneh, default=None, related_name="resanehoffer", verbose_name="رسانه", on_delete=models.CASCADE, blank=True)
+    start = models.DateTimeField(default=timezone.now, verbose_name="زمان شروع")
+    end = models.DateTimeField(default=timezone.now, verbose_name="زمان پایان")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="زمان ایجاد")
+    status = models. BooleanField(default=False, verbose_name="فعال")
+    class Meta:
+        verbose_name = "پیشنهاد ویژه"
+        verbose_name_plural = "پیشنهاد‌های ویژه"
+
+    def __str__(self):
+        return self.resaneh.name
+
+    def is_active(self):
+        if self.end > timezone.now() and self.status==True:
+            return True
+        else:
+            return False
+
+    is_active.boolean = True
+    is_active.short_description = "نمایش داده شود؟"
+
+    def jcreated(self):
+        return jalali_converter(self.created)
+    jcreated.short_description = "زمان ایجاد"
+
+    def jstart(self):
+        return jalali_converter(self.start)
+    jstart.short_description = "زمان شروع"
+
+    def jend(self):
+        return jalali_converter(self.end)
+    jend.short_description = "زمان پایان"

@@ -23,6 +23,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('resaneh/', include('resaneh.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('cities/', include('cities.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('comment/', include('comment.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
@@ -30,7 +31,6 @@ urlpatterns = [
 
 
 #در حالت دپلوی غیرفعال بشه
-
 from django.conf import settings
 from django.conf.urls.static import static
 

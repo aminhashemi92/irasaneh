@@ -1,5 +1,5 @@
 from django.db import models
-
+from extensions.utils import jalali_converter
 # Create your models here.
 class ContactUs(models.Model):
     ROLE_CHOICES =(
@@ -22,3 +22,7 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return self.title
+
+    def jpublish(self):
+        return jalali_converter(self.date_created)
+    jpublish.short_description = "زمان ارسال"

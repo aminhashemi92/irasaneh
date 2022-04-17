@@ -22,7 +22,7 @@ def resaneh(request, slug=None, page=1):
     filter = ResanehFilter(request.GET, queryset=resaneh_list)
     resaneh_list = filter.qs
 
-    paginator = Paginator(resaneh_list,4)
+    paginator = Paginator(resaneh_list,16)
     resanehs = paginator.get_page(page)
 
     min_price = Resaneh.objects.aggregate(price=Min('price'))
@@ -42,6 +42,7 @@ def resaneh(request, slug=None, page=1):
         "min_price" : min_price,
         "max_price" : max_price,
         "data" : urlencode(data),
+
         }
     return render(request,"resaneh/resaneh.html", context)
 
@@ -93,7 +94,7 @@ def search(request, page=1):
     search = request.GET.get('q')
     resanehs_list = Resaneh.objects.filter(Q(detail__icontains = search)| Q(address__icontains = search)| Q(name__icontains = search) | Q(point__icontains = search) | Q(company__name__icontains = search), status="p").order_by('-publish')
     # articles_list = category.articles.filter(status="p").order_by('-publish')
-    paginator = Paginator(resanehs_list,2)
+    paginator = Paginator(resanehs_list,16)
     resanehs = paginator.get_page(page)
     context = {
         "resanehs" : resanehs,
