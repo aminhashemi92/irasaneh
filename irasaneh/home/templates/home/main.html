@@ -194,16 +194,20 @@
               <a class="dropdown-item text-right" href="product.html">رسانه‌دارها</a>
             </div>
           </li> -->
-          <li class="nav-item active"><a href="{% url 'blog:blog' %}" class="nav-link">وبلاگ</a></li>
-          <li class="nav-item active"><a href="#" class="nav-link">مشاوره</a></li>
-          <li class="nav-item dropdown active">
+          <!-- <li class="nav-item active"><a href="{% url 'blog:blog' %}" class="nav-link">وبلاگ</a></li> -->
+          <li class="nav-item active"><a href="https://irasane.com/blog/" class="nav-link">وبلاگ</a></li>
+          <!-- <li class="nav-item active"><a href="#" class="nav-link">مشاوره</a></li> -->
+          <li class="nav-item active"><a href="{% url 'home:contact' %}" class="nav-link">تماس با‌ما</a></li>
+          <li class="nav-item active"><a href="{% url 'home:about' %}" class="nav-link">درباره‌ی ما</a></li>
+          <li class="nav-item active"><a href="{% url 'home:faq' %}" class="nav-link">پرسش‌های متداول</a></li>
+          <!-- <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle " href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">آی‌رسانه</a>
             <div class="dropdown-menu  text-right" aria-labelledby="dropdown04">
               <a href="{% url 'home:contact' %}" class="dropdown-item" href="product.html">تماس با‌ما</a>
               <a href="{% url 'home:about' %}" class="dropdown-item" href="product-single.html">درباره‌ی ما</a>
               <a href="{% url 'home:faq' %}" class="dropdown-item" href="cart.html">پرسش‌های متداول</a>
             </div>
-          </li>
+          </li> -->
           <!-- <li class="nav-item active"><a href="{% url 'home:contact' %}" class="nav-link">تماس با ما</a></li>
           <li class="nav-item active"><a href="{% url 'home:about' %}" class="nav-link">درباه‌ما</a></li>
           <li class="nav-item active"><a href="{% url 'home:faq' %}" class="nav-link">پرسش‌های متداول</a></li> -->
@@ -230,8 +234,8 @@
   <!-- <footer> begin ============================-->
   <footer class="ftco-footer" style="text-align:right;">
     <div class="container">
-      <div class="row mb-5">
-        <div class="col-sm-12 col-md">
+      <div class="row row-cols-2 mb-5">
+        <div class="col">
           <div class="ftco-footer-widget mb-4">
             <a class="navbar-brand " href="index.html"><img id="logo" src="{%static '/home/images/whitelogo.png' %}" style="width:170px;"></a>
             <br>
@@ -242,9 +246,9 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-12 col-md">
+        <div class="col">
           <div class="ftco-footer-widget mb-4 ml-md-4">
-            <h2 class="ftco-heading-2 text-right">حساب کاربری</h2>
+            <h2 class="ftco-heading-2 text-right">حساب‌کاربری</h2>
             <ul class="list-unstyled text-right pr-0">
               <li><a href="{% url 'account:login_register' %}"><span class=""></span>ورود</a></li>
               <li><a href="{% url 'account:login_register' %}"><span class=""></span>عضویت</a></li>
@@ -255,9 +259,9 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-12 col-md">
+        <div class="col">
           <div class="ftco-footer-widget mb-4 ml-md-4">
-            <h2 class="ftco-heading-2 text-right">دباره‌ما</h2>
+            <h2 class="ftco-heading-2 text-right">درباره‌ی‌ما</h2>
             <ul class="list-unstyled text-right pr-0">
               <li><a href="{% url 'home:contact' %}"><span class=""></span>تماس با ما</a></li>
               <li><a href="{% url 'home:about' %}"><span class=""></span>ارتباط با ما</a></li>
@@ -266,18 +270,19 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-12 col-md">
+        <div class="col">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2 text-right">دسترسی آسان</h2>
+            <h2 class="ftco-heading-2 text-right">دسترسی‌آسان</h2>
             <ul class="list-unstyled text-right pr-0">
               <li><a href="{% url 'resaneh:resaneh'%}"><span class=""></span>رسانه‌ها</a></li>
-              <li><a href="{% url 'blog:blog'%}"><span class=""></span>وبلاگ</a></li>
+              <li><a href="https://irasane.com/blog/"><span class=""></span>وبلاگ</a></li>
+              <!-- <li><a href="{% url 'blog:blog'%}"><span class=""></span>وبلاگ</a></li> -->
               <li><a href="{% url 'home:homepage'%}"><span class=""></span>خانه</a></li>
-              <li><a href="#"><span class="mr-2"></span>مشاوره</a></li>
+              <li><a href="#"><span class=""></span>مشاوره</a></li>
             </ul>
           </div>
         </div>
-        <div class="col-sm-12 col-md">
+        <div class="col">
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2 text-right">ارتباط با ما</h2>
             <div class="block-23 mb-3">

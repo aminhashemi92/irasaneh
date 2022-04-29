@@ -80,13 +80,17 @@
   <div class="container">
     <div class="row no-gutters slider-text align-items-center">
       <div class="col-md-8 ftco-animate d-flex align-items-end">
-        <div class="text w-100 text-center" style="padding-left:150px">
+        <div class="text w-100 text-center">
           <h1 class="mb-4"><span>آی رسانه</span></h1>
           <h2 class="mb-4 text-white"><span style="font-size:3rem;">کاوشگر هوشمند رسانه</span></h2>
           <!-- <h1 class="mb-4">کاوشگر <span>هوشمند</span> رسانه <span></span></h1> -->
           <p>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'account:login_register' %}" class="btn btn-white btn-outline-white py-2 px-4 mb-2">ورود/عضویت</a>
+            {% endif %}
             <a href="{% url 'home:contact' %}" class="btn btn-primary py-2 px-4 mb-2">تماس با ما</a>
             <a href="{% url 'home:about' %}" class="btn btn-white btn-outline-white py-2 px-4 mb-2">درباره ما</a>
+            <!-- <a href="{% url 'account:login_register' %}" class="btn btn-primary py-2 px-4 mb-2">ورود/عضویت</a> -->
           </p>
         </div>
       </div>
@@ -150,7 +154,7 @@
     <div class="row">
       <div class="col-md-6 img img-3 d-flex justify-content-center align-items-center shadow p-3 mb-5 bg-body rounded" style="background-image: url('{% static "home/images/about1.png" %}');">
       </div>
-      <div class="col-md-6 wrap-about pl-md-5 ftco-animate pr-5">
+      <div class="col-md-6 wrap-about pl-5 ftco-animate pr-md-5">
         <div class="heading-section text-right ">
           <span class="subheading ">اهداف</span>
           <h2 class="mb-4">آی‌رسانه</h2>
@@ -166,7 +170,7 @@
             افرادي كه صاحب كسب و كار هستند و نياز به انجام تبليغات براي معرفي محصول و برند خود دارند، مي‌توانند براساس شهر / استان، موقعيت قرار‌گيري رسانه (پمپ بنزين/ ايستگاه مترو)، نوع رسانه (ويديو وال/بيلبورد...)، مخاطب هدف (بيننده‌هاي رسانه) و
             بودجه‌ی مد نظر خود براي اجاره رسانه، جستجو انجام دهند تا به‌صورت هدفمند به بهترين رسانه براي تبليغ خود هدايت شوند.
           </p>
-          <p class="year">
+          <p class="year" style="display:none;">
             <span>تعداد رسانه‌ها تا این لحظه‌</span>
             <strong class="number" data-number="{{allresanehcount}}">0</strong>
           </p>
@@ -425,7 +429,7 @@
 
 <!-- ============================================-->
 <!-- <blog section> begin ============================-->
-<section class="ftco-section">
+<section class="ftco-section" style="display:none;">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 heading-section text-center ftco-animate">

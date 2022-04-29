@@ -46,15 +46,33 @@
 <section class="ftco-section">
   <div class="container">
     <div class="row border">
+      <div class="col-lg-7 product-details mb-5 ftco-animate ">
+        <div class="wrapper12 py-2">
+          <div class="card12">
+            <div class="d-flex justify-content-center p-4 "> <img class="minipicfunc shadow bg-body rounded" id="main-image" src="{{resaneh.resanehimage.last.image.url}}" />
+            </div>
+
+            <div class="thumbnail text-center">
+              {% for irasanehimage in resaneh.resanehimage.all %}
+              <img onclick="change_image(this)" src="{{irasanehimage.image.url}}" width="70">
+              {% endfor %}
+              ‍
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
       <div class="col-lg-5  ftco-animate">
 
         <h3 class="d-flex justify-content-center py-3 text-center">{{resaneh.name}}</h3>
 
-        <div class="row justify-content-center">
-          <p class="text-center justify-content-center">
+        <div class="row d-flex justify-content-center">
+          <!-- <p class="text-center"> -->
             {% ratings resaneh template_name='star_ratings/widgetresaneh.html' %}
             <!-- <a href="#" class="mr-2">5.0</a> -->
-          </p>
+          <!-- </p> -->
         </div>
 
         <div class="rating d-flex justify-content-center row ">
@@ -171,30 +189,10 @@
               </div>
           </div>
 
-
-
-
-
-
       </div>
 
-      <div class="col-lg-7 product-details mb-5 ftco-animate ">
-        <div class="wrapper12 py-2">
-          <div class="card12">
-            <div class="d-flex justify-content-center p-4 "> <img class="minipicfunc shadow bg-body rounded" id="main-image" src="{{resaneh.resanehimage.last.image.url}}" />
-            </div>
 
-            <div class="thumbnail text-center">
-              {% for irasanehimage in resaneh.resanehimage.all %}
-              <img onclick="change_image(this)" src="{{irasanehimage.image.url}}" width="70">
-              {% endfor %}
-              ‍
-            </div>
 
-          </div>
-        </div>
-
-      </div>
     </div>
 
     <div class="row border">
@@ -202,7 +200,7 @@
         <h5 class=" col-md-12 d-flex justify-content-start text-center pt-3" id="rdetail">مشخصات</h5>
         <div class="khat m-2">  </div>
 
-        <table class="table d-flex justify-content-start mx-5 text-right ">
+        <table class="table d-flex justify-content-start text-right ">
 
           <tbody>
             <tr>
@@ -379,18 +377,18 @@
         <div class="tab-content bg-light" id="v-pills-tabContent">
 
           <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
-            <div class="p-4">
+            <div class="p-3">
               <!-- <h3 class="mb-4 text-right">معرفی</h3> -->
-              <p class="text-justify px-5" style="font-size:16px;">
+              <p class="text-justify" style="font-size:16px;">
                 {{resaneh.detail|linebreaksbr}}
               </p>
             </div>
           </div>
 
           <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
-            <div class="p-4">
+            <div class="p-3">
               <!-- <h3 class="mb-4 text-right">مشخصات</h3> -->
-              <p class="text-justify px-5" style="font-size:16px;">
+              <p class="text-justify" style="font-size:16px;">
                 {{resaneh.point|linebreaksbr}}
               </p>
             </div>
