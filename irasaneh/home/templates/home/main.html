@@ -32,7 +32,7 @@
   <!--     page title-->
   <!-- ===============================================-->
   <title>آی‌رسانه{%block title%}{% endblock %}</title>
-
+  <link rel="icon" type="image/svg" href="{% static '/home/images/iconlogo.png' %} ">
 
   <!-- ===============================================-->
   <!--     stylesheet-->
@@ -67,9 +67,9 @@
 
 <body>
 
-{% block modal %}
+  {% block modal %}
 
-{% endblock %}
+  {% endblock %}
 
   <!-- ============================================-->
   <!-- <nav> begin ============================-->
@@ -228,14 +228,14 @@
 
   <!-- ============================================-->
   <!-- <footer> begin ============================-->
-  <footer class="ftco-footer">
+  <footer class="ftco-footer" style="text-align:right;">
     <div class="container">
       <div class="row mb-5">
         <div class="col-sm-12 col-md">
           <div class="ftco-footer-widget mb-4">
             <a class="navbar-brand " href="index.html"><img id="logo" src="{%static '/home/images/whitelogo.png' %}" style="width:170px;"></a>
             <br>
-            <ul class="ftco-footer-social list-unstyled mt-2">
+            <ul class="ftco-footer-social list-unstyled mt-3 pr-0">
               <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
@@ -244,45 +244,51 @@
         </div>
         <div class="col-sm-12 col-md">
           <div class="ftco-footer-widget mb-4 ml-md-4">
-            <h2 class="ftco-heading-2">حساب کاربری</h2>
-            <ul class="list-unstyled">
-              <li><a href="#"><span class="mr-2"></span>ورود</a></li>
-              <li><a href="#"><span class="mr-2"></span>عضویت</a></li>
-              <li><a href="#"><span class="mr-2"></span>تنظیمات</a></li>
-              <li><a href="#"><span class="mr-2"></span>سبد خرید</a></li>
+            <h2 class="ftco-heading-2 text-right">حساب کاربری</h2>
+            <ul class="list-unstyled text-right pr-0">
+              <li><a href="{% url 'account:login_register' %}"><span class=""></span>ورود</a></li>
+              <li><a href="{% url 'account:login_register' %}"><span class=""></span>عضویت</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'dashboard:profile' %}"><span class=""></span>حساب کاربری</a></li>
+              <li><a href="{% url 'dashboard:dashboard' %}"><span class=""></span>داشبورد</a></li>
+            {% endif %}
             </ul>
           </div>
         </div>
         <div class="col-sm-12 col-md">
           <div class="ftco-footer-widget mb-4 ml-md-4">
-            <h2 class="ftco-heading-2">دباره‌ما</h2>
-            <ul class="list-unstyled">
-              <li><a href="#"><span class="mr-2"></span>تماس با ما</a></li>
-              <li><a href="#"><span class="mr-2"></span>ارتباط با ما</a></li>
-              <li><a href="#"><span class="mr-2"></span>پرسش‌های متداول</a></li>
-              <li><a href="#"><span class="mr-2"></span>آدرس</a></li>
+            <h2 class="ftco-heading-2 text-right">دباره‌ما</h2>
+            <ul class="list-unstyled text-right pr-0">
+              <li><a href="{% url 'home:contact' %}"><span class=""></span>تماس با ما</a></li>
+              <li><a href="{% url 'home:about' %}"><span class=""></span>ارتباط با ما</a></li>
+              <li><a href="{% url 'home:faq' %}"><span class=""></span>پرسش‌های متداول</a></li>
+
             </ul>
           </div>
         </div>
         <div class="col-sm-12 col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">دسترسی آسان</h2>
-            <ul class="list-unstyled">
-              <li><a href="#"><span class="mr-2"></span>رسانه‌ها</a></li>
-              <li><a href="#"><span class="mr-2"></span>رسانه‌دارها</a></li>
-              <li><a href="#"><span class="mr-2"></span>فروش ویژه</a></li>
-              <li><a href="#"><span class="mr-2"></span>تخفیفات</a></li>
+            <h2 class="ftco-heading-2 text-right">دسترسی آسان</h2>
+            <ul class="list-unstyled text-right pr-0">
+              <li><a href="{% url 'resaneh:resaneh'%}"><span class=""></span>رسانه‌ها</a></li>
+              <li><a href="{% url 'blog:blog'%}"><span class=""></span>وبلاگ</a></li>
+              <li><a href="{% url 'home:homepage'%}"><span class=""></span>خانه</a></li>
+              <li><a href="#"><span class="mr-2"></span>مشاوره</a></li>
             </ul>
           </div>
         </div>
         <div class="col-sm-12 col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">ارتباط با ما</h2>
-            <div class="block-23 mb-3" style="direction:ltr;">
-              <ul>
-                <li><span class="icon fa fa-map marker"></span><span class="text">ایران، تهران، ملاصدرا، شماره ۲۴</span></li>
-                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+۹۸۲۱۲۲۲۲۲۲۲</span></a></li>
-                <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">info@irasaneh.com</span></a></li>
+            <h2 class="ftco-heading-2 text-right">ارتباط با ما</h2>
+            <div class="block-23 mb-3">
+              <ul class="list-unstyled text-right pr-0">
+                <li><span class="icon fa fa-map marker"></span><span class="text">
+                    تهران، میدان ونک، خیابان ملاصدرا، پلاک ۱۶۳ واحد۳
+                  </span></li>
+                <li><a href="tel://982191302626"><span class="icon fa fa-phone"></span><span class="text">
+                      +۹۸۲۱۹۱۳۰۲۶۲۶
+                    </span></a></li>
+                <li><a href="mailto:info@irasane.com"><span class="icon fa fa-paper-plane"></span><span class="text">info@irasaneh.com</span></a></li>
               </ul>
             </div>
           </div>
@@ -335,8 +341,6 @@
   <script src="{% static 'home/js/jquery.magnific-popup.min.js' %}"></script>
   <script src="{% static 'home/js/jquery.animateNumber.min.js' %}"></script>
   <script src="{% static 'home/js/scrollax.min.js' %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="{% static 'home/js/google-map.js' %}"></script>
   <script src="{% static 'home/js/main.js' %}"></script>
   <script src="{% static 'home/js/jQuery.persianNumbers-1.0.js' %}"></script>
   <script src="{% static 'home/js/jQuery.persianNumbers-1.0.min.js' %}"></script>

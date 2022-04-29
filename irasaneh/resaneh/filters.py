@@ -3,6 +3,7 @@ from django import forms
 from .models import *
 from account.models import Company
 from django.db.models import Q
+from cities.models import *
 
 class ResanehFilter(django_filters.FilterSet):
 
@@ -36,9 +37,21 @@ class ResanehFilter(django_filters.FilterSet):
     created = django_filters.ChoiceFilter(choices=CREATED_CHOICE, method='created_sort')
     viewed = django_filters.ChoiceFilter(choices=VIEWED_CHOICE, method='viewed_sort')
 
+
+    state = django_filters.ModelMultipleChoiceFilter(queryset=State.objects.all(), widget=forms.CheckboxSelectMultiple)
+    city = django_filters.ModelMultipleChoiceFilter(queryset=City.objects.all(), widget=forms.CheckboxSelectMultiple)
+    zone = django_filters.ModelMultipleChoiceFilter(queryset=Zone.objects.all(), widget=forms.CheckboxSelectMultiple)
+    # country = django_filters.ModelMultipleChoiceFilter(queryset=Country.objects.all(), widget=forms.CheckboxSelectMultiple)
+    # state = django_filters.ModelChoiceFilter(queryset=State.objects.none(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+    # city = django_filters.ModelChoiceFilter(queryset=City.objects.none(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+    # zone = django_filters.ModelChoiceFilter(queryset=Zone.objects.none(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+
+
     class Meta:
         model = Resaneh
         fields = ['q']
+
+
 
     def my_search(self, queryset, name, value):
         return queryset.filter(

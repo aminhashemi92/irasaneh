@@ -66,15 +66,20 @@ def resaneh(request, slug=None, page=1):
 def details(request, slug):
     resaneh = get_object_or_404(Resaneh, slug=slug, status="p")
     place = resaneh.place
+    loc = resaneh.location
+    loc = loc.split(",")
+    print(loc)
     count_hit = True
     # print(place)
     lastresanehs = Resaneh.objects.filter(status="p", place=place).order_by('-publish').exclude(id=resaneh.id)[:5]
     form = LocationForm()
+
     # print(resaneh.location)
     context ={
     "resaneh" : resaneh,
     "form" : form,
     "lastresanehs" : lastresanehs,
+    "loc" : loc,
     }
     # hitcount logic
     hit_count = get_hitcount_model().objects.get_for_object(resaneh)

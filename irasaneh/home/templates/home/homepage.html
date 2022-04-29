@@ -75,7 +75,7 @@
 
 <!-- ============================================-->
 <!-- <home heading> begin ============================-->
-<div class="hero-wrap" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="1">
+<div class="hero-wrap" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-center">
@@ -84,7 +84,10 @@
           <h1 class="mb-4"><span>آی رسانه</span></h1>
           <h2 class="mb-4 text-white"><span style="font-size:3rem;">کاوشگر هوشمند رسانه</span></h2>
           <!-- <h1 class="mb-4">کاوشگر <span>هوشمند</span> رسانه <span></span></h1> -->
-          <p><a href="{% url 'home:contact' %}" class="btn btn-primary py-2 px-4">تماس با ما</a> <a href="{% url 'home:about' %}" class="btn btn-white btn-outline-white py-2 px-4">درباره ما</a></p>
+          <p>
+            <a href="{% url 'home:contact' %}" class="btn btn-primary py-2 px-4 mb-2">تماس با ما</a>
+            <a href="{% url 'home:about' %}" class="btn btn-white btn-outline-white py-2 px-4 mb-2">درباره ما</a>
+          </p>
         </div>
       </div>
     </div>
@@ -145,7 +148,7 @@
 <section class="ftco-section ftco-no-pb">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 img img-3 d-flex justify-content-center align-items-center" style="background-image: url('{% static "home/images/about1.png" %}');">
+      <div class="col-md-6 img img-3 d-flex justify-content-center align-items-center shadow p-3 mb-5 bg-body rounded" style="background-image: url('{% static "home/images/about1.png" %}');">
       </div>
       <div class="col-md-6 wrap-about pl-md-5 ftco-animate pr-5">
         <div class="heading-section text-right ">

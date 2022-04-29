@@ -21,7 +21,11 @@ def category_sidebar():
 
 @register.inclusion_tag("resaneh/partials/offer.html")
 def offer():
-    offer = Offer.objects.filter(status=True).last()
+    try:
+        offer = Offer.objects.filter(status=True).last()
+    except Profile.DoesNotExist:
+        offer = None
+    # offer = Offer.objects.filter(status=True).last()
     if offer.is_active():
         resaneh = offer.resaneh
     else:

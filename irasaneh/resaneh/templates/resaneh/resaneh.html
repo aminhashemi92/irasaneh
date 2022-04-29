@@ -4,6 +4,7 @@
 {% load static %}
 {% load hitcount_tags %}
 
+
 {% block title %}|رسانه‌ها
 {% if category %}
 |{{category}}
@@ -13,7 +14,7 @@
 {% block content %}
 <!-- ============================================-->
 <!-- <blog heading> begin ============================-->
-<section class="hero-wrap hero-wrap-2" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) , url('{% static "home/images/prod-5.jpg" %}');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2" style="background-image:  url('{% static "home/images/prod-5.jpg" %}');" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-end justify-content-center">
@@ -81,6 +82,9 @@
                 {{filter.form.place}}
                 {{filter.form.price_l}}
                 {{filter.form.price_g}}
+                {{filter.form.state}}
+                {{filter.form.city}}
+                {{filter.form.zone}}
               </div>
 
             </form>
@@ -120,7 +124,7 @@
                     {{resaneh.address}}
                   </p>
                   <p class="">
-                    {{resaneh.place}}
+                    {{resaneh.company}}
                   </p>
                   <span class="price text-danger">
                     {% if resaneh.category.all %}
@@ -259,6 +263,7 @@
                 </li> -->
 
 
+
                 <li>
                   <a href="#company" data-toggle="collapse" aria-expanded="false" class="text-center">رسانه‌دارها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="company">
@@ -352,6 +357,54 @@
 
                   </ul>
                 </li>
+                <li>
+                  <a href="#state" data-toggle="collapse" aria-expanded="false" class="text-center">استان‌ها <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="state">
+                    {% for state in filter.form.state %}
+
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{state}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+                <li>
+                  <a href="#city" data-toggle="collapse" aria-expanded="false" class="text-center">شهرها <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="city">
+                    <!-- <div style="height:300px; overflow-x: hidden; overflow-y:scroll;"> -->
+
+                    {% for city in filter.form.city %}
+
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{city}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  <!-- </div> -->
+                  </ul>
+                </li>
+
+
+                <li>
+                  <a href="#zone" data-toggle="collapse" aria-expanded="false" class="text-center">منطقه‌ها <span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="zone">
+                    {% for zone in filter.form.zone %}
+
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{zone}}
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </li>
+
               </ul>
               <br>
 
@@ -396,4 +449,60 @@
 <!-- ============================================-->
 
 
+{% endblock %}
+
+{% block scripts%}
+<!--
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_country").change(function() {
+    var url = $("#country").attr("data-cities-url"); // get the url of the `load_cities` view
+    var countryId = $(this).val(); // get the selected country ID from the HTML input
+    console.log(url)
+    $.ajax({ // initialize an AJAX request
+      url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'country': countryId // add the country id to the GET parameters
+      },
+      success: function(data) { // `data` is the return of the `load_cities` view function
+        $("#id_state").html(data); // replace the contents of the city input with the data that came from the server
+      }
+    });
+  });
+
+
+  $("#id_state").change(function() {
+    var url = $("#state").attr("data-cities-url"); // get the url of the `load_cities` view
+    var stateId = $(this).val(); // get the selected country ID from the HTML input
+    console.log(url)
+    $.ajax({ // initialize an AJAX request
+      url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'state': stateId // add the country id to the GET parameters
+      },
+      success: function(data) { // `data` is the return of the `load_cities` view function
+        $("#id_city").html(data); // replace the contents of the city input with the data that came from the server
+      }
+    });
+  });
+
+
+  $("#id_city").change(function() {
+    var url = $("#city").attr("data-cities-url"); // get the url of the `load_cities` view
+    var cityId = $(this).val(); // get the selected country ID from the HTML input
+    console.log(url)
+    $.ajax({ // initialize an AJAX request
+      url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'city': cityId // add the country id to the GET parameters
+      },
+      success: function(data) { // `data` is the return of the `load_cities` view function
+        $("#id_zone").html(data); // replace the contents of the city input with the data that came from the server
+      }
+    });
+  });
+
+
+
+</script> -->
 {% endblock %}
