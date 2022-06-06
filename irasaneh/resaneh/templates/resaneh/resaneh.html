@@ -14,34 +14,11 @@
 {% block content %}
 <!-- ============================================-->
 <!-- <blog heading> begin ============================-->
-<section class="hero-wrap hero-wrap-2" style="background-image:  url('{% static "home/images/prod-5.jpg" %}');" data-stellar-background-ratio="0.5">
+<section  class="hero-wrap hero-wrap-3 resaneh-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static "home/images/res.jpg" %}');">
   <div class="overlay"></div>
   <div class="container">
-    <div class="row no-gutters slider-text align-items-end justify-content-center">
-      <div class="col-md-9 ftco-animate mb-5 text-center">
-        <p class="breadcrumbs mb-3">
-          <span class="mr-2">
-            <a href="{% url 'home:homepage' %}">
-              خانه
-              <i class="fa fa-chevron-left"></i>
-            </a>
-          </span>
-          <span>
-            <a href="{% url 'resaneh:resaneh' %}">
-              رسانه‌ها
-              <i class="fa fa-chevron-left"></i>
-            </a>
-          </span>
-        </p>
-        <h2 class="mb-0 bread">
-          {% if category %}
-          {{category}}
-          {% else %}
-          رسانه‌ها
-          {% endif %}
-        </h2>
+    <div class="row no-gutters slider-text align-items-end justify-content-center align-items-mobile-center">
 
-      </div>
     </div>
   </div>
 </section>
@@ -51,8 +28,19 @@
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 
-<section class="ftco-section pt-5">
+<section class="ftco-section pt-4" >
   <div class="container">
+    <nav style="--bs-breadcrumb-divider: '<';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="breadcrumb-link" href="{% url 'home:homepage' %}">&nbsp;خانه</a></li>
+        {% if category %}
+        <li class="breadcrumb-item"><a class="breadcrumb-link" href="{% url 'resaneh:resaneh' %}">&nbsp;رسانه‌ها</a></li>
+        <li class="breadcrumb-item active" aria-current="page">&nbsp;{{category}}</li>
+        {% else %}
+        <li class="breadcrumb-item active" aria-current="page">&nbspرسانه‌ها</li>
+        {% endif %}
+      </ol>
+    </nav>
     <div class="row">
       <div class="col-md-9">
 
@@ -82,6 +70,8 @@
                 {{filter.form.place}}
                 {{filter.form.price_l}}
                 {{filter.form.price_g}}
+
+                {{filter.form.country}}
                 {{filter.form.state}}
                 {{filter.form.city}}
                 {{filter.form.zone}}
@@ -110,7 +100,7 @@
               <div class="block product no-border z-depth-2-top z-depth-2--hover ftco-animate">
                 <div class="block-image">
                   <a href="{% url 'resaneh:details' resaneh.slug %}">
-                    <img src="{{resaneh.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:350px; width:550px;">
+                    <img src="{{resaneh.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:auto; width:auto;">
                   </a>
                   <!-- <span class="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span> -->
                 </div>
@@ -188,7 +178,7 @@
         </div>
         <!-- paginator -->
         {% if resanehs.has_other_pages %}
-        <div class="row mt-5">
+        <div class="row my-4">
           <div class="col text-center">
             <div class="block-27">
               <ul>
@@ -266,7 +256,8 @@
 
                 <li>
                   <a href="#company" data-toggle="collapse" aria-expanded="false" class="text-center">رسانه‌دارها <span class="fa fa-chevron-down"></span></a>
-                  <ul class="collapse list-unstyled py-3" id="company">
+                  <ul class="collapse list-unstyled py-3" id="company" >
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for company in filter.form.company %}
 
                     <li class="text-right">
@@ -275,12 +266,14 @@
                       </div>
                     </li>
                     {% endfor %}
+                    </div>
 
                   </ul>
                 </li>
                 <li>
                   <a href="#industry" data-toggle="collapse" aria-expanded="false" class="text-center">صنعت‌ها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="industry">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for industry in filter.form.industry %}
                     <li class="text-right">
                       <div class="form-check">
@@ -288,12 +281,14 @@
                       </div>
                     </li>
                     {% endfor %}
+                    </div>
 
                   </ul>
                 </li>
                 <li>
                   <a href="#showtype" data-toggle="collapse" aria-expanded="false" class="text-center">نوع نمایش <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="showtype">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for showtype in filter.form.showtype %}
                     <li class="text-right">
                       <div class="form-check">
@@ -301,12 +296,13 @@
                       </div>
                     </li>
                     {% endfor %}
-
+                    </div>
                   </ul>
                 </li>
                 <li>
                   <a href="#structuretype" data-toggle="collapse" aria-expanded="false" class="text-center">نوع سازه <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="structuretype">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for structuretype in filter.form.structuretype %}
                     <li class="text-right">
                       <div class="form-check">
@@ -314,12 +310,14 @@
                       </div>
                     </li>
                     {% endfor %}
+                    </div>
 
                   </ul>
                 </li>
                 <li>
                   <a href="#place" data-toggle="collapse" aria-expanded="false" class="text-center">جایگاه‌ها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="place">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for place in filter.form.place %}
                     <li class="text-right">
                       <div class="form-check">
@@ -327,6 +325,7 @@
                       </div>
                     </li>
                     {% endfor %}
+                    </div>
 
                   </ul>
                 </li>
@@ -358,8 +357,54 @@
                   </ul>
                 </li>
                 <li>
+                  <a href="#country" data-toggle="collapse" aria-expanded="false" class="text-center">استان / شهر / منطقه<span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="country" >
+                    <div >
+                      <span>انتخاب کشور:</span>
+                      <select class="form-select mb-3" id="country-id" data-cities-url="{% url 'cities:ajax_load_states' %}" name='country'>
+                        <option value="">---------</option>
+                        {% for country in countries %}
+                        <option value="{{country.id}}">{{country.name}}</option>
+
+                        <!-- <li class="text-right"> -->
+                          <!-- <div class="form-check"> -->
+
+                          <!-- </div> -->
+                        <!-- </li> -->
+                        {% endfor %}
+                      </select>
+                      <span>انتخاب استان:</span>
+                      <select class="form-select mb-3" id="state-id" data-cities-url="{% url 'cities:ajax_load_cities' %}" name="state">
+                        <option value="">---------</option>
+                      </select>
+
+                      <span>انتخاب شهر:</span>
+                      <select class="form-select mb-3" id="city-id" data-cities-url="{% url 'cities:ajax_load_zones' %}" name="city">
+                        <option value="">---------</option>
+                      </select>
+                      <li>
+                        <a href="#zone" data-toggle="collapse" aria-expanded="false" class="text-center">منطقه‌ها <span class="fa fa-chevron-down"></span></a>
+                        <ul class="collapse list-unstyled py-3" id="zone" >
+                          <div class="overflow-auto pb-1" style="max-height:270px;" id="zone-id">
+
+
+                        </div>
+
+                        </ul>
+                      </li>
+
+                      <!-- <select class="form-select mt-3" id="zone-id" >
+                        <option value="">---------</option>
+                      </select> -->
+
+                    </div>
+                  </ul>
+                </li>
+
+                <!-- <li>
                   <a href="#state" data-toggle="collapse" aria-expanded="false" class="text-center">استان‌ها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="state">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for state in filter.form.state %}
 
                     <li class="text-right">
@@ -368,14 +413,14 @@
                       </div>
                     </li>
                     {% endfor %}
-
+                    </div>
                   </ul>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <a href="#city" data-toggle="collapse" aria-expanded="false" class="text-center">شهرها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="city">
-                    <!-- <div style="height:300px; overflow-x: hidden; overflow-y:scroll;"> -->
 
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
                     {% for city in filter.form.city %}
 
                     <li class="text-right">
@@ -384,31 +429,25 @@
                       </div>
                     </li>
                     {% endfor %}
-
-                  <!-- </div> -->
-                  </ul>
-                </li>
-
-
-                <li>
-                  <a href="#zone" data-toggle="collapse" aria-expanded="false" class="text-center">منطقه‌ها <span class="fa fa-chevron-down"></span></a>
-                  <ul class="collapse list-unstyled py-3" id="zone">
-                    {% for zone in filter.form.zone %}
-
-                    <li class="text-right">
-                      <div class="form-check">
-                        {{zone}}
-                      </div>
-                    </li>
-                    {% endfor %}
+                    </div>
 
                   </ul>
-                </li>
+                </li> -->
+
+
+
 
               </ul>
               <br>
 
               <button class="btn btn-success " type="submit" name="Filter">فیلتر کردن</button>
+              <a class="btn btn-danger " type="button" href="
+              {% if category %}
+                {% url 'resaneh:resaneh' category.slug %}
+              {% else %}
+                {% url 'resaneh:resaneh' %}
+              {% endif %}
+              ">پاک‌کردن فیلتر‌ها</a>
 
 
               <div style="display:None;">
@@ -416,7 +455,6 @@
                 {{filter.form.created}}
                 {{filter.form.viewed}}
               </div>
-
 
             </form>
           </div>
@@ -452,57 +490,111 @@
 {% endblock %}
 
 {% block scripts%}
-<!--
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  $("#id_country").change(function() {
-    var url = $("#country").attr("data-cities-url"); // get the url of the `load_cities` view
+
+    function parse_query_string(query) {
+      var vars = query.split("&");
+      var query_string = {};
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        var key = decodeURIComponent(pair.shift());
+        var value = decodeURIComponent(pair.join("="));
+        // If first entry with this name
+        if (typeof query_string[key] === "undefined") {
+          query_string[key] = value;
+          // If second entry with this name
+        } else if (typeof query_string[key] === "string") {
+          var arr = [query_string[key], value];
+          query_string[key] = arr;
+          // If third or later entry with this name
+        } else {
+          query_string[key].push(value);
+        }
+      }
+      return query_string;
+    }
+
+    var query = window.location.search.substring(1);
+    var qs = parse_query_string(query);
+
+    var countryId = qs['country'];
+    var stateId = qs['state'];
+    var cityId = qs['city'];
+    var zonesId = qs['zone'];
+
+    if (typeof zonesId == 'string') {
+      zonesId = zonesId.split(" ")
+    }
+
+
+  $("#country-id").change(function() {
+    var url = $("#country-id").attr("data-cities-url"); // get the url of the `load_cities` view
     var countryId = $(this).val(); // get the selected country ID from the HTML input
-    console.log(url)
+    if (!countryId){
+      countryId = 0
+    }
     $.ajax({ // initialize an AJAX request
       url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
       data: {
         'country': countryId // add the country id to the GET parameters
       },
       success: function(data) { // `data` is the return of the `load_cities` view function
-        $("#id_state").html(data); // replace the contents of the city input with the data that came from the server
+        $("#state-id").html(data); // replace the contents of the city input with the data that came from the server
+        $("#state-id").val(stateId).change();
+
       }
     });
+
   });
 
+  $("#country-id").val(countryId).change();
 
-  $("#id_state").change(function() {
-    var url = $("#state").attr("data-cities-url"); // get the url of the `load_cities` view
+
+  $("#state-id").change(function() {
+
+    var url = $("#state-id").attr("data-cities-url"); // get the url of the `load_cities` view
     var stateId = $(this).val(); // get the selected country ID from the HTML input
-    console.log(url)
+    if (!stateId){
+      stateId = 0
+    }
     $.ajax({ // initialize an AJAX request
       url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
       data: {
         'state': stateId // add the country id to the GET parameters
       },
       success: function(data) { // `data` is the return of the `load_cities` view function
-        $("#id_city").html(data); // replace the contents of the city input with the data that came from the server
+        $("#city-id").html(data); // replace the contents of the city input with the data that came from the server
+        $("#city-id").val(cityId).change();
       }
     });
   });
 
 
-  $("#id_city").change(function() {
-    var url = $("#city").attr("data-cities-url"); // get the url of the `load_cities` view
+
+  $("#city-id").change(function() {
+    var url = $("#city-id").attr("data-cities-url"); // get the url of the `load_cities` view
     var cityId = $(this).val(); // get the selected country ID from the HTML input
-    console.log(url)
+    if (!cityId){
+      cityId = 0
+    }
     $.ajax({ // initialize an AJAX request
       url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
       data: {
         'city': cityId // add the country id to the GET parameters
       },
       success: function(data) { // `data` is the return of the `load_cities` view function
-        $("#id_zone").html(data); // replace the contents of the city input with the data that came from the server
+        $("#zone-id").html(data); // replace the contents of the city input with the data that came from the server
+        if (zonesId != undefined){
+          for (let i = 0; i < zonesId.length; i++) {
+            $('#id-zone-'+zonesId[i]).attr('checked', true);
+          }
+        }
       }
     });
   });
 
 
-
-</script> -->
+</script>
 {% endblock %}

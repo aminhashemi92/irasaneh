@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+
+            <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
+    <!-- End Google Tag Manager -->
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>
@@ -10,6 +19,7 @@
   {% block title %}
   {% endblock%}
     </title>
+  <link rel="icon" type="image/svg" href="{% static '/home/images/iconlogo.png' %} ">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -36,10 +46,25 @@
   <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
   <!-- Custom style for RTL -->
   <link rel="stylesheet" href="{%static 'home/dist/css/custom.css' %}">
+
+
+
+  <!-- ===============================================-->
+  <!--     yektanet-->
+  <!-- ===============================================-->
+    <script> !function (t, e, n) { t.yektanetAnalyticsObject = n, t[n] = t[n] || function () { t[n].q.push(arguments) }, t[n].q = t[n].q || []; var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(), c = e.getElementsByTagName("script")[0], s = e.createElement("script"); s.id = "ua-script-X6VbzgGP"; s.dataset.analyticsobject = n; s.async = 1; s.type = "text/javascript"; s.src = "https://cdn.yektanet.com/rg_woebegone/scripts_v3/X6VbzgGP/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c) }(window, document, "yektanet"); </script>
+
+
 </head>
 
 
 <body class="hold-transition sidebar-mini layout-fixed">
+            <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -203,7 +228,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong class="small">تمامی حقوق متعلق به ویژن طرح <a href="http://irasaneh.ir">Irasaneh.ir</a>.</strong>
+    <strong class="small">تمامی حقوق متعلق به ویژن طرح <a href="http://irasane.com">Irasane.com</a>.</strong>
 
     <div class="float-right d-none d-sm-inline-block small">
       <b>نسخه</b> ۰.۰.۱
@@ -217,7 +242,9 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+{% block script %}
 
+{% endblock %}
 <!-- jQuery -->
 <script src="{% static 'home/plugins/jquery/jquery.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->

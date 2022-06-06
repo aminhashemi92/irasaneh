@@ -2,18 +2,31 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="{% url 'home:homepage' %}" class="brand-link text-center ">
+
+  <a href="{% url 'home:homepage' %}" class="brand-link text-center" style="height:57px; padding-top:15px; padding-right:10px;">
+      <img src="{%static '/home/images/logologo.png' %}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8;">
+      <span class="brand-text font-weight-light">
+        <img src="{%static '/home/images/logotext.png' %}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+        </span>
+    </a>
+
+  <!-- <a href="{% url 'home:homepage' %}" class="brand-link text-center" style="display:none;">
     <img src="{%static '/home/images/whitelogo.png' %}" alt="AdminLTE Logo" style="opacity: .8; width:120px;">
-    <!-- <span class="brand-text font-weight-light">آی‌رسانه</span> -->
+
   </a>
+
+  <a href="{% url 'home:homepage' %}" class="brand-link text-center brand-link-mini">
+    <img src="{%static '/home/images/logologo.png' %}" alt="AdminLTE Logo" style="opacity: .8; width:30px;">
+
+  </a> -->
 
   <!-- Sidebar -->
   <div class="sidebar">
     {% if request.user.profile %}
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{user.profile.pic.url}}" class="rounded elevation-2" alt="User Image">
+      <div class="image pt-2">
+        <img src="{{user.profile.pic.url}}" class="img-circle" alt="User Image" style="width:45px;">
       </div>
       <div class="info">
         <a href="#" class="d-block">{%if user.profile.firstname%}{{user.profile.firstname}}{% endif %} {% if user.profile.lastname %}{{user.profile.lastname}} {% endif %}</a>
@@ -695,3 +708,7 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+
+{% block script %}
+
+{% endblock %}

@@ -1,0 +1,528 @@
+{% extends 'home/main.html' %}
+{% load resaneh_tags %}
+{% load ratings %}
+{% load static %}
+{% load hitcount_tags %}
+
+
+{% block title %}|رسانه‌ها
+|مقایسه رسانه‌ها
+{% endblock %}
+
+{% block content %}
+<!-- ============================================-->
+<!-- <blog heading> begin ============================-->
+<section class="hero-wrap hero-wrap-3 resaneh-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static "home/images/res.jpg" %}');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center align-items-mobile-center">
+
+    </div>
+  </div>
+</section>
+<!-- <blog heading> close ============================-->
+<!-- ============================================-->
+
+
+<!-- ============================================-->
+<!-- <section> begin ============================-->
+<div class="row1 pt-3 pl-3 pr-4">
+  {% if resanehs|length > 1 %}
+  {% for resaneh in resanehs %}
+  <div class="col d-flex justify-content-end {%if forloop.counter > 2 %}compare-mob{%endif%}">
+    <button type="button" class="close" aria-label="Close" data-slug="{{resaneh.slug}}">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if resanehs|length < 3 %}
+  <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+  </div>‍
+  {%endif%}
+</div>
+
+<div class="row1 pb-3 border-left pr-4">
+  <div class="col-12">
+    <div class="row1">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-center border-left {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <a  href="{% url 'resaneh:details' resaneh.slug %}">
+          <img src="{{resaneh.resanehimage.first.image.url}}" class="image-resize img-fluid shadow rounded">
+        </a>
+      </div>
+      {% empty %}
+      <p class="pr-4 text-danger">محتوایی برای نمایش وجود ندارد</p>
+      {% endfor %}
+      <!-- <div class="col d-flex justify-content-center  border-left">
+        <img  src="{{resaneh2.resanehimage.first.image.url}}" class="justify-content-center image-resize ">
+      </div>
+
+      <div class="col d-flex justify-content-center  border-left">
+        <img  src="{{resaneh3.resanehimage.first.image.url}}" class="image-resize ">
+      </div> -->
+      {% if resanehs|length < 3 %}
+      <div class="col {% if resanehs|length == 2 %}compare-mob{%endif%}">
+        <div class="row pt-5 justify-content-center">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary compare-mob-font" data-toggle="modal" data-target="#exampleModalCenter">
+            انتخاب رسانه
+          </button>
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                  <h6 class="modal-title text-center" id="exampleModalLongTitle">انتخاب رسانه برای مقایسه</h6>
+                  <button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-primary ml-1 rounded" id="SearchButton" type="button">جستجو</button>
+                    </div>
+                    <input type="text" class="form-control rounded" id="SearchInput" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                  </div>
+                  <div id="similarsId" class="row overflow-auto" style="max-height:400px;">
+
+                    {% for similar in similars %}
+                    <div class="col-md-6 mb-4">
+
+                      <div class="choose-product block product no-border z-depth-2-top z-depth-2--hover ftco-animate " data-slug="{{similar.slug}}">
+                        <div class="block-image">
+                          <a>
+                            <img src="{{similar.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:auto; width:auto;">
+                          </a>
+                          <!-- <span class="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span> -->
+                        </div>
+                        <div class="block-body text-center">
+                          <a>
+                            <p class="font-weight-bold">
+                              {{similar.name}}
+                            </p>
+                          </a>
+
+
+                          <div class="product-colors mt-2">
+                            <div class="">
+                              {% ratings similar read_only=True template_name='star_ratings/widgetresaneh.html' %}
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {% empty %}
+                    <p class="pr-4 text-danger">محتوایی برای نمایش وجود ندارد</p>
+                    {% endfor %}
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- end modal -->
+
+
+        </div>
+      </div>
+
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">نام رسانه:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.name}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">رسانه‌دار:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.company}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">جایگاه:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.place}}</p>
+      </div>
+      {% endfor %}
+
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">رسانه:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        {% if resaneh.category.all %}
+        <p class="text-right compare-mob-font">
+          {% for category in resaneh.category.all %}
+          <span class="text-primary">
+            {{ category }}
+            {% if forloop.counter < resaneh.category.all.count %}
+            ،
+            {% endif %}
+          </span>
+          {% endfor %}
+        </p>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">نوع نمایش:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        {% if resaneh.showtype.all %}
+        <p class="text-right compare-mob-font">
+          {% for showtype in resaneh.showtype.all %}
+          <span class="text-primary">
+            {{ showtype }}
+            {% if forloop.counter < resaneh.showtype.all.count %}
+            ،
+            {% endif %}
+          </span>
+          {% endfor %}
+        </p>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">ابعاد طرح:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.dimensions}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">برآورد بازدید روزانه:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.nvisit}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">کد شناسایی:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.code}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">مساحت تابلو‌ها:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.area}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">جزییات مساحت:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.areadetail}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">آدرس:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font">{{resaneh.city}}-{{resaneh.address}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">توضیحات:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font">{{resaneh.detail|linebreaksbr}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="row1 pt-2 border-bottom pr-4">
+  <div class="col-12 pt-3">
+    <div class="row d-flex justify-content-start ">
+      <h6 class="purple-color compare-mob-font">امتیازات جایگاه:</h6>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row1 pb-3">
+      {% for resaneh in resanehs %}
+      <div class="col d-flex justify-content-start border-left text-primary {%if forloop.counter > 2 %}compare-mob{%endif%}">
+        <p class="text-right compare-mob-font"> {{resaneh.point|linebreaksbr}}</p>
+      </div>
+      {% endfor %}
+      {% if resanehs|length < 3 %}
+      <div class="col pt-3 {% if resanehs|length == 2 %}compare-mob{%endif%}">
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<div class="mb-5">
+
+</div>
+<!-- <section> close ============================-->
+<!-- ============================================-->
+
+
+{% endblock %}
+
+{% block scripts%}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  function deleteItem() {
+    console.log($(this))
+  }
+
+  $('.close').on('click', function() {
+
+    var slug = $(this).data('slug');
+    var newurl = window.location.href.replace('/' + slug, '');
+    window.location.href = newurl;
+
+  });
+
+
+
+
+
+  $('#SearchButton').on('click', function() {
+    var q = $("#SearchInput").val();
+    var cat = JSON.parse("{{category|escapejs}}");
+    var category = []
+
+    for (var x in cat) {
+      category.push(cat[x]['pk'])
+    }
+    category = category.toString();
+
+    var url = "{% url 'resaneh:ajax_search_similars' %}"
+    $.ajax({ // initialize an AJAX request
+      url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'q': q, // add the country id to the GET parameters
+        'category': category,
+      },
+
+      success: function(data) { // `data` is the return of the `load_cities` view function
+        $("#similarsId").html(data); // replace the contents of the city input with the data that came from the server
+
+
+        $('.product').on('click', function() {
+
+          var slug = $(this).data('slug');
+          if (!window.location.href.includes(slug)) {
+            var newurl = window.location.href + '/' + slug;
+            window.location.href = newurl;
+          } else {
+            alert("این رسانه قبلا انتخاب شده")
+          };
+
+        });
+
+      }
+    });
+
+
+  });
+
+
+  $('.product').on('click', function() {
+
+    var slug = $(this).data('slug');
+    if (!window.location.href.includes(slug)) {
+      var newurl = window.location.href + '/' + slug;
+      window.location.href = newurl;
+    } else {
+      alert("این رسانه قبلا انتخاب شده")
+    };
+
+  });
+</script>
+{% endblock %}

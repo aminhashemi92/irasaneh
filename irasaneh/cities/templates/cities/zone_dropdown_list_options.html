@@ -1,4 +1,9 @@
-<option value="">---------</option>
+
 {% for zone in zones %}
-<option value="{{ zone.pk }}">{{ zone.name }}</option>
+<li class="text-right">
+  <div class="form-check">
+    <label for="id-zone-{{zone.id}}"><input type="checkbox" name="zone" value={{zone.id}} id="id-zone-{{zone.id}}">
+    {{zone.name}}</label>
+  </div>
+</li>
 {% endfor %}

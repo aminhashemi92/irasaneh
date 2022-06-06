@@ -56,7 +56,12 @@
           </div>
         </div>
         <button type='text' class="btn btn-primary">
-          <a href="#" class="text-white"> تماس با پشتیبانی: ۰۲۱۴۴۴۴۴۴۴</a></button>
+          تماس با پشتیبانی:
+          <a  href="tel://982191302592" class="text-white">
+            {% include 'home/companyphone.html'%}
+          </a>
+
+        </button>
 
 
 
@@ -75,11 +80,11 @@
 
 <!-- ============================================-->
 <!-- <home heading> begin ============================-->
-<div class="hero-wrap" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="0.5">
+<div class="hero-wrap" id="hero-main" style="background-image: url('{% static "home/images/page1.jpg" %}');" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
   <div class="container">
-    <div class="row no-gutters slider-text align-items-center">
-      <div class="col-md-8 ftco-animate d-flex align-items-end">
+    <div class="row no-gutters slider-text align-items-center align-items-mobile">
+      <div class="col-md-8 ftco-animate d-flex">
         <div class="text w-100 text-center">
           <h1 class="mb-4"><span>آی رسانه</span></h1>
           <h2 class="mb-4 text-white"><span style="font-size:3rem;">کاوشگر هوشمند رسانه</span></h2>
@@ -241,7 +246,7 @@
           <div class="block product no-border z-depth-2-top z-depth-2--hover ftco-animate">
             <div class="block-image">
               <a href="{% url 'resaneh:details' resaneh.slug %}">
-                <img src="{{resaneh.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:350px; width:550px;">
+                <img src="{{resaneh.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:auto;">
               </a>
               <!-- <span class="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span> -->
             </div>

@@ -26,8 +26,11 @@ def offer():
     except Profile.DoesNotExist:
         offer = None
     # offer = Offer.objects.filter(status=True).last()
-    if offer.is_active():
-        resaneh = offer.resaneh
+    if offer != None:
+        if offer.is_active():
+            resaneh = offer.resaneh
+        else:
+            resaneh = None
     else:
         resaneh = None
     return {

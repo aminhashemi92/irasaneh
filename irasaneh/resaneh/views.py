@@ -4,11 +4,13 @@ from .models import Resaneh, Category
 from django.core.paginator import Paginator
 from .forms import LocationForm
 from django.db.models import Q, Max, Min
-from .filters import ResanehFilter
+from .filters import ResanehFilter, ResanehSearchFilter
 from urllib.parse import urlencode
 from hitcount.utils import get_hitcount_model
 from hitcount.views import HitCountMixin
-
+from cities.models import Country
+from django.core import serializers
+from json import dumps
 # Create your views here.
 def resaneh(request, slug=None, page=1):
     if slug:
@@ -34,7 +36,7 @@ def resaneh(request, slug=None, page=1):
     if 'page' in data:
         del data['page']
 
-
+    countries = Country.objects.all()
     context ={
         "category" : category,
         "resanehs" : resanehs,
@@ -42,6 +44,7 @@ def resaneh(request, slug=None, page=1):
         "min_price" : min_price,
         "max_price" : max_price,
         "data" : urlencode(data),
+        "countries" : countries,
 
         }
     return render(request,"resaneh/resaneh.html", context)
@@ -74,7 +77,7 @@ def details(request, slug):
     lastresanehs = Resaneh.objects.filter(status="p", place=place).order_by('-publish').exclude(id=resaneh.id)[:5]
     form = LocationForm()
 
-    # print(resaneh.location)
+
     context ={
     "resaneh" : resaneh,
     "form" : form,
@@ -94,15 +97,52 @@ def details(request, slug):
     return render(request, "resaneh/details.html", context)
 
 
+def comparison(request, slug1=None, slug2=None, slug3=None, slug4=None):
+    resanehs =[]
+    if slug1:
+        resaneh1 = Resaneh.objects.get(slug=slug1)
+        category = resaneh1.category.all()
+        resanehs.append(resaneh1)
+        # resanehs["resaneh1"] = resaneh1
+        if slug2:
+            resaneh2 = Resaneh.objects.get(slug=slug2)
+            # resanehs["resaneh2"] = resaneh2
+            if resaneh2 not in resanehs:
+                resanehs.append(resaneh2)
+            if slug3:
+                resaneh3 = Resaneh.objects.get(slug=slug3)
+                # resanehs["resaneh3"] = resaneh3
+                if resaneh3 not in resanehs:
+                    resanehs.append(resaneh3)
+                if slug4:
+                    resaneh4 = Resaneh.objects.get(slug=slug4)
+                    # resanehs["resaneh4"] = resaneh4
+                    if resaneh4 not in resanehs:
+                        resanehs.append(resaneh4)
 
-def search(request, page=1):
-    search = request.GET.get('q')
-    resanehs_list = Resaneh.objects.filter(Q(detail__icontains = search)| Q(address__icontains = search)| Q(name__icontains = search) | Q(point__icontains = search) | Q(company__name__icontains = search), status="p").order_by('-publish')
-    # articles_list = category.articles.filter(status="p").order_by('-publish')
-    paginator = Paginator(resanehs_list,16)
-    resanehs = paginator.get_page(page)
+    similars = Resaneh.objects.filter(category__in=category, status="p")
+    category = serializers.serialize('json', category)
+
     context = {
         "resanehs" : resanehs,
+        "similars" : similars,
+        "category" : category,
+
+
+    }
+    return render(request, "resaneh/comparison.html", context)
+
+
+
+
+def search_similars(request):
+    search = request.GET.get('q')
+    category = request.GET.get('category')
+    category = category.split(",")
+
+    similars = Resaneh.objects.filter(Q(detail__icontains = search)| Q(address__icontains = search)| Q(name__icontains = search) | Q(point__icontains = search) | Q(company__name__icontains = search), status="p", category__id__in=category)
+    context = {
+        "similars" : similars,
         "search" : search,
     }
-    return render(request,"resaneh/search.html", context)
+    return render(request,"resaneh/search_similars.html", context)

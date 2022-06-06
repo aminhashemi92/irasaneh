@@ -38,13 +38,21 @@ class ResanehFilter(django_filters.FilterSet):
     viewed = django_filters.ChoiceFilter(choices=VIEWED_CHOICE, method='viewed_sort')
 
 
-    state = django_filters.ModelMultipleChoiceFilter(queryset=State.objects.all(), widget=forms.CheckboxSelectMultiple)
-    city = django_filters.ModelMultipleChoiceFilter(queryset=City.objects.all(), widget=forms.CheckboxSelectMultiple)
-    zone = django_filters.ModelMultipleChoiceFilter(queryset=Zone.objects.all(), widget=forms.CheckboxSelectMultiple)
     # country = django_filters.ModelMultipleChoiceFilter(queryset=Country.objects.all(), widget=forms.CheckboxSelectMultiple)
-    # state = django_filters.ModelChoiceFilter(queryset=State.objects.none(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
-    # city = django_filters.ModelChoiceFilter(queryset=City.objects.none(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
-    # zone = django_filters.ModelChoiceFilter(queryset=Zone.objects.none(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+    # state = django_filters.ModelMultipleChoiceFilter(queryset=State.objects.all(), widget=forms.CheckboxSelectMultiple)
+    # city = django_filters.ModelMultipleChoiceFilter(queryset=City.objects.all(), widget=forms.CheckboxSelectMultiple)
+    # zone = django_filters.ModelMultipleChoiceFilter(queryset=Zone.objects.all(), widget=forms.CheckboxSelectMultiple)
+
+
+
+    country = django_filters.ModelChoiceFilter(queryset=Country.objects.all(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+
+    state = django_filters.ModelChoiceFilter(queryset=State.objects.all(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+
+    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(), widget=forms.Select(attrs={'class':'form-select form-select-sm mb-3'}))
+
+    zone = django_filters.ModelMultipleChoiceFilter(queryset=Zone.objects.all(), widget=forms.CheckboxSelectMultiple)
+
 
 
     class Meta:
@@ -69,3 +77,19 @@ class ResanehFilter(django_filters.FilterSet):
     def viewed_sort(self, queryset, name, value):
         data = 'viewed' if value == 'پربازدیدترین' else '-viewed'
         return queryset.order_by(data)
+
+
+
+
+class ResanehSearchFilter(django_filters.FilterSet):
+
+    q = django_filters.CharFilter(method='my_search',label="Search", widget=forms.TextInput(attrs={'class': 'form-control text-center' , 'placeholder':'جستجو ...'}))
+
+    class Meta:
+        model = Resaneh
+        fields = ['q']
+
+    def my_search(self, queryset, name, value):
+        return queryset.filter(
+            Q(name__icontains=value) | Q(address__icontains=value) | Q(detail__icontains=value)
+        )

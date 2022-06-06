@@ -1,0 +1,35 @@
+{% load ratings %}
+{% load static %}
+
+{% for similar in similars %}
+<div class="col-md-6 mb-4">
+
+  <div class="choose-product block product no-border z-depth-2-top z-depth-2--hover" data-slug="{{similar.slug}}">
+    <div class="block-image">
+      <a>
+        <img src="{{similar.resanehimage.first.image.url}}" class="img-center img d-flex align-items-center justify-content-center" style="height:auto; width:auto;">
+      </a>
+
+    </div>
+    <div class="block-body text-center">
+      <a>
+      <p class="font-weight-bold">
+          {{similar.name}}
+      </p>
+    </a>
+
+
+      <div class="product-colors mt-2">
+        <div class="">
+          {% ratings similar read_only=True template_name='star_ratings/widgetresaneh.html' %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% empty %}
+<p class="pr-4 text-danger">محتوایی برای نمایش وجود ندارد</p>
+{% endfor %}

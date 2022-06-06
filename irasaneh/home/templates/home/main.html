@@ -6,7 +6,13 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
+  <!-- End Google Tag Manager -->
 
   <!-- ===============================================-->
   <!-- tags-->
@@ -63,9 +69,20 @@
 
 
 
+  <!-- ===============================================-->
+  <!--     yektanet-->
+  <!-- ===============================================-->
+    <script> !function (t, e, n) { t.yektanetAnalyticsObject = n, t[n] = t[n] || function () { t[n].q.push(arguments) }, t[n].q = t[n].q || []; var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(), c = e.getElementsByTagName("script")[0], s = e.createElement("script"); s.id = "ua-script-X6VbzgGP"; s.dataset.analyticsobject = n; s.async = 1; s.type = "text/javascript"; s.src = "https://cdn.yektanet.com/rg_woebegone/scripts_v3/X6VbzgGP/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c) }(window, document, "yektanet"); </script>
+
+
+
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   {% block modal %}
 
@@ -195,7 +212,7 @@
             </div>
           </li> -->
           <!-- <li class="nav-item active"><a href="{% url 'blog:blog' %}" class="nav-link">وبلاگ</a></li> -->
-          <li class="nav-item active"><a href="https://irasane.com/blog/" class="nav-link">وبلاگ</a></li>
+          <li class="nav-item active"><a href="https://blog.irasane.com" class="nav-link">وبلاگ</a></li>
           <!-- <li class="nav-item active"><a href="#" class="nav-link">مشاوره</a></li> -->
           <li class="nav-item active"><a href="{% url 'home:contact' %}" class="nav-link">تماس با‌ما</a></li>
           <li class="nav-item active"><a href="{% url 'home:about' %}" class="nav-link">درباره‌ی ما</a></li>
@@ -237,7 +254,7 @@
       <div class="row row-cols-2 mb-5">
         <div class="col">
           <div class="ftco-footer-widget mb-4">
-            <a class="navbar-brand " href="index.html"><img id="logo" src="{%static '/home/images/whitelogo.png' %}" style="width:170px;"></a>
+            <a class="navbar-brand " href="{% url 'home:homepage'%}"><img id="logo" src="{%static '/home/images/whitelogo.png' %}" style="width:170px;"></a>
             <br>
             <ul class="ftco-footer-social list-unstyled mt-3 pr-0">
               <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
@@ -275,7 +292,7 @@
             <h2 class="ftco-heading-2 text-right">دسترسی‌آسان</h2>
             <ul class="list-unstyled text-right pr-0">
               <li><a href="{% url 'resaneh:resaneh'%}"><span class=""></span>رسانه‌ها</a></li>
-              <li><a href="https://irasane.com/blog/"><span class=""></span>وبلاگ</a></li>
+              <li><a href="https://blog.irasane.com/"><span class=""></span>وبلاگ</a></li>
               <!-- <li><a href="{% url 'blog:blog'%}"><span class=""></span>وبلاگ</a></li> -->
               <li><a href="{% url 'home:homepage'%}"><span class=""></span>خانه</a></li>
               <li><a href="#"><span class=""></span>مشاوره</a></li>
@@ -288,12 +305,12 @@
             <div class="block-23 mb-3">
               <ul class="list-unstyled text-right pr-0">
                 <li><span class="icon fa fa-map marker"></span><span class="text">
-                    تهران، میدان ونک، خیابان ملاصدرا، پلاک ۱۶۳ واحد۳
+                    {% include 'home/companyaddress.html' %}
                   </span></li>
-                <li><a href="tel://982191302626"><span class="icon fa fa-phone"></span><span class="text">
-                      +۹۸۲۱۹۱۳۰۲۶۲۶
+                <li><a href="tel://982191302592"><span class="icon fa fa-phone"></span><span class="text">
+                      {% include 'home/companyphone.html' %}
                     </span></a></li>
-                <li><a href="mailto:info@irasane.com"><span class="icon fa fa-paper-plane"></span><span class="text">info@irasaneh.com</span></a></li>
+                <li><a href="mailto:info@irasane.com"><span class="icon fa fa-paper-plane"></span><span class="text">info@irasane.com</span></a></li>
               </ul>
             </div>
           </div>

@@ -15,5 +15,5 @@ def load_cities(request):
 
 def load_zones(request):
     city_id = request.GET.get('city')
-    zones = Zone.objects.filter(city_id=city_id).order_by('name')
+    zones = Zone.objects.filter(city_id=city_id).order_by('id')
     return render(request, 'cities/zone_dropdown_list_options.html', {'zones': zones})
