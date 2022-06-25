@@ -41,20 +41,31 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig',
-    'blog.apps.BlogConfig',
-    'account.apps.AccountConfig',
-    'resaneh.apps.ResanehConfig',
-    'dashboard.apps.DashboardConfig',
-    'cities.apps.CitiesConfig',
+
+
+
     'django_summernote',
     'comment',
     'crispy_forms',
     'location_field.apps.DefaultConfig',
     'django_filters',
     'hitcount',
+
+
+    'home.apps.HomeConfig',
+    'blog.apps.BlogConfig',
+    'account.apps.AccountConfig',
+    'resaneh.apps.ResanehConfig',
+    'dashboard.apps.DashboardConfig',
+    'cities.apps.CitiesConfig',
     'star_ratings',
-    'rest-framework',
+
+    'VOD.apps.VodConfig',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+
+
 ]
 
 MIDDLEWARE = [
@@ -65,7 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blog.middleware.SaveIPAddressMiddleware',
+    # 'blog.middleware.SaveIPAddressMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -198,3 +209,15 @@ STAR_RATINGS_STAR_HEIGHT = 16
 # STAR_RATINGS_ANNUNYMOUS = True
 # STAR_RATINGS_RERATE = False
 # STAR_RATINGS_STAR_SPRITE = os.path.join(BASE_DIR, 'img.jpg')
+
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    #
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ],
+}

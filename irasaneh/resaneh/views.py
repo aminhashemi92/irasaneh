@@ -15,11 +15,11 @@ from json import dumps
 def resaneh(request, slug=None, page=1):
     if slug:
         category = get_object_or_404(Category, slug=slug, status=True)
-        resaneh_list = category.resaneh.filter(status="p").order_by('-publish')
+        resaneh_list = category.resaneh.filter(status="p", is_digital=False).order_by('-publish')
 
     else:
         category = None
-        resaneh_list = Resaneh.objects.filter(status="p").order_by('-publish')
+        resaneh_list = Resaneh.objects.filter(status="p", is_digital=False).order_by('-publish')
 
     filter = ResanehFilter(request.GET, queryset=resaneh_list)
     resaneh_list = filter.qs
@@ -67,14 +67,14 @@ def resaneh(request, slug=None, page=1):
 
 
 def details(request, slug):
-    resaneh = get_object_or_404(Resaneh, slug=slug, status="p")
+    resaneh = get_object_or_404(Resaneh, slug=slug, status="p",is_digital=False)
     place = resaneh.place
     loc = resaneh.location
     loc = loc.split(",")
     print(loc)
     count_hit = True
     # print(place)
-    lastresanehs = Resaneh.objects.filter(status="p", place=place).order_by('-publish').exclude(id=resaneh.id)[:5]
+    lastresanehs = Resaneh.objects.filter(status="p", place=place,is_digital=False).order_by('-publish').exclude(id=resaneh.id)[:5]
     form = LocationForm()
 
 
@@ -120,7 +120,7 @@ def comparison(request, slug1=None, slug2=None, slug3=None, slug4=None):
                     if resaneh4 not in resanehs:
                         resanehs.append(resaneh4)
 
-    similars = Resaneh.objects.filter(category__in=category, status="p")
+    similars = Resaneh.objects.filter(category__in=category, status="p",is_digital=False)
     category = serializers.serialize('json', category)
 
     context = {
@@ -140,7 +140,7 @@ def search_similars(request):
     category = request.GET.get('category')
     category = category.split(",")
 
-    similars = Resaneh.objects.filter(Q(detail__icontains = search)| Q(address__icontains = search)| Q(name__icontains = search) | Q(point__icontains = search) | Q(company__name__icontains = search), status="p", category__id__in=category)
+    similars = Resaneh.objects.filter(Q(detail__icontains = search)| Q(address__icontains = search)| Q(name__icontains = search) | Q(point__icontains = search) | Q(company__name__icontains = search), status="p", is_digital=False, category__id__in=category)
     context = {
         "similars" : similars,
         "search" : search,

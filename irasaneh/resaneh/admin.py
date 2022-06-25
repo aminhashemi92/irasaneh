@@ -155,8 +155,8 @@ admin.site.register(Offer,OfferAdmin)
 @admin.register(Resaneh)
 class ResanehAdmin(admin.ModelAdmin):
     inlines = [ResanehImageAdmin]
-    list_display = ('name','company','place','category_to_str','showtype_to_str','status',)
-    list_filter = ( 'status', 'company','place')
+    list_display = ('name','company','place','category_to_str','showtype_to_str','status','is_digital')
+    list_filter = ( 'status', 'company','place','is_digital')
     search_fields = ('name', 'detail')
     prepopulated_fields = {'slug':('name',)}
     ordering = ['status', 'publish']

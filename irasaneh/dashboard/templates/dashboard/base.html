@@ -3,6 +3,8 @@
 <html lang="fa" dir="rtl">
 <head>
 
+
+
             <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -10,6 +12,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
     <!-- End Google Tag Manager -->
+
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,6 +56,9 @@
   <!--     yektanet-->
   <!-- ===============================================-->
     <script> !function (t, e, n) { t.yektanetAnalyticsObject = n, t[n] = t[n] || function () { t[n].q.push(arguments) }, t[n].q = t[n].q || []; var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(), c = e.getElementsByTagName("script")[0], s = e.createElement("script"); s.id = "ua-script-X6VbzgGP"; s.dataset.analyticsobject = n; s.async = 1; s.type = "text/javascript"; s.src = "https://cdn.yektanet.com/rg_woebegone/scripts_v3/X6VbzgGP/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c) }(window, document, "yektanet"); </script>
+
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script src="/static/location_field/js/form.js"></script>
 
 
 </head>
@@ -191,8 +197,9 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+{% block sidebar %}
 
-{% include 'dashboard/sidebar.html' %}
+{% endblock %}
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

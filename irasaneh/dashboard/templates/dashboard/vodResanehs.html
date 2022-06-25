@@ -1,0 +1,127 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{%block title%}|رسانه‌های دیجیتال
+{% endblock %}
+
+{% block sidebar %}
+{% include 'dashboard/sidebarvod.html' %}
+{% endblock %}
+
+{% block header %}
+رسانه‌های دیجیتال
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- modal -->
+  <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">حذف</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default shadow" data-dismiss="modal">بستن</button>
+          <a type="button" class="delbut btn btn-danger" value="" href="">حذف</a>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title mb-0 float-left pt-1">رسانه‌های من</h3>
+
+        <div class="card-tools mb-0 float-right">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0 table-striped" style="height: 300px;">
+        <table class="table table-head-fixed">
+          <thead>
+            <tr class="small">
+              <th>کد</th>
+              <th>عنوان</th>
+              <th>رسانه‌دار</th>
+              <th>ایجاد‌کننده</th>
+              <th>مالک</th>
+              <th>وضعیت</th>
+              <th>مدل تلویزیون</th>
+              <th>ابعاد تلویزیون</th>
+              <th>سیستم عامل اندروید</th>
+              <th>ورژن اندروید</th>
+              <!-- <th>لینک</th> -->
+              <th>ویرایش</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for resaneh in resanehs %}
+            <tr>
+              <td>{{resaneh.code}}</td>
+              <td>{{resaneh.name}}</td>
+              <td>{{resaneh.company}}</td>
+              <td>{{resaneh.creator}}</td>
+              <td>{{resaneh.owner}}</td>
+              <td>{{resaneh.get_status_display}}</td>
+              <td>{{resaneh.tvModel}}</td>
+              <td>{{resaneh.tvSize}}</td>
+              <td>{{resaneh.mis_Androidbox}}</td>
+              <td>{{resaneh.androidVersion}}</td>
+
+              <!-- <td><a href="{% url 'resaneh:details' resaneh.slug %}">بیشتر</a></td> -->
+              <td class="project-actions text-left">
+                <!-- <a class="btn btn-primary btn-sm" href="{% url 'resaneh:details' resaneh.slug %}" id="">
+                  <i class="fas fa-folder">
+                  </i>
+                  مشاهده
+                </a> -->
+                <a class="btn btn-info btn-sm" href="{% url 'dashboard:vodResanehUpdate' resaneh.slug %}">
+                  <i class="fas fa-pencil-alt">
+                  </i>
+                  ویرایش
+                </a>
+                <a class="del btn btn-danger btn-sm" data-toggle="modal" data-id="{{resaneh.id}}" data-target="#modal-default" href="#">
+                  <i class="fas fa-trash">
+                  </i>
+                  حذف
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>‍
+
+<script type="text/javascript">
+  $(document).on("click", ".del", function() {
+    var delId = $(this).data('id');
+    $('.delbut').attr('href', '/dashboard/vodResanehDelete/' + delId);
+    $('.modal-body').html(`آیا از حذف کد ${delId} مطمئن هستید؟`)
+  });
+</script>
+{% endblock %}

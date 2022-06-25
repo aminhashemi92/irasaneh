@@ -1,0 +1,90 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{%block title%}|داشبورد من
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'dashboard/sidebarvod.html' %}
+{% endblock %}
+
+{% block header %}
+داشبورد رسانه‌های دیجیتال
+{% endblock %}
+
+{% block content %}
+{% if request.user.profile %}
+<div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{cresanehs}}</h3>
+
+                <p>تعداد رسانه‌ها</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="{% url 'dashboard:vodResanehs'%}"  class="small-box-footer">اطلاعات بیشتر <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{videos}}<sup style="font-size: 20px"></sup></h3>
+
+                <p>تعداد ویدیوها</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-videocamera"></i>
+              </div>
+              <a href="{% url 'dashboard:vodVideos'%}"  class="small-box-footer">اطلاعات بیشتر <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          {% if request.user.profile.position == 'm' %}
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{boxes}}</h3>
+
+                <p>تعداد باکس‌ها</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-ios-box"></i>
+              </div>
+              <a href="{% url 'dashboard:vodBoxes'%}" class="small-box-footer">اطلاعات بیشتر <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{events}}</h3>
+
+                <p>تعداد رویدادها</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-android-add"></i>
+              </div>
+              <a href="{% url 'dashboard:vodEvents'%}"  class="small-box-footer">اطلاعات بیشتر <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+{% else %}
+<div class="text-danger">
+<h4>برای استفاده از امکانات سایت ابتدا باید حساب کاربری خود را تکمیل کنید!</h4>
+<a href="{% url 'dashboard:profile' %}">تکمیل پروفایل</a>
+</div>
+{% endif %}
+{% endblock %}

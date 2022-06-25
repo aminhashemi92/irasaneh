@@ -50,3 +50,14 @@ def profile_complete_needed(views_func):
             return redirect('dashboard:profile')
 
     return wrapper_func
+
+
+def superuser_required(views_func):
+    def wrapper_func(request, *args, **kwargs):
+        user = request.user
+        if user.is_superuser:
+            return views_func(request, *args, **kwargs)
+        else:
+            return redirect('dashboard:profile')
+
+    return wrapper_func

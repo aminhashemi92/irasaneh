@@ -1,0 +1,123 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{%block title%}|لیست باکس‌ها
+{% endblock %}
+
+{% block sidebar %}
+{% include 'dashboard/sidebarvod.html' %}
+{% endblock %}
+
+{% block header %}
+لیست باکس‌ها
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- modal -->
+  <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">حذف</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default shadow" data-dismiss="modal">بستن</button>
+          <a type="button" class="delbut btn btn-danger" value="" href="">حذف</a>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title mb-0 float-left pt-1">باکس‌های من</h3>
+
+        <div class="card-tools mb-0 float-right">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0 table-striped" style="height: 300px;">
+        <table class="table table-head-fixed">
+          <thead>
+            <tr class="small">
+              <th>کد</th>
+              <th>نام</th>
+              <th>تعداد ویدیو</th>
+              <th>وضعیت</th>
+              <!-- <th>لینک</th> -->
+              <th>تاریخ ایجاد</th>
+              <th>ویدیوها</th>
+              <th>ترتیب پخش</th>
+              ‍‍‍<th>ویرایش</th>‍
+            </tr>
+          </thead>
+          <tbody>
+            {% for box in boxes %}
+            <tr>
+              <td>{{box.id}}</td>
+              <td>{{box.name}}</td>
+
+              <td>{{box.numberOfVideos}}</td>
+              <td>{{box.mstatus}}</td>
+              <!-- <td class="text-break"><a href="{{video.video}}">{{video.video}}</a></td> -->
+              <td>{{box.created}}</td>
+              <td>
+                {% for video in box.videos.all %}
+                <a href="{% if video.video %}{{video.video.url}}{% endif %}">{{video.name}}</a>,
+                {% endfor %}
+              </td>
+              <td>{{box.order}}</td>
+              <td class="project-actions text-left">
+                <!-- <a class="btn btn-primary btn-sm" href="#" id="">
+                  <i class="fas fa-folder">
+                  </i>
+                  مشاهده
+                </a> -->
+                <a class="btn btn-info btn-sm" href="{% url 'dashboard:vodBoxUpdate' box.id %}">
+                  <i class="fas fa-pencil-alt">
+                  </i>
+                  ویرایش
+                </a>
+                <a class="del btn btn-danger btn-sm" data-toggle="modal" data-id="{{box.id}}" data-target="#modal-default" href="#">
+                  <i class="fas fa-trash">
+                  </i>
+                  حذف
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>‍
+<script type="text/javascript">
+  $(document).on("click", ".del", function() {
+    var delId = $(this).data('id');
+    $('.delbut').attr('href', '/dashboard/vodBoxDelete/' + delId);
+    $('.modal-body').html(`آیا از حذف کد ${delId} مطمئن هستید؟`)
+  });
+</script>
+{% endblock %}

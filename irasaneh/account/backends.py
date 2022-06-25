@@ -5,7 +5,10 @@ class PhoneAuthBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
         if username is None:
-            username = kwargs.get(UserModel.PHONE_FIELD)
+            username = kwargs['phone']
+            # username = kwargs.get(UserModel.phone)
+            # username = UserModel.objects.get(phone=username)
+            
         if username is None or password is None:
             return
         try:

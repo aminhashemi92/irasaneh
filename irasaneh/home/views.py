@@ -10,7 +10,7 @@ from django.contrib import messages
 # Create your views here.
 def homepage(request):
     articles = Article.objects.filter(status="p").order_by('-publish')[:4]
-    resanehs = Resaneh.objects.filter(status="p").order_by('-publish')[:4]
+    resanehs = Resaneh.objects.filter(status="p", is_digital=False).order_by('-publish')[:4]
     categories = Category.objects.filter(status=True, parent=None)
     allresanehcount = Resaneh.objects.all().count()
 

@@ -1,0 +1,249 @@
+{% load static %}
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+
+  <a href="{% url 'home:homepage' %}" class="brand-link text-center" style="height:57px; padding-top:15px; padding-right:10px;">
+    <img src="{%static '/home/images/logologo.png' %}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8;">
+    <span class="brand-text font-weight-light">
+      <img src="{%static '/home/images/logotext.png' %}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+    </span>
+  </a>
+
+  <!-- <a href="{% url 'home:homepage' %}" class="brand-link text-center" style="display:none;">
+    <img src="{%static '/home/images/whitelogo.png' %}" alt="AdminLTE Logo" style="opacity: .8; width:120px;">
+
+  </a>
+
+  <a href="{% url 'home:homepage' %}" class="brand-link text-center brand-link-mini">
+    <img src="{%static '/home/images/logologo.png' %}" alt="AdminLTE Logo" style="opacity: .8; width:30px;">
+
+  </a> -->
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    {% if request.user.profile %}
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image pt-2">
+        <img src="{{user.profile.pic.url}}" class="img-circle" alt="User Image" style="width:45px;">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{%if user.profile.firstname%}{{user.profile.firstname}}{% endif %} {% if user.profile.lastname %}{{user.profile.lastname}} {% endif %}</a>
+        <a class="d-block" style="color:#c2c7d0; font-size:0.8rem;">{{user.profile.get_position_display}}</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview">
+          <a href="{% url 'dashboard:vodDashboard' %}" class="nav-link
+          {% if request.resolver_match.url_name == 'vodDashboard' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              داشبورد رسانه‌های دیجیتال
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+        </li>
+
+
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'vodResanehs' or request.resolver_match.url_name == 'vodResanehAdd' or request.resolver_match.url_name == 'vodResanehUpdate' %}
+        menu-open
+        {% endif %}">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'vodResanehs' or request.resolver_match.url_name == 'vodResanehAdd' or request.resolver_match.url_name == 'vodResanehUpdate' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+              رسانه‌های دیجیتال
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'dashboard:vodResanehs' %}" class="nav-link
+              {% if request.resolver_match.url_name == 'vodResanehs' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>لیست رسانه‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:vodResanehAdd' %}" class="nav-link
+              {% if request.resolver_match.url_name == 'vodResanehAdd' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>ایجاد رسانه جدید</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+
+
+
+
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'vodVideoAdd' or request.resolver_match.url_name == 'vodVideos' or request.resolver_match.url_name == 'vodVideoUpdate' %}
+        menu-open
+        {% endif %}">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'vodVideoAdd' or request.resolver_match.url_name == 'vodVideos' or request.resolver_match.url_name == 'vodVideoUpdate'%}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-film"></i>
+            <p>
+              مدیریت ویدیوها
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="{% url 'dashboard:vodVideos' %}" class="nav-link {% if request.resolver_match.url_name == 'vodVideos' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>لیست ویدیو‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:vodVideoAdd' %}" class="nav-link {% if request.resolver_match.url_name == 'vodVideoAdd' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>افزودن ویدیو</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'vodBoxes' or request.resolver_match.url_name == 'vodBoxAdd' or request.resolver_match.url_name == 'vodBoxUpdate' %}
+        menu-open
+        {% endif %}">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'vodBoxes' or request.resolver_match.url_name == 'vodBoxAdd' or request.resolver_match.url_name == 'vodBoxUpdate' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-boxes"></i>
+            <p>
+              مدیریت باکس‌ها
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="{% url 'dashboard:vodBoxes' %}" class="nav-link {% if request.resolver_match.url_name == 'vodBoxes' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>لیست باکس‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:vodBoxAdd' %}" class="nav-link {% if request.resolver_match.url_name == 'vodBoxAdd' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>افزودن باکس</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'vodEvents' or request.resolver_match.url_name == 'vodEventAdd' or request.resolver_match.url_name == 'vodEventUpdate' %}
+        menu-open
+        {% endif %}">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'vodEvents' or request.resolver_match.url_name == 'vodEventAdd' or request.resolver_match.url_name == 'vodEventUpdate' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              مدیریت رویدادها
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="{% url 'dashboard:vodEvents' %}" class="nav-link {% if request.resolver_match.url_name == 'vodEvents' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>لیست رویدادها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:vodEventAdd' %}" class="nav-link {% if request.resolver_match.url_name == 'vodEventAdd' %}
+              active
+              {% endif %}"">
+                <i class="far fa-circle nav-icon"></i>
+                <p>افزودن رویداد</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+
+        <li class="nav-item has-treeview">
+          <a href="{% url 'account:logout_page' %}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>
+              خروج از حساب کاربری
+              <!-- <i class="fas fa-angle-left right"></i> -->
+            </p>
+          </a>
+
+        </li>
+
+
+    </nav>
+    <!-- /.sidebar-menu -->
+
+    {% else %}
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="text-wrap text-center nav-link">ابتدا باید حساب کاربری خودرا تکمیل نمایید</li>
+        <li class="nav-item has-treeview ">
+          <a href="{% url 'dashboard:profile' %}" class="nav-link
+          {% if request.resolver_match.url_name == 'profile' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              پروفایل
+              <!-- <i class="fas fa-angle-left right"></i> -->
+            </p>
+          </a>
+
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="{% url 'account:logout_page' %}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>
+              خروج از حساب کاربری
+              <!-- <i class="fas fa-angle-left right"></i> -->
+            </p>
+          </a>
+
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
+
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+{% block script %}
+
+{% endblock %}

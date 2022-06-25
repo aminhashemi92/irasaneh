@@ -11,6 +11,8 @@ from comment.models import Comment
 from hitcount.models import HitCountMixin, HitCount
 from star_ratings.models import Rating
 from cities.models import *
+
+
 # from comment.models import Comment
 
 # Managers
@@ -60,6 +62,14 @@ class Place(models.Model):
     slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس")
     status = models. BooleanField(default=True, verbose_name="نمایش داده شود؟")
     position = models.IntegerField(verbose_name="پوزیشن")
+
+    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL, related_name="place", verbose_name="کشور", blank=True)
+    state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL, related_name="place", verbose_name="استان", blank=True)
+    city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL, related_name="place", verbose_name="شهر", blank=True)
+    zone = models.ForeignKey(Zone, null=True, on_delete=models.SET_NULL, related_name="place", verbose_name="منطقه", blank=True)
+
+    address = models.CharField(max_length=200, verbose_name="آدرس", blank=True)
+
     class Meta:
         verbose_name = "جایگاه"
         verbose_name_plural = "جایگاه‌ها"
@@ -153,14 +163,16 @@ class Resaneh(models.Model):
 
     nvisit = models.CharField(max_length=200, verbose_name="برآورد بازدید روزانه", blank=True)
 
-    price = models.PositiveIntegerField(verbose_name="قیمت", blank=True)
+    price = models.PositiveIntegerField(verbose_name="قیمت", blank=True, default=0)
     detail = models.TextField(verbose_name="جزییات بیشتر", blank=True)
     point = models.TextField(verbose_name="امتیازات", blank=True)
 
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
 
+    # slug =  AutoSlugField(populate_from=['name',])
     slug =  models.SlugField(max_length=100, unique=True, verbose_name="آدرس صفحه")
     code = models.CharField(max_length=200, verbose_name="کد شناسایی", blank=True)
+    connectionID = models.CharField(max_length=200, verbose_name="کد ارتباطی", blank=True)
     publish = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -176,6 +188,12 @@ class Resaneh(models.Model):
     ratings = GenericRelation(Rating, related_query_name='resaneh')
 
 
+    is_digital = models.BooleanField(default=False, verbose_name="رسانه‌ی دیجیتال")
+    tvModel = models.CharField(max_length=200, verbose_name="مدل تلویزیون", blank=True)
+    tvSize = models.CharField(max_length=200, verbose_name="ابعاد تلویزیون", blank=True)
+    is_Androidbox = models.BooleanField(default=False, verbose_name="سیستم‌عامل اندروید")
+    androidVersion = models.CharField(max_length=200, verbose_name="ورژن اندروید", blank=True)
+    operatorNumber = models.CharField(max_length=200, blank=True, verbose_name="تلفن اپراتور")
 
 
     class Meta:
@@ -200,6 +218,13 @@ class Resaneh(models.Model):
 
     def showtype_published(self):
         return self.showtype.filter(status=True)
+
+    def mis_Androidbox(self):
+        if self.is_Androidbox == True:
+            a = "<img src='/static/admin/img/icon-yes.svg' alt='True'>"
+        else:
+            a = "<img src='/static/admin/img/icon-no.svg' alt='False'>"
+        return format_html(a)
 
     # objects = ImageResanehManager()
 
