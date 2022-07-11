@@ -68,3 +68,54 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+
+def jalali_converter2(time):
+    jmonths = [
+        "فروردین",
+        "اردیبهشت",
+        "خرداد",
+        "تیر",
+        "مرداد",
+        "شهریور",
+        "مهر",
+        "آبان",
+        "آذر",
+        "دی",
+        "بهمن",
+        "اسفند",
+    ]
+
+    time = timezone.localdate(time)
+
+    time_to_str="{},{},{}".format(time.year, time.month, time.day)
+    time_to_tuple = jalali.Gregorian(time_to_str).persian_tuple()
+    time_to_list = list(time_to_tuple)
+
+    for index, month in enumerate(jmonths):
+        if time_to_list[1] == index + 1:
+            time_to_list[1] = month
+            break
+
+    output = "{} {} {}".format(
+        time_to_list[2],
+        time_to_list[1],
+        time_to_list[0],
+    )
+    return Persian_numbers_converter(output)
+
+
+def gregorian_converter(time):
+    time_to_list = time.split('/')
+    time_to_str="{},{},{}".format(time_to_list[0], time_to_list[1], time_to_list[2])
+    return(jalali.Persian(time_to_str).gregorian_string())
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

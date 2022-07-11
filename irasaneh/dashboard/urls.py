@@ -6,7 +6,8 @@ urlpatterns = [
     path('', dashboard, name='dashboard'),
     path('profile', profile, name='profile'),
     path('employee', employee, name='employee'),
-    path('myresaneh', myresaneh, name='myresaneh'),
+    path('myofflineresaneh', myofflineresaneh, name='myofflineresaneh'),
+    path('mydigitalresaneh', mydigitalresaneh, name='mydigitalresaneh'),
 
     path('vod', vodDashboard, name='vodDashboard'),
     path('vodResanehs', vodResanehs, name='vodResanehs'),
@@ -25,5 +26,19 @@ urlpatterns = [
     path('vodEventAdd', vodEventAdd, name='vodEventAdd'),
     path('vodEventUpdate/<int:pk>', vodEventUpdate, name="vodEventUpdate"),
     path('vodEventDelete/<int:pk>', vodEventDelete, name="vodEventDelete"),
+
+    path('charts', charts, name="charts"),
+    path('chartjs', chartjs, name="chartjs"),
+    path('flot', flot, name="flot"),
+    path('inline', inline, name="inline"),
+
+
+    path('Videos', Videos, name='Videos'),
+    path('VideoAdd', VideoAdd, name='VideoAdd'),
+    path('VideoUpdate/<int:pk>', VideoUpdate, name="VideoUpdate"),
+    path('VideoDelete/<int:pk>', VideoDelete, name="VideoDelete"),
+
+    path('ajax/load-counterChart/', load_counterChart, name='ajax_load_counterChart'),
+
 
 ]

@@ -71,3 +71,20 @@ def contact(request):
 
 def faq(request):
     return render(request, "home/faq.html")
+
+def whoWeAre(request):
+    form = ContactUsForm()
+    # form.fields['ip_address'].initial = ip_address
+    if request.POST:
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'پیام شما با موفقیت ارسال گردید.')
+            # obj.ip_address = ip_address
+            # obj.save()
+            return redirect('/whoWeAre#contact')
+
+    context ={
+        "form" : form,
+        }
+    return render(request, "home/whoWeAre.html", context)

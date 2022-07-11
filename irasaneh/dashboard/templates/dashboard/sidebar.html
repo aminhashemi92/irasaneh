@@ -80,86 +80,36 @@
             </p>
           </a>
         </li> -->
-        <li class="nav-item has-treeview">
-          <a href="{% url 'dashboard:myresaneh' %}" class="nav-link
-          {% if request.resolver_match.url_name == 'myresaneh' %}
-          active
-          {% endif %}">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>
-              رسانه‌ها
-              <!-- <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span> -->
-            </p>
-          </a>
-          <!-- <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Top Navigation</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/boxed.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Boxed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Fixed Sidebar</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Fixed Navbar</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/fixed-footer.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Fixed Footer</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Collapsed Sidebar</p>
-              </a>
-            </li>
-          </ul> -->
-        </li>
 
-        <li class="nav-item has-treeview" style="display:None;">
+
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'myofflineresaneh' or  request.resolver_match.url_name == 'mydigitalresaneh' %}
+        menu-open
+        {% endif %} ">
           <a href="#" class="nav-link
-          {% if request.resolver_match.url_name == 'plots' %}
+          {% if request.resolver_match.url_name == 'myofflineresaneh'  or request.resolver_match.url_name == 'mydigitalresaneh' %}
           active
           {% endif %}">
-            <i class="nav-icon fas fa-chart-pie"></i>
+            <i class="nav-icon fas fa-th"></i>
             <p>
-              نمودارها
+              رسانه‌های من
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
+              <a href="{% url 'dashboard:myofflineresaneh' %}" class="nav-link   {% if request.resolver_match.url_name == 'myofflineresaneh' %}
+                active
+                {% endif %}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>تجمیعی</p>
+                <p>رسانه‌های آفلاین</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
+              <a href="{% url 'dashboard:mydigitalresaneh' %}" class="nav-link  {% if request.resolver_match.url_name == 'mydigitalresaneh' %}
+                active
+                {% endif %}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>فردی</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/inline.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>سالیانه</p>
+                <p>رسانه‌های دیجیتال</p>
               </a>
             </li>
           </ul>
@@ -299,6 +249,85 @@
         </li>
         {% endif %}
         <!-- <li class="nav-header">EXAMPLES</li> -->
+        <li class="nav-item has-treeview" style="display:None">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'plots' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              نمودارها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'dashboard:chartjs' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>تجمیعی</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:flot' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>فردی</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:inline' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>سالیانه</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-item" >
+          <a href="{% url 'dashboard:charts'%}" class="nav-link
+          {% if request.resolver_match.url_name == 'calender' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              نمودارها
+
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'VideoAdd' or request.resolver_match.url_name == 'Videos' or request.resolver_match.url_name == 'VideoUpdate' %}
+        menu-open
+        {% endif %}">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'VideoAdd' or request.resolver_match.url_name == 'Videos' or request.resolver_match.url_name == 'VideoUpdate'%}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-film"></i>
+            <p>
+              مدیریت ویدیوها
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="{% url 'dashboard:Videos' %}" class="nav-link {% if request.resolver_match.url_name == 'Videos' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>لیست ویدیو‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:VideoAdd' %}" class="nav-link {% if request.resolver_match.url_name == 'VideoAdd' %}
+              active
+              {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>افزودن ویدیو</p>
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li class="nav-item" style="display:None;">
           <a href="pages/calendar.html" class="nav-link

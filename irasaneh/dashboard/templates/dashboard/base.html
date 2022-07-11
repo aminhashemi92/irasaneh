@@ -50,6 +50,8 @@
   <!-- Custom style for RTL -->
   <link rel="stylesheet" href="{%static 'home/dist/css/custom.css' %}">
 
+{% block moreheader %}
+{% endblock %}
 
 
   <!-- ===============================================-->
@@ -60,6 +62,9 @@
     <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
     <script src="/static/location_field/js/form.js"></script>
 
+    <style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+</style>
 
 </head>
 
@@ -235,7 +240,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong class="small">تمامی حقوق متعلق به ویژن طرح <a href="http://irasane.com">Irasane.com</a>.</strong>
+    <strong class="small">تمامی حقوق متعلق به آی‌رسانه است.<a href="http://irasane.com"></a></strong>
 
     <div class="float-right d-none d-sm-inline-block small">
       <b>نسخه</b> ۰.۰.۱
@@ -249,6 +254,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
 {% block script %}
 
 {% endblock %}
@@ -288,5 +294,6 @@
 <script src="{% static 'home/dist/js/pages/dashboard.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'home/dist/js/demo.js' %}"></script>
+
 </body>
 </html>

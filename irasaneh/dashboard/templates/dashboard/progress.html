@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Progress</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<style>
+  .not-visible {
+    display: none;
+  }
+</style>
+
+<body>
+  <div class="container mt-3">
+    <div class="" id="alert-box"></div>
+  </div>
+
+  <div class="container mt-3">
+    <div class="" id="img-box"></div>
+    <form class="" action="" method="post" id="upload_form">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" name="" value="Upload" class="btn btn-primary">
+    </form>
+  </div>
+
+
+  <div class="container  not-visible" id="btn_cancle">
+    <input name="" value="cancle" class="btn btn-danger mt-3">
+  </div>
+  <div class="container mt-3 p-0 not-visible progress" id="progress">
+  </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <script type="text/javascript">
+    const uploadForm = document.getElementById('upload_form')
+    const input_file = document.getElementById('id_image')
+    const progress_bar = document.getElementById('progress')
+    const cancleBtn = document.getElementById('btn_cancle')
+    const imgBox = document.getElementById('img-box')
+    const alertBox = document.getElementById('alert-box')
+    const image = document.getElementById('id_image')
+
+    image.addEventListener('change', ()=>{
+      const media_data = input_file.files[0]
+      const url = URL.createObjectURL(media_data)
+      // console.log(imgBox);
+      // imgBox.innerHTML = `<img src="${url}" width="100%">`;
+      // imgBox.innerHTML = `<img src="${url}" width="100%">`;
+
+    });
+
+
+    $('#upload_form').submit(function(e) {
+      e.preventDefault();
+      $form = $(this)
+      var formData = new FormData(this);
+      const media_data = input_file.files[0]
+      const url = URL.createObjectURL(media_data)
+      if (media_data != null) {
+        console.log(media_data);
+        progress_bar.classList.remove("not-visible");
+        btn_cancle.classList.remove("not-visible");
+      }
+      $.ajax({
+        type: 'POST',
+        url: '',
+        data: formData,
+        dataType: 'json',
+        beforeSend: function() {
+          // imgBox.innerHTML = ""
+          alertBox.innerHTML = ""
+        },
+        xhr: function() {
+          const xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener('progress', e => {
+            if (e.lengthComputable) {
+              const percentProgress = (e.loaded / e.total) * 100
+              // progress_bar.innerHTML = `<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${percentProgress}%" aria-valuenow="${percentProgress}" aria-valuemin="0" aria-valuemax="100"></div>`
+              progress_bar.innerHTML =
+                `<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${percentProgress}%;" aria-valuenow="${percentProgress}" aria-valuemin="0" aria-valuemax="100">${percentProgress.toFixed(1)}%</div>`
+
+            }
+          });
+          cancleBtn.addEventListener('click', () => {
+            xhr.abort()
+            setTimeout(()=>{
+              uploadForm.reset()
+              progress_bar.classList.add('not-visible')
+              cancleBtn.classList.add('not-visible')
+              imgBox.innerHTML = ""
+              alertBox.innerHTML = ""
+            }, 1000)
+
+          })
+          return xhr
+        },
+        success: function(response) {
+          // imgBox.innerHTML = `<img src="${url}" width="100px">`
+          if (response.data == "Data Uploaded") {
+            alertBox.innerHTML = `<div class="alert alert-success" role="alert">با موفقیت بارگزاری شد</div>`
+            progress_bar.classList.add('not-visible')
+            cancleBtn.classList.add('not-visible')
+          };
+
+          if (response.data == "Wrong") {
+            alertBox.innerHTML = `<div class="alert alert-danger" role="alert">بارگزاری با خطا روبرو شد!</div>`
+            progress_bar.classList.add('not-visible')
+            cancleBtn.classList.add('not-visible')
+          };
+          console.log(response.data);
+        },
+        error: function(err) {
+            alertBox.innerHTML = `<div class="alert alert-danger" role="alert">لغو بارگزاری</div>`
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+
+      });
+    });
+  </script>
+</body>
+
+</html>

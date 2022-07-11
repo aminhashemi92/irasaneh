@@ -31,12 +31,12 @@ class AdVideo(models.Model):
     )
     name = models.CharField(max_length=200, verbose_name="نام ویدیو", blank=True)
     type = models.ForeignKey(AdVideoType, verbose_name="نوع", blank=True, null=True, on_delete=models.SET_NULL,related_name="advideo")
-    owner =  models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name="advideo", verbose_name="ایجاد کننده", blank=True)
-    company =  models.ForeignKey(Company, null=True, on_delete=models.SET_NULL, related_name="advideo", verbose_name="رسانه‌دار", blank=True)
+    owner =  models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name="advideo", verbose_name="ایجاد کننده")
+    company =  models.ForeignKey(Company, null=True, on_delete=models.SET_NULL, related_name="advideo", verbose_name="صاحب ویدیو", blank=True)#شرکت صاحب ویدیو
     status = models. BooleanField(default=True, verbose_name="نمایش داده شود؟")
     video = models.FileField(upload_to='advideos',null=True, validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv','jpg'])], verbose_name="ویدیو", blank=True)
 
-    condition = models.CharField(max_length=1, choices=CONDITION_CHOICES, verbose_name="وضعیت انتشار", blank=True)
+    condition = models.CharField(max_length=1, choices=CONDITION_CHOICES,default='p',verbose_name="وضعیت انتشار", blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -58,6 +58,7 @@ class AdVideo(models.Model):
 
 
 class AdBox(models.Model):
+    owner =  models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name="adbox", verbose_name="ایجاد کننده", blank=True)
     name = models.CharField(max_length=200, verbose_name="نام باکس آگهی", blank=True)
     numberOfVideos = models.PositiveIntegerField(verbose_name="تعداد ویدیوها", blank=True)
     status = models.BooleanField(default=True, verbose_name="نمایش داده شود؟")
@@ -67,12 +68,41 @@ class AdBox(models.Model):
 
     videos = models.ManyToManyField(AdVideo, verbose_name="ویدیوها", related_name="adbox")
 
+    videos_list = models.CharField(max_length=200, verbose_name="ویدیو‌های مرتب شده", blank=True)
+
     class Meta:
         verbose_name = "باکس"
         verbose_name_plural = "باکس‌ها"
 
+    # def save_related(self, request, form, formsets, change):
+    #     super(AdBox, self).save_related(request, form, formsets, change)
+    #     videos = self.videosvideo_id_list = list(videos.values_list('id', flat=True))
+    #     orders = self.order
+    #     orders_list = map(int, orders.split('-'))
+    #     z = [x for _,x in sorted(zip(orders_list,video_id_list))]
+    #     video_play_list = ','.join(map(str, z))
+    #     # print(orders_list)
+    #     # A = self.save()
+    #     self.videos_list = video_play_list
+    #     super(AdBox, self).save_related(request, form, formsets, change)
+
+
+
     def __str__(self):
         return self.name
+
+    # def save(self, *args, **kwargs):
+    #     super(AdBox, self).save(*args, **kwargs)
+    #     videos = self.videos
+    #     video_id_list = list(videos.values_list('id', flat=True))
+    #     orders = self.order
+    #     orders_list = map(int, orders.split('-'))
+    #     z = [x for _,x in sorted(zip(orders_list,video_id_list))]
+    #     video_play_list = ','.join(map(str, z))
+    #     # print(orders_list)
+    #     # A = self.save()
+    #     self.videos_list = video_play_list
+    #     super(AdBox, self).save(*args, **kwargs)
 
     def mstatus(self):
         if self.status == True:
@@ -82,7 +112,10 @@ class AdBox(models.Model):
         return format_html(a)
 
 
+
+
 class AdEvent(models.Model):
+    owner =  models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name="adevent", verbose_name="ایجاد کننده", blank=True)
     name = models.CharField(max_length=200, verbose_name="نام", blank=True)
     slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس")
     status = models. BooleanField(default=True, verbose_name="نمایش داده شود؟")

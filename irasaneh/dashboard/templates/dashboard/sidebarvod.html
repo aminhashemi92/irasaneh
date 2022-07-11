@@ -192,6 +192,39 @@
           </ul>
         </li>
 
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link
+          {% if request.resolver_match.url_name == 'plots' %}
+          active
+          {% endif %}">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              نمودارها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'dashboard:chartjs' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>تجمیعی</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:flot' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>فردی</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:inline' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>سالیانه</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
 
 
         <li class="nav-item has-treeview">

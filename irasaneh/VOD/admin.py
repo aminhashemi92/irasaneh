@@ -23,9 +23,9 @@ admin.site.register(AdVideoType,AdVideoTypeAdmin)
 
 
 class AdVideoAdmin(admin.ModelAdmin):
-    list_display = ('name', 'type', 'owner', 'status', 'video')
-    list_filter = ([ 'owner', 'type', 'status'])
-    search_fields = ('name', 'owner')
+    list_display = ('name', 'type', 'owner', 'company','status', 'video')
+    list_filter = ([ 'owner','company', 'type', 'status'])
+    search_fields = ('name', 'owner', 'company')
     actions = [make_active, make_diactive]
 
 admin.site.register(AdVideo,AdVideoAdmin)
@@ -35,6 +35,22 @@ class AdBoxAdmin(admin.ModelAdmin):
     list_filter = (['status'])
     search_fields = ('name',)
     actions = [make_active, make_diactive]
+
+
+    def save_related(self, request, form, formsets, change):
+        super(AdBoxAdmin, self).save_related(request, form, formsets, change)
+        obj = form.instance
+        videos = obj.videos
+        video_id_list = list(videos.values_list('id', flat=True))
+        orders = obj.order
+        orders_list = map(int, orders.split('-'))
+        z = [x for _,x in sorted(zip(orders_list,video_id_list))]
+        video_play_list = ','.join(map(str, z))
+        obj.videos_list = video_play_list
+        super(AdBoxAdmin, self).save_related(request, form, formsets, change)
+        obj.save()
+
+
 
 admin.site.register(AdBox,AdBoxAdmin)
 

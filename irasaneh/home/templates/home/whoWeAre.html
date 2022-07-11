@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html lang="en" dir="rtl">
+
+<head>
+    <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Hotjar Tracking Code for https://irasane.com/ -->
+  <script>
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:3050464,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>آی‌رسانه|سفر آی‌رسانه</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg" href="{% static '/home/images/iconlogo.png' %} ">
+
+  <!-- <link href="{% static 'home/assets/img/favic' %} on.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'home/assets/vendor/aos/aos.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/vendor/bootstrap-icons/bootstrap-icons.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/vendor/boxicons/css/boxicons.min.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/vendor/glightbox/css/glightbox.min.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/vendor/remixicon/remixicon.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/vendor/swiper/swiper-bundle.min.css' %} " rel="stylesheet">
+
+
+  <!--icons from bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <!-- Template Main CSS File -->
+  <link href="{% static 'home/assets/css/style.css' %} " rel="stylesheet">
+  <link href="{% static 'home/assets/css/owl.carousel.css' %} " rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Arsha - v4.3.0
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX"
+   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+   <!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-center">
+
+      <h1 class="logo"><a href="{% url 'home:homepage' %}">
+          <img id="logo" src="{%static '/home/images/whitelogo.png' %}">
+        </a></h1>
+
+
+    </div>
+  </header><!-- End Header -->
+
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+          <h1>سفر با آی‌رسانه</h1>
+          <h2>
+            توی این سفر با ما همراه شو ...
+          </h2>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <a href="#strpish" class="btn-get-started">شروع کنیم؟</a>
+            <a href="#" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span class="m-2">مشاهده‌ی ویدیو</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+          <img src="{% static 'home/images/present/H2.png' %}" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <main id="main">
+
+    <!-- ======= Cliens Section ======= -->
+    <section id="cliens" class="cliens section fixed-top1" style="background-color: rgba(255, 255, 255, 0.9 );">
+      <div class="container">
+        <div class="row ms-progressbar" style="border-bottom:0;">
+
+
+
+          <div id="pish" class="col ms-progressbar-step disabled">
+            <!-- complete -->
+            <div class="text-center ms-progressbar-step-number">پیش‌نیاز سفر</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="ms-progressbar-dot"></a>
+
+          </div>
+
+          <div id="start" class="col ms-progressbar-step disabled">
+            <!-- complete -->
+            <div class="text-center ms-progressbar-step-number">شروع سفر</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="ms-progressbar-dot"></a>
+
+          </div>
+
+          <div id="goal" class="col ms-progressbar-step disabled ">
+            <!-- active -->
+            <div class="text-center ms-progressbar-step-number">مقصد سفر</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="ms-progressbar-dot"></a>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- End Cliens Section -->
+
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us section-bg">
+      <div id="strpish" class="container-fluid" data-aos="fade-up">
+
+        <div class="row" style="margin-left:15px;">
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+            <div class="content text-justify">
+              <h3>
+                <strong>
+                  پیش‌نیاز سفر
+                </strong>
+              </h3>
+              <p class="text-justify">
+
+              </p>
+            </div>
+
+            <div class="accordion-list">
+              <ul>
+                <li>
+                  <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#accordion-list-1"><span>۱</span>
+                    تبلیغات یعنی چی و کاربردش کجاست؟
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-1" class="collapse text-justify" data-bs-parent=".accordion-list">
+                    <p>
+                      هر کسب و کاری برای رسیدن به اهدافش ُ مثل رشد در فروش، نیاز به برقراری ارتباط موثر و تعامل با بازار داره که به مجموعه‌ای از این فعالیت‌ها،
+                      <strong>
+                        بازاریابی
+                      </strong>
+                      (بازارسازی) میگیم. پس درواقع کسب و کارها، مایلن تا با مشتری‌های خودشون ارتباط برقرار کنن و از طریق یک
+                      <strong>
+                        بستر ارتباطی
+                      </strong>
+                      ، یه
+                      <strong>
+                        پیام
+                      </strong>
+                      رو به اون‌ها منتقل کنن.
+                      <br>
+                      حالا تبلیغات هم یکی از انواع فعالیت‌های بازاریابی و برقراری ارتباطه،که کسب و کارها برای اون هزینه می‌کنن تا بتونن پیام مدنظرشون رو در قالب یک بستر (که بهش میگیم
+                      <strong>
+                        رسانه </strong>
+                      و جلوتر تعریفش می‌کنیم) به مخاطب هاشون منتقل کنن.
+                      <br>
+                      طبق
+                      <a href="#" style="display:inline; padding-left:0px;">این</a>
+                      انجمن تبلیغات بریتانیا، تبلیغات وسیله‌ای برای برقراری ارتباط با کاربران یک محصول یا خدماته. تبلیغات پیام‌هایی هستن که هزینه اون توسط کسانی که اون رو ارسال می‌کنن پرداخت می‌شه و هدفش، اطلاع‌رسانی یا تأثیرگذاری روی افرادیه که اون
+                      پیام رو دریافت می‌کنن. پس اینجا ما با دو تا پارامتر مهم طرف هستیم؛ یعنی
+                      <strong>
+                        پیام و بستر انتقال پیام
+                      </strong>
+                      (که در واقع همون چیزیه که براش هزینه میشه).
+                      <br>
+                      خب اولاً همه‌ی کسب و کار‌ها در تلاشن تا هزینه تبلیغات خودشون رو مدیریت کنن یا به عبارت دیگه، برای بهترین و مؤثرترین تبلیغ هزینه کنن. پیام‌هایی هم که در تبلیغات منتقل میشه برای هر کسب و کاری متفاوته. یکی ممکنه بخواد درباره اخرین
+                      تغییرات کالاها و خدماتش اطلاع رسانی کنه، یکی دیگه میخواد مشتری‌های خودش رو فراخونی کنه که کاری رو انجام بدن یا اصن می‌خواد به یه بازار جدید ورود کنه و داره برای اون زمینه سازی می‌کنه.
+                      <br>
+                    <div class="row justify-content-center text-center">
+                      « پس مهمه که بدونیم چه پیامی رو، در چه زمان و مکانی، برای چه کسایی، با چه هدفی و در قالب چه محتوایی میخوایم منتقل کنیم »
+                    </div>
+                    </p>
+                  </div>
+                </li>
+
+                <li>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>۲</span>
+                    انواع تبلیغات چیا هستن... ؟
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-2" class="collapse text-justify" data-bs-parent=".accordion-list">
+                    <p>
+                      این طیف گسترده رو میشه از چندین جهت مختلف تقسیم‌بندی و دسته‌بندی کرد. توی قسمت قبل هم گفتیم چیزی که توی تبلیغ مهمه اینه که چه
+                      <strong>
+                        پیامی
+                      </strong>
+                      رو، در چه زمان و مکانی، برای چه
+                      <strong>
+                        کسایی
+                      </strong>
+                      و با چه
+                      <strong>
+                        هدفی
+                      </strong>
+                      و در
+                      <strong>
+                        قالب
+                      </strong>
+                      چه محتوایی میخوایم منتقل کنیم. پس میشه تبلیغات رو به صورت کلی بر اساس نوع پیام ،مخاطب‌هاشون و قالب محتواشون تقسیم بندی کرد.
+                      <br>
+                      با گذر زمان و پیشرفت راه‌های مختلف ارتباطی، دست کسب و کار‌ها توی انتخاب قالب تبلیغات خیلی بازتر شده. الان دیگه مثل قدیم، اگهی رفتن توی تلویزیون راه باحالی واسه تبلیغ کردن نیست و تنوع خیلی زیادی برای اون وجود داره. از
+                      نام‌آشناترین اون‌ها گرفته مثل تبلیغات چاپی، بیلبوردی یا خارج از خانه، رادیو و تلویزیونی، پیامکی و ایمیلی، پادکست و محتوای ویدیویی تا انواع دیجیتالی اون مثل فضای مجازی و موبایلی، تبلیغات کلیکی، تبلیغات موتورهای جستجو (نمونه ش رو
+                      می‌تونید توی گوگل ببینید) و انواع خلاقانه‌تر اون‌ها مثل تبلیغات چریکی یا اصطلاحاً گوریلا که یه نوعی از تبلیغات خلاقانه و معمولاً کم هزینه س که مخاطب‌ها رو درگیر و باهاشون تعامل می‌کنه.
+                      <br>
+                      از نظر پیامی هم که توی هر تبلیغ منتقل میشه، می‌تونیم تبلیغات رو دسته بندی کنیم. گاهی اوقات این پیام، مربوط به برندسازی یک کسب و کاره، بعضی وقتا درباره محصول یا خدمات جدید یا حتی قدیمیه، ممکنه یه کسب و کار برای اطلاع‌رسانی
+                      اتفاقات و رویدادهای جدیدی که ایجاد کرده تبلیغ کنه و حتی ممکنه کمی جسورانه تر، کسب و کاری بخواد خودش رو در ذهن مخاطب از رقباش متمایز کنه. هوشمندی کسب و کارها به اینه که بدونن برای هر پیامی، از چه قالبی از تبلیغات استفاده کنن. به
+                      قول معروف،
+                      <br>
+                    <div class="row justify-content-center">
+                      « هر سخن جائی و هر نکته مکانی دارد »
+                    </div>
+                    </p>
+                  </div>
+                </li>
+
+                <li>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>۳</span>
+                    تعریف بعضی از اصطلاحات این حوزه رو بدونیم...
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-3" class="collapse text-justify" data-bs-parent=".accordion-list">
+                    <p>
+                      اگه توی زمینه تبلیغات دستی بر آتش دارید که هیچی... اما اگه نه، بد نیست معانی چند مورد از اصطلاحات فرنگی یا تخصصی‌ای که توی این صنعت پرکاربرده رو با هم مرور کنیم.
+                      <br>
+                      <strong>تبلیغات Out of Home | </strong>
+                      یا همون تبلیغات خارج از خانه و برای کوتاهی سخن(!) بعضی وقتا OOH هم میگن بهشون. اسمشون هم روشونه؛ هر تبلیغی یا تلاش برای دیده شدن که به صورت‌های مختلف در فضای شهری و محل‌های عمومی و خارج از خانه انجام بشه بهش میگن OOH. مثال هاش
+                      رو هم که هر روز می‌بینیم؛ بیلبوردهای شهری، مترو و اتوبوس، بنرهای تبلیغاتی توی فرودگاه یا مطب دندان‌پزشک.
+                      <br>
+                      <strong>تبلیغات ATL | </strong>
+                      سر حرف Above the Line هستش و به تبلیغاتی که به صورت گسترده و انبوه برای یه تعداد زیادی از مخاطب‌ها با هدف اطلاع رسانی و ایجاد آگاهی انجام میشه میگن ATL. معمولاً هزینه بیشتری دارن و یه جور سرمایه‌گذاری بلند مدت محسوب میشن.
+                      <br>
+                      <strong>تبلیغات BTL | </strong>
+                      سر حرف Below the Line هستش و یجورایی برعکس تبلیغات ATL، ابعاد اون کوچیک‌تر و مخاطب اون خاص تره. برای یک محدوده و مخاطب مشخص تعریف میشن و زودبازده‌تر هم هستن و نتایجش رو میشه توی زمان کمتری دید.
+                      <br>
+                      <strong>Call to Action | </strong>
+                      فراخوانی برای اقدام بهش میگن و بیشتر توی حوزه تبلیغات فضای مجازی و سایت‌ها به کار میره اما توی تبلیغات هم کاربرد داره. خیلی ساده یعنی توی یه سایت یا تبلیغ، از مخاطب میخوان که کاری رو انجام بده. مثلاً یه تقلب بخوایم برسونیم، توی
+                      صفحه اصلی همین
+                      <a href="#" style="display:inline; padding-left:0px;">سایت</a>
+                      ، اونجایی که نوشتیم «ورود و عضویت» درواقع داریم شما رو برای عضو شدن توی سایتمون فراخوانی می‌کنیم. CTA، به عنوان یه شاخص برای ارزیابی تأثیرگذاری تبلیغات هم بکار میره.
+                      <br>
+                      <strong>Impression & Reach |</strong>
+                      دو تا اصطلاحن که توی تبلیغات دیجیتال و فضای مجازی کاربرد دارن. Impression یا اثر، یعنی تعداد دفعاتی که یه تبلیغ به دست مخاطب‌ها رسیده، فارغ از اینکه اون رو دیدن یا نه که معمولاً تخمینی هستش. Reach هم تعداد کل افرادیه که تبلیغ رو
+                      میبینن. مثلاً اگه یه تبلیغ توی اینستاگرام ۱۰ بار برای یه نفر فرستاده شده و فقط ۱ بار اون رو دیده، نسبت I به R میشه ۱۰٪.
+                      <br>
+                      <strong>تبلیغات 360° | </strong>
+                      هم نوعی از تبلیغات و هم استراتژی بازاریابی محسوب میشه. روشی از تبلیغاته که توی اون از همه مسیر‌های موجود سنتی و دیجیتال و کانال‌های مختلف برای برقراری ارتبط با مشتری و مخاطب استفاده میشه.
+                    </p>
+                  </div>
+                </li>
+
+
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("{% static 'home/images/present/A1.png' %}");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+        </div>
+
+      </div>
+
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Skills Section ======= -->
+    <section id="skills" class="why-us" style="margin-right:15px;">
+      <div class="container-fluid" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='margin-bottom:10px; background-image: url("{% static 'home/images/present/A2.png' %}");' data-aos="zoom-in" data-aos-delay="150">&nbsp; </div>
+
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-1 order-lg-2">
+
+            <div class="content text-justify" style="display:none;">
+              <h3><strong>ورم ایپسوم متن ساختگی با تولید سادگی نا</strong> ورم ایپسوم متن ساختگی با تولید سادگی </h3>
+              <p>
+                لورم ایپسوم متن ساختگی با تولید ورم ایپسوم متن ساختگی با تولید سادگی نا است.
+              </p>
+            </div>
+
+            <div class="accordion-list">
+              <ul>
+                <li style="background-color: #f3f5fa !important;">
+                  <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#accordion-list-4"><span>۴</span>
+                    رسانه‌های تبلیغاتی رو بشناسیم...
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-4" class="collapse  text-justify" data-bs-parent=".accordion-list">
+                    <p>
+                      توی بخش‌های قبل هم گفتیم که توی هر تبلیغ، ما یک
+                      <strong>
+                        پیامی
+                      </strong>
+                      داریم که می‌خوایم از طریق یک
+                      <strong>
+                        بستر
+                      </strong>
+                      به
+                      <strong>
+                        مخاطب
+                      </strong>
+                      مدنظرمون منتقل کنیم. به این بستر، ابزار، مسیر یا وسیله‌ای که به ما در این کار کمک کنه میگیم
+                      <strong>
+                        رسانه
+                      </strong>
+                      و اگه اون پیام در راستای تبلیغات باشه، رسانه تبلیغاتی به حساب میاد. طبیعیه که رسانه‌ها انواع مختلفی دارن و روز به روز هم داره به تنوع‌شون اضافه میشه.
+                      <br>
+                      همه روزه هم در معرض رسانه‌های تبلیغاتی هستیم و جزء جدانشدنی زندگیمون شدن. رادیو، تلویرزیون و شبکه‌های اجتماعی، احتمالاً اولین چیزهایی هستن که به عنوان مثال‌هایی از رسانه تبلیغاتی به ذهنمون می‌رسن. انواع قدیمی‌تر مثل مجله و
+                      روزنامه‌ها رسانه هستن، اسپانسر یک تیم ورزشی شدن نوعی از رسانه به حساب میاد، رسانه‌های محیطی و شهری هم که نیاز به معرفی ندارن. حتی مثلاً اگه پیراهن یه برند خاصی رو به تن کنین، شما هم با اجازه تبدیل به یه رسانه میشین.
+                    </p>
+                  </div>
+
+                </li>
+
+                <li style="background-color: #f3f5fa !important;">
+                  <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#accordion-list-5"><span>۵</span>
+                    کمپین‌های تبلیغاتی چی هستن؟
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-5" class="collapse  text-justify" data-bs-parent=".accordion-list">
+                    <p>
+                      کمپین‌های تبلیغاتی، یه سری فعالیت‌های تبلیغاتی هستن که از طریق مجموعه‌ای از
+                      <strong>
+                        رسانه‌های
+                      </strong>
+                      تبلیغاتی، با صرف یک
+                      <strong>
+                        هزینه
+                      </strong>
+                      مشخص و با برنامه ریزی و
+                      <strong>
+                        و شناخت بازار
+                      </strong>
+                      و
+                      <strong>
+                        مخاطب
+                      </strong>
+                      هدف انجام میشن تا به
+                      <strong>
+                        هدفی
+                      </strong>
+                      که برای اون تعیین شده برسن. معمولاً یکی از خدماتی که آژانس‌های تبلیغاتی ارائه میدن، برنامه ریزی همین کمپین‌های تبلیغاتی هستش که به شما برای برگزاری اون مشاوره میدن و بعد از برگزاری، آثار و نتایج و میزان اثرگذاری اون رو بهتون
+                      گزارش می‌کنن.
+                      <br>
+                      در برنامه ریزی کمپین‌های تبلیغاتی، موضوعی که اهمیت زیادی داره، بودجه‌بندی اون هستش. اما بودجه بندی به معنای کم خرج کردن نیست، در عوض باید ببینیم که بهترین زمان، مکان و قالب برای تبلیغات‌مون چی باشه برای اینکه بیشترین تأثیرگذاری
+                      رو داشته باشه و بتونه به هدف کمپین برسه.
+                      <br>
+                      موضوع مهم دیگه، ارزیابی میزان اثربخشی کمپین هاست. معمولاً شاید روش‌های زیادی برای سنجیدن این موضوع وجود نداشته باشه و کسب و کارها هم گاهاً با چند بار آزمون و خطا (البته بهتره بگیم آزمون و تحلیل نتایجش)، به یه مدل مطلوب برای
+                      کمپین‌های تبلیغاتی شون می‌رسن. اما به هر حال کمک گرفتن از مشاور یا ابزارهایی که بتونن شما رو برای اینکار راهنمایی کنن خیلی بهتره. باز هم تکرار می‌کنیم که توی کمپین‌های تبلیغاتی، مهمه که بدونیم چه پیامی رو، در چه زمان و مکانی،
+                      برای چه کسایی، با چه هدفی و در قالب چه محتوایی میخوایم منتقل کنیم.
+                    </p>
+                  </div>
+                </li>
+
+
+                <li style="background-color: #f3f5fa !important;">
+                  <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#accordion-list-6"><span>۶</span>
+                    با تبلیغات بیرون از خانه و انواع اون آشنا بشیم...
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-6" class="collapse " data-bs-parent=".accordion-list">
+                    <div class="row d-flex justify-content-center">
+                      <div class="col-md-12 py-3 text-center">
+                        <p class="text-justify">
+                          Out of Home Advertising (OOH) یا همون تبلیغات خارج از خانه در یک تعریف ساده، شامل تمامی تبلیغاتی میشه که وقتی بیرون از خانه هستیم به ما مخابره می‌شن. این دسته از تبلیغات طیف گسترده‌ای دارن و قالب‌های سنتی و مدرن‌تر رو دربر
+                          می‌گیرن. انواع سنتی اون مثل بیلبورد‌های شهری، بنرهای تبلیغاتی مراکز و مجتمع‌های رفاهی، برچسب‌های تبلیغاتی اتوبوس و مترو یا ... و انواع کمی مدرن‌تر هم، نمایشگرهای دیجیتال پخش تبلیغات در سطح شهر، وسایل نقلیه یا پاساژها و
+                          فروشگاه‌هاست.
+                          <br>
+                          فارغ از اینکه ساکن کجا هستین و روزانه از چه مکان‌هایی عبور و مرور می‌کنین، تقریباً در هر جایی در تعامل با رسانه‌های «تبلیغات خارج از خانه – Out Of Home» هم هستین. این نوع از تبلیغات که به طور خلاصه OOH هم بهشون گفته می‌شه،
+                          شامل انواع بسیار متنوعیه. چه در وسط بزرگراه از زیر یک بیلبورد عبور کنین، یا توی مطب پزشک‌تون یک نمایشگر تبلیغاتی توجهتون رو جلب کنه یا توی استادیوم مشغول فریاد زدن و تشویق تیم‌تون باشین، در تعامل با این دسته از تبلیغات
+                          هستین. پس احتمالاً تا حدودی متوجه تنوع بالای این تبلیغات شدین. برخی از انواع این تبلیغات شامل موارد زیر میشه:
+
+                        </p>
+                      </div>
+                      <div class="col-md-4 py-3">
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <img src="{% static 'home/images/present/ooh1.png' %}" alt="" class="img-fluid">
+                          </div>
+                          <div class="col-md-12">
+                            <p class="text-justify text-center">
+                              <small>
+                                تبلیغات بیلبوردی
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 py-3">
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <img src="{% static 'home/images/present/ooh2.png' %}" alt="" class="img-fluid">
+                          </div>
+                          <div class="col-md-12">
+                            <p class="text-justify text-center">
+                              <small>
+                                تبلیغات خارج از خانه دیجیتال (DOOH)
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 py-3">
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <img src="{% static 'home/images/present/ooh5.png' %}" alt="" class="img-fluid">
+                          </div>
+                          <div class="col-md-12">
+                            <p class="text-justify text-center">
+                              <small>
+                                تبلیغات مبتنی بر مکان
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-4 py-3">
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <img src="{% static 'home/images/present/ooh3.png' %}" alt="" class="img-fluid">
+                          </div>
+                          <div class="col-md-12">
+                            <p class="text-justify text-center">
+                              <small>
+                                تبلیغات در سازه‌های خیابانی
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 py-3">
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <img src="{% static 'home/images/present/ooh4.png' %}" alt="" class="img-fluid">
+                          </div>
+                          <div class="col-md-12">
+                            <p class="text-justify text-center">
+                              <small>
+                                تبلیغات در حمل و نقل
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 py-3">
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <img src="{% static 'home/images/present/ooh6.png' %}" alt="" class="img-fluid">
+                          </div>
+                          <div class="col-md-12">
+                            <p class="text-justify text-center">
+                              <small>
+                                تبلیغات نماهای پنجره
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </li>
+
+
+                <li style="background-color: #f3f5fa !important; display:none;">
+                  <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#accordion-list-6"><span>۳</span>
+                    با تبلیغات بیرون از خانه و انواع اون آشنا بشیم...
+                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-6" class="collapse  text-justify" data-bs-parent=".accordion-list">
+                    <p>
+                      Advertising یا همون تبلیغات خارج از خانه در یک تعریف ساده، شامل تمامی تبلیغاتی میشه که زمانی که بیرون از خانه هستیم به ما مخابره می‌شن. این دسته از تبلیغات طیف گسترده‌ای دارن و قالب‌های سنتی و مدرن‌تر رو دربر می‌گیرن. انواع سنتی
+                      اون مثل بیلبورد‌های شهری، بنرهای تبلیغاتی مراکز و مجتمع‌های رفاهی، برچسب‌های تبلیغاتی اتوموس و مترو یا ... و انواع کمی مدرن‌تر هم، نمایشگرهای دیجیتال پخش تبلیغات در سطح شهر، وسایل نقلیه یا پاساژها و فروشگاه‌هاست.
+                      <br>
+                      فارغ از اینکه ساکن کجا هستین و روزانه از چه مکان‌هایی عبور و مرور می‌کنین، تقریباً در هر جایی در تعامل با رسانه‌های «تبلیغات خارج از خانه – Out Of Home» هم هستین. این نوع از تبلیغات که به طور خلاصه OOH هم بهشون گفته می‌شه، شامل
+                      انواع بسیار متنوعیه. چه در وسط بزرگراه از زیر یک بیلبورد عبور کنین، یا توی مطب پزشک‌تون یک استند تبلیغاتی توجهتون رو جلب کنه یا توی استادیوم مشغول فریاد زدن و تشویق تیم‌تون باشین، در تعامل با این دسته تبلیغات هستین. پس احتمالاً
+                      تا حدودی متوجه تنوع بالای این تبلیغات شدین. برخی از انواع این تبلیغات شامل :
+                      <br>
+
+                    </p>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Skills Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="ctaaa" class="cta py-5">
+      <div class="container" data-aos="zoom-in">
+
+
+        <div class="row text-center justify-content-center">
+          <h1 class="text-white">شروع سفر</h1>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-9 text-center text-lg-end">
+            <h3 class="pt-5">آی‌رسانه دقیقا چیه؟</h3>
+            <p class="text-justify">
+              آی رسانه، آژانس تبلیغاتی نیست. آی رسانه بازاریه که قراره صاحب رسانه رو به متقاضی رسانه برسونه. توی این بازار هم میتونین مناسب¬ترین رسانه ی آفلاین(خارج از خانه) رو برای تبلیغاتتون انتخاب کنین و هم رسانه های خودتون رو به نمایش بذارید.
+              <br>
+              شما اگه به عنوان صاحب برند یا کسب و کار، متقاضی رسانه تبلیغاتی هستین میتونین در ای‌رسانه، با مقایسه‌ی رسانه‌های مختلف و امکاناتی که براتون فراهم کردیم، بهترین انتخاب رو با بودجه مدیریت شده داشته باشین.
+              <br>
+              صاحبان رسانه هم در آی‌رسانه می‌تونن رسانه‌های خودشون رو در معرض دید متقاضیانی که به آی‌رسانه مراجعه می‌کنن قرار بدن و این طوری قسمت زیادی از هزینه‌های بازاریابی و فروش رسانه‌های خودشون رو کاهش بدن چون این کار به صورت خودکار در آی‌رسانه
+              انجام میشه.
+              <br>
+              همچنین مکان‌هایی که به صورت بالقوه دارای فضای مناسب برای تبلیغات محیطین با کمک آی‌رسانه شناسایی و بسترهای لازم برای انجام تبلیغات خارج از خانه براشون فراهم و معرفی میشن.
+
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-4 cta-btn-container text-center align-self-center" style="display:block;  float:left;">
+            <a class="cta-btn align-middle" href="#" disabled>مشاهده‌ی ویدیو</a>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Cta Section -->
+
+    <!-- =======  irasaneh goals section ======= -->
+    <section id="goals" class="">
+      <div class="container-fluid d-flex justify-content-center" data-aos="fade-up">
+        <div class="row w-80">
+          <div class="col-md-12">
+            <div class="section-title">
+              <h2>
+                چه نیازی به آی‌رسانه است؟
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 px-4">
+            <div class="row">
+              <div class="col-2 p-0">
+                <img src="{% static 'home/assets/img/goal1.png' %}" alt="" style="heigh:80px; width:80px;">
+              </div>
+              <div class="col-10">
+                <h5>
+                  آی‌رسانه متصل می‌کنه
+                </h5>
+                <p class="text-justify">
+                  <small>
+                    ای رسانه اطلاعات رسانه‌های خارج از خانه رو در یک مکان دور هم جمع میکنه و شما می‌تونین به راحتی اطلاعات مربوط به هر رسانه ای رو که می‌خواین بدست بیارین. اگر هم رسانه دارین با کمک آی‌رسانه می‌تونین رسانه تون رو به کسب و کارهایی که
+                    تمایل دارن در فضای شما تبلیغات انجام بدن معرفی کنین و به کسب درآمد بپردازین.
+                  </small>
+                </p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-4 py-3 px-4">
+            <div class="row">
+              <div class="col-2 p-0">
+                <img src="{% static 'home/assets/img/goal1.png' %}" alt="" style="heigh:80px; width:80px;">
+              </div>
+              <div class="col-10">
+                <h5>
+                  آی‌رسانه تسهیلگره
+                </h5>
+                <p class="text-justify">
+                  <small>
+                    اگه می‌خواین تبلیغات خارج از خانه انجام بدین آی‌رسانه کمکتون می‌کنه تا بتونین بهترین رسانه رو انتخاب کنین و در سریع ترین زمان اون رو اجرایی کنین. اگر هم می‌خواین از فضای کسب و کارتون برای تبلیغات استفاده کنین آی‌رسانه کمکتون میکنه
+                    تا بتونین به راحتی محیط کاری خودتون رو برای انجام تبلیغات آماده و خیلی راحت با کسب و کارهایی که تمایل دارن تبلیغاتشون در فضای شما نمایش داده بشه ارتباط بگیرین.
+                  </small>
+                </p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-4 py-3 px-4">
+            <div class="row">
+              <div class="col-2 p-0">
+                <img src="{% static 'home/assets/img/goal1.png' %}" alt="" style="heigh:80px; width:80px;">
+              </div>
+              <div class="col-10">
+                <h5>
+                  آی‌رسانه مرجعه
+                </h5>
+                <p class="text-justify">
+                  <small>
+                    در آی رسانه همه چی شفافه و اطلاعات مربوط به رسانه‌ها جمع شده و به راحتی می‌تونین رسانه‌های مختلف رو با هم مقایسه کنین و دیگه لازم نیست با چندین شرکت ارتباط بگیرین تا بتونین رسانه‌هایی که می‌خواین رو پیدا کنین. اگه دارای رسانه هم
+                    هستین با قرار گرفتن رسانه هاتون روی بستر آی‌رسانه خیلی راحت میتونین رسانه‌هاتون رو به بقیه معرفی و برای رسانه‌هاتون مشتری پیدا کنین.
+                  </small>
+                </p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-4 py-3 px-4">
+            <div class="row">
+              <div class="col-2 p-0">
+                <img src="{% static 'home/assets/img/goal1.png' %}" alt="" style="heigh:80px; width:80px;">
+              </div>
+              <div class="col-10">
+                <h5>
+                  آی‌رسانه راحته
+                </h5>
+                <p class="text-justify">
+                  <small>
+                    در آی‌رسانه شما به راحتی هم میتونین رسانه دار بشین و از این طریق کسب در آمد کنین و هم میتونین رسانه خواه بشین و به راحتی میتونین رسانه ی مناسب خودتون رو پیدا و کمپینتون را اجرا کنین
+                  </small>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-4 py-3 px-4">
+            <div class="row">
+              <div class="col-2 p-0">
+                <img src="{% static 'home/assets/img/goal1.png' %}" alt="" style="heigh:80px; width:80px;">
+              </div>
+              <div class="col-10">
+                <h5>
+                  آی‌رسانه اندازه گیری می‌کنه
+                </h5>
+                <p class="text-justify">
+                  <small>
+                    در آی‌رسانه با استفاده از آی‌رسانه باکس خیلی از داده‌های مربوط به رسانه‌ها به صورت آنلاین اندازه گیری و مانیتور می‌شه. اینطوری تخمین بهتری از میزان اثرگذاری کمپین‌های تبلیغاتی‌تون دارین.
+                  </small>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-4 py-3 px-4">
+            <div class="row">
+              <div class="col-2 p-0">
+                <img src="{% static 'home/assets/img/goal1.png' %}" alt="" style="heigh:80px; width:80px;">
+              </div>
+              <div class="col-10">
+                <h5>
+                  آی‌رسانه آنلاینه
+                </h5>
+                <p class="text-justify">
+                  <small>
+                    اگه بخواین محتوای تبلیغتون رو عوض کنین دیگه نیاز نیست کلی زمان و هزینه برای عوض کردن محتوا صرف کنین کافیه فقط محتوای جدید رو بارگزاری کنین تا در سریع ترین زمان محتوای جدید به مخاطبانتون نمایش داده بشه.
+                  </small>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </section><!-- End goals Section -->
+
+    <!-- ======= tozihat Section ======= -->
+    <section id="tozihat" class="section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-title">
+              <h2>
+                مخاطب‌های آی‌رسانه چه کسانی هستند؟
+              </h2>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <img src="{% static 'home/images/present/B1.png' %}" alt="" class="img-fluid">
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p class="text-justify">
+
+              خب همونجوری هم که تو بخش چه نیازی به آی‌رسانه هست گفتم مخاطبین ما به دو دسته رسانه‌دار و رسانه‌خواه تقسیم بندی میشن:
+              <br>
+              <br>
+              <strong>حالا رسانه دار کیست؟</strong>
+              <br>
+              اگه شما هم دارای یک کسب و کار با تعداد مراجعه کننده مناسب (حداقل حدود 30 نفر در روز) هستین، می‌تونین در این صنعت به عنوان رسانه دار فعالیت کنه. مثلاً من صاحب یک کافه رستوران هستم در نتیجه با توجه به اینکه در طول روز تعداد زیادی مراجعه
+              کننده منحصر به فرد از عموم مردم دارم می تونم رسانه دار بشم و از محل کسب و کار خودم درآمد جانبی هم داشته باشم.
+              <br>
+              همچنین ممکن است اصل فعالیت من در زمینه تبلیغات محیطی باشد. من صاحب بیلبورد های شهری یا بین شهری هستم.
+              <br>
+              آی رسانه برای هر نوع رسانه داری برنامه ریزی دقیق خود را داره و به پیشرفت نوع رسانه شما هم از نظر کمیت و هم از نظر کیفیت کمک می کند.
+            </p>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p class="text-justify">
+              <strong>رسانه خواه کیست؟</strong>
+              <br>
+              من صاحب یک کسب و کار هستم و جهت بهتر شدن کارم و همچنین داشتن مشتری های بیشتر نیاز به انجام تبلیغات را دارم. ولی با توجه به اینکه این تبلیغات برای من از اهمیت ویژه ای برخورداره می خوام در بهترین شکل خود با بهره بردن از بهترین زمان در
+              بهترین مکان و بیشترین مخاطب هدف تبلیغات خود را انجام بدم.
+              <br>
+              آی رسانه این امکان را برای شما فراهم کرده و این دسترسی را به شما خواهد داد تا بتونید در هر لحظه بازخوردهای تبلیغات خود را داشته و با توجه به این بازخوردها حتی در حین اجرای کمپین روش خود را تغییر داده تا به بهترین شکل ممکن بتونید از
+              تبلیغات خود بهره برداری کنید.
+
+            </p>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'home/images/present/B2.png' %}" alt="" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Cta Section ======= -->
+    <section id="strgoal" class="cta py-5">
+      <div class="container" data-aos="zoom-in">
+
+
+        <div class="row text-center justify-content-center">
+          <h1 class="text-white">مقصد سفر</h1>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-9 text-center text-lg-end">
+            <h3 class="pt-5">آی‌رسانه به درد من می‌خوره؟</h3>
+            <p class="text-justify">
+              در آی‌رسانه رسانه‌داران میتونن رسانه‌های خودشون رو معرفی و در معرض دید رسانه‌خواهان قرار بدن. رسانه‌خواهان می‌تونن با ستفاده از فیلترهای متنوعی که در سایت قرار گرفته یا تا بتونن بصورت هدفمند بهترین رسانه و کمپین تبلیغاتی خود رو انتخاب
+              کنن.
+              <br>
+              آی‌رسانه با کمک مشاوران و متخصصان حوزه‌ی تبلیغات، تبلیغات محیطی رو مقیاس پذیر کرده تا كسب و كارهای نوپا و دارای بودجه‌ی محدود بتونن در معرفی محصولات و برند خود از تبلیغات محیطی مناسب استفاده کنن و خودشون رو به مخاطبان هدف خودشون معرفی
+              کنن.
+              <br>
+              در آی‌رسانه ما معتقدیم که هر مکانی می‌تواند برای بخشی از کسب و کارها بهترین انتخاب برای معرفی و انجام تبلیغات باشد و به این دلیل شما می‌توانید با عرضه محل‌های مناسبی كه برای تبلیغات سایرین در اختیار دارید كسب درآمد كنید یا از محل این
+              درآمد‌ها، با كمترین هزینه، تبلیغات هدفمند و اثر بخشی رو در سایر رسانه‌ها انجام دهید.
+              <br>
+              یکی از قسمت‌های جذاب آی‌رسانه اجرای تبلیغات محیطی به صورت دیجیتال هست که با استفاده از آی رسانه باکس به راحتی می‌تونین تلویزیون‌هایی که در فضای خودتون دارید رو به بستر مناسبی برای تبلیغات تبدیل کنین. همچنین اگر تبلیغتون رو در این بستر
+              اجرا کنین می‌تونین فرصت بیشتری برای رسوندن پیامتون به مخاطب داشته باشین و همچنین می‌تونین یه سری داده از پخش تبلیغاتتون در رسانه‌های مختلف رو مشاهده کنین که در تحلیل‌هایی که می‌کنین تاثیر گذاره.
+              <br>
+              اگر شما کسب و کاری هستین که قبلا تبلیغات محیطی انجام دادین پس با مشکلات انتخاب رسانه‌ها مواجه شدین؛ دسترسی به خیلی از رسانه سخته و باید با چندین و چند شرکت ارتباط بگیرین تا بتونین تبلیغات خودتون رو اجرا کنین تازه اگه بتونین راه
+              ارتباطی با اونها رو پیدا کنین خیلی از جاهایی که می‌خواین اونجا تبلیغ کنین هیچ زیرساختی برای اجرای تبلیغات شما رو ندارن آی‌رسانه دسته بندی‌های جدید و متنوعی رو اضافه کرده که با استفاده از اون میتونین به راحتی تبلیغتون رو در جاهایی که
+              نیاز دارین اجرا کنین.
+              <br>
+              اگر شما کسب و کاری هستین که تا حالا از تبلیغات محیطی استفاده نکردین ما در آی‌رسانه با کمک مشاوران متخصص کمکتون می‌کنیم که بهترین رسانه محیطی برای کسب و کارتون رو انتخاب کنین و تا اجرای تبلیغات در کنارتون هستیم.
+              اگر شما کسب و کاری هستین که در حال حاضر در فضاتون دارین کار تبلیغات انجام میدین با پیوستن به آی‌رسانه اولا رسانه به راحتی و سادگی در دسترسی کلی مشتری قرار میگره و همچنین با استفاده از آی‌رسانه باکس به راحتی میتونی درآمدت رو افزایش
+              بدی.
+              <br>
+              اگر کسب و کاری هستی که پاخور مناسبی داری می‌تونی به راحتی با کمک مشاوران آی‌رسانه و استفاده از آی‌رسانه باکس به درآمد خوبی از طریق تبلیغات دست پیدا کنی. در کل ما تو آی‌رسانه با دو گروه خیلی سر و کار داریم که اسم این دو گروه رو اینجوری
+              انتخاب کردیم:
+              <br>
+              رسانه‌دار و رسانه خواه حالا این یعنی چی، رسانه دار گروهی هستن که قراره تو محل کسب و کارشون تبلیغات بقیه رو پخش کنن و رسانه خواه هم همونایی هستن که تبلیغات کسب و کارشون داره تو محل رسانه داران پخش میشه.
+
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" style="padding-left:200px; padding-right:200px; display:none;">
+      <div class="container">
+
+        <div class="section-title py-5">
+          <h2>مقصد سفر</h2>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-9 text-center text-lg-end">
+              <div class="content text-justify">
+                <h5>
+                  <strong>
+                    آی‌رسانه به‌درد من می‌خوره؟
+                  </strong>
+                </h5>
+
+              </div>
+              <p class="text-justify">
+                در آی‌رسانه رسانه‌داران میتونن رسانه‌های خودشون رو معرفی و در معرض دید رسانه‌خواهان قرار بدن. رسانه‌خواهان می‌تونن با ستفاده از فیلترهای متنوعی که در سایت قرار گرفته یا تا بتونن بصورت هدفمند بهترین رسانه و کمپین تبلیغاتی خود رو انتخاب
+                کنن.
+                <br>
+                آی‌رسانه با کمک مشاوران و متخصصان حوزه‌ی تبلیغات، تبلیغات محیطی رو مقیاس پذیر کرده تا كسب و كارهای نوپا و دارای بودجه‌ی محدود بتونن در معرفی محصولات و برند خود از تبلیغات محیطی مناسب استفاده کنن و خودشون رو به مخاطبان هدف خودشون معرفی
+                کنن.
+                <br>
+                در آی‌رسانه ما معتقدیم که هر مکانی می‌تواند برای بخشی از کسب و کارها بهترین انتخاب برای معرفی و انجام تبلیغات باشد و به این دلیل شما می‌توانید با عرضه محل‌های مناسبی كه برای تبلیغات سایرین در اختیار دارید كسب درآمد كنید یا از محل این
+                درآمد‌ها، با كمترین هزینه، تبلیغات هدفمند و اثر بخشی رو در سایر رسانه‌ها انجام دهید.
+                <br>
+                یکی از قسمت‌های جذاب آی‌رسانه اجرای تبلیغات محیطی به صورت دیجیتال هست که با استفاده از آی رسانه باکس به راحتی می‌تونین تلویزیون‌هایی که در فضای خودتون دارید رو به بستر مناسبی برای تبلیغات تبدیل کنین. همچنین اگر تبلیغتون رو در این بستر
+                اجرا کنین می‌تونین فرصت بیشتری برای رسوندن پیامتون به مخاطب داشته باشین و همچنین می‌تونین یه سری داده از پخش تبلیغاتتون در رسانه‌های مختلف رو مشاهده کنین که در تحلیل‌هایی که می‌کنین تاثیر گذاره.
+                <br>
+                اگر شما کسب و کاری هستین که قبلا تبلیغات محیطی انجام دادین پس با مشکلات انتخاب رسانه‌ها مواجه شدین؛ دسترسی به خیلی از رسانه سخته و باید با چندین و چند شرکت ارتباط بگیرین تا بتونین تبلیغات خودتون رو اجرا کنین تازه اگه بتونین راه
+                ارتباطی با اونها رو پیدا کنین خیلی از جاهایی که می‌خواین اونجا تبلیغ کنین هیچ زیرساختی برای اجرای تبلیغات شما رو ندارن آی‌رسانه دسته بندی‌های جدید و متنوعی رو اضافه کرده که با استفاده از اون میتونین به راحتی تبلیغتون رو در جاهایی که
+                نیاز دارین اجرا کنین.
+                <br>
+                اگر شما کسب و کاری هستین که تا حالا از تبلیغات محیطی استفاده نکردین ما در آی‌رسانه با کمک مشاوران متخصص کمکتون می‌کنیم که بهترین رسانه محیطی برای کسب و کارتون رو انتخاب کنین و تا اجرای تبلیغات در کنارتون هستیم.
+                اگر شما کسب و کاری هستین که در حال حاضر در فضاتون دارین کار تبلیغات انجام میدین با پیوستن به آی‌رسانه اولا رسانه به راحتی و سادگی در دسترسی کلی مشتری قرار میگره و همچنین با استفاده از آی‌رسانه باکس به راحتی میتونی درآمدت رو افزایش
+                بدی.
+                <br>
+                اگر کسب و کاری هستی که پاخور مناسبی داری می‌تونی به راحتی با کمک مشاوران آی‌رسانه و استفاده از آی‌رسانه باکس به درآمد خوبی از طریق تبلیغات دست پیدا کنی. در کل ما تو آی‌رسانه با دو گروه خیلی سر و کار داریم که اسم این دو گروه رو اینجوری
+                انتخاب کردیم:
+                <br>
+                رسانه‌دار و رسانه خواه حالا این یعنی چی، رسانه دار گروهی هستن که قراره تو محل کسب و کارشون تبلیغات بقیه رو پخش کنن و رسانه خواه هم همونایی هستن که تبلیغات کسب و کارشون داره تو محل رسانه داران پخش میشه.
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section><!-- End Services Section -->
+
+
+    <!-- ======= Portfolio Section ======= -->
+    <section>
+      <div class="container portfolio" id="portfolio">
+        <div class="section-title">
+          <h2>
+            چطور می‌تونم با آی‌رسانه همکاری کنم؟
+          </h2>
+        </div>
+        <div class="deck">
+          <div class="card14">
+            <div class="front face">
+              <div class="row d-flex justify-content-center align-items-center  px-3">
+                <div class="col-md-12 py-3 text-center">
+                  <div class="pricing-switcher">
+                    <p class="fieldset">
+                      <input type="radio" name="duration-1" value="monthly" id="monthly-1">
+                      <label for="monthly-1" class="flip" style="color: #2d3e50; font-size:15px;">رسانه‌خواه هستم</label>
+                      <input type="radio" name="duration-1" value="yearly" id="yearly-1" checked>
+                      <label for="yearly-1" style="font-size:15px;">رسانه‌دار هستم</label>
+                      <span class="switch1"></span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4  px-3">
+                  <div class="icon"><img src="{% static 'home/images/present/B1.png'%} " alt="" class="img-fluid"></div>
+                </div>
+                <div class="col-md-6  px-3">
+                  <p class="text-justify">
+                    اگر رسانه دار هستید و می خواید تو این بخش فعالیت کنید یکی از سه تا کار زیر را باید انجام بدین:
+                    <br>
+                    - با مراجعه حضوری یکی از کارشناسان فروش شرکت به محل کسب و کارتون به امضای قرارداد با کارشناس فروش اقدام فرمایید بقیه کارها را ما انجام میدیم.
+                    <br>
+                    - با مراجعه به سایت
+                    <a href="https://irasane.com/">آی‌رسانه</a>
+                    و ثبت نام در بخش رسانه دار ها اقدام به رسانه دار شدن کنید.
+                    <br>
+                    با شماره
+                    ۹۱۳۰۲۵۹۲-۰۲۱
+                    تماس گرفته و درخواست رسانه دار شدن خود را ثبت کنید.
+
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="back face">
+
+              <div class="row d-flex justify-content-center align-items-center  px-3">
+                <div class="col-md-12 py-3 text-center">
+                  <div class="pricing-switcher">
+                    <p class="fieldset">
+                      <input type="radio" name="duration-1" value="monthly" id="monthly-1">
+                      <label for="monthly-1" style="font-size:15px;">رسانه‌خواه هستم</label>
+                      <input type="radio" name="duration-1" value="yearly" id="yearly-1" checked>
+                      <label for="yearly-1" class="flip" style="color: #2d3e50; font-size:15px;">رسانه‌دار هستم</label>
+                      <span class="switch"></span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4  px-3">
+                  <div class="icon"><img src="{% static 'home/images/present/B2.png'%} " alt="" class="img-fluid"></div>
+                </div>
+                <div class="col-md-6  px-3">
+                  <p class="text-justify">
+                    شما باید وارد سایت ما بشید و دسته خودتون رو انتخاب کنید اگر رسانه‌خواه هستید که با ورود به بخش رسانه‌خواهان و ثبت نام توی این بخش رسانه‌های موجود با قیمت‌هاش می‌تونید ببینید و انتخاب کنید.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>
+            خدمات آی‌رسانه برای کسب‌وکار من چیه؟
+          </h2>
+          <p class="text-justify">
+            ببین بستگی داره که تو رسانه دار باشی یا رسانه خواه ولی در هر حال آی رسانه بهت کمک میمنه تا بتونی بهترین راه تبلیغات محیطی برای کسب و کارت انتخاب کنی چون رسانه دار ها هم به تبلیغات نیاز دارن ولی اگر رسانه دار باشی آی رسانه بهت کمک میکنه تا
+            بتونی از محل کسب و کارت با تبلیغات دیگران یک درآمد جانبی هم داشته باشی راستی آی رسانه سرویس کاتالوگ خودت را هم بصورت رایگان تو محل کسب و کارت پخش میکنه و این باعث میشه مشتریان شناخت بهتری هم از کسب و کارتون پیدا کنن.
+          </p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="{% static 'home/images/present/restaurant.png' %}" class="img-fluid" alt="" style="height:auto; width:auto;"></div>
+              <div class="member-info">
+                <h4>آی‌رسانه در رستوران‌ها</h4>
+                <span>رستوران‌ها به عنوان رسانه‌دار و رسانه‌خواه</span>
+                <p>
+                  آی‌رسانه در صنعت رستوران چه کاری ازش برمیاد؟
+                </p>
+
+                <div class="social">
+                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
+              <div class="pic"><img src="{% static 'home/images/present/hotel.png' %}" class="img-fluid" alt="" style="height:auto; width:auto;"></div>
+              <div class="member-info">
+                <h4>آی‌رسانه در هتل‌ها</h4>
+                <span>هتل‌ها به عنوان رسانه‌دار و رسانه‌خواه</span>
+                <p>
+                  هتل‌ها چجوری می‌تونن از آی‌رسانه استفاده کنن؟
+                </p>
+                <div class="social">
+                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
+              <div class="pic"><img src="{% static 'home/images/present/gym.png' %}" class="img-fluid" alt="" style="height:auto; width:auto;"></div>
+              <div class="member-info">
+                <h4>آی‌رسانه در باشگاه‌های ورزشی</h4>
+                <span>باشگاه‌های ورزشی به عنوان رسانه‌دار و رسانه‌خواه</span>
+                <p>
+                  آی‌رسانه برای باشگاه‌ها هم برنامه داره!
+                </p>
+                <div class="social">
+                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
+              <div class="pic"><img src="{% static 'home/images/present/hair.png' %}" class="img-fluid" alt="" style="height:auto; width:auto;"></div>
+              <div class="member-info">
+                <h4>آی‌رسانه در سالن‌های آرایش</h4>
+                <span>سالن‌های آرایش به‌عنوان رسانه‌دار و رسانه‌خواه</span>
+                <p>
+                  سالن‌های آرایشی مردانه و زنانه هم می‌توانند از آی‌رسانه استفاده کنن!
+                </p>
+                <div class="social " data-bs-toggle="modal" href="">
+                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+
+
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>پرسش‌های متداول</h2>
+          <p class="text-justify">
+            خب بخش جذاب ماجرا هم همینجاست شما وقتی با ما به عنوان رسانه دار قرارداد ببندین در مرحله اول کارشناسان آی رسانه برای نصب باکس آی رسانه و همچنین استفاده از خدمات پلتفرم خدمتتون می رسن و کار با آی رسانه را کامل به شما آموزش میدن بعدش شما اگر
+            بخواین که سرویس کاتالوگ خودتون هم توی محل کسب و کارتون پخش بشه اون را در اختیار کارشناسان ما قرار میدین تا در هنگام پخش تبلغیات سرویس کاتالوگ شما هم برای مشتریانتون نمایش داده بشه و در نهایت بعد از گذشت یک ماه شما تونستید از طریق آی رسانه
+            به درآمد برسید.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#faq-list-1">
+                برای رسانه دار شدن به تجهیزات خاصی نیاز دارم؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  در مرحله اول شما باید دارای یک کسب کار با تعداد مخاطبین بالا و غیر مستمر باشید. در مجموعه‌ی شما وجود یک دستگاهLED( تلوزیون) با سایز متناسب با فضای مجموعه الزامیه. تهیه باکس سخت‌افزاری آی‌رسانه جهت نصب نرم افزار و استفاده از آن هم
+                  آخرین چیزیه که برای رسانه‌دار شدن نیازه.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">
+                ارتباط بین من و رسانه‌خواه چجوریه؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  رسانه خواه با مراجعه به سایت آی رسانه بر اساس فاکتورهای تبلیغاتی مد نظر خودش و با استفاده از فیلتر های سایت با رسانه شما آشنا میشه و از طریق پلتفرم آی رسانه با شما وارد ارتباط و همکاری می گردد.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">
+                آیا بعد از رسانه دار شدن من باید فعالیت خاصی را انجام دهم؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  شما به عنوان یک رسانه دار تنها یک مسئولیت دارید و آن روشن نگه داشتن رسانه در ساعات مقرر هست.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">
+                هزینه برق و اینترنت من به عهده کیه؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  با وارد شدن به پلتفرم آی رسانه شما در کنار کسب و کار خود یک درآمد جانبی نیز برای مجموعه فراهم کردید که برای رسیدن به این درآمد باید یکسری هزینه ها را متقبل بشین و هزینه برق مصرفی و اینترنت جزئی از همین هزینه هاست.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="500">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">
+                من مستاجر هستم در صورت جا به جایی محل کسب و کار تکلیف قراردادم چی میشه؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  قرارداد با شما بر اساس نوع کسب و کارتان تنظیم شده و در صورت جا به جایی کافیه با پشتیبانی آی رسانه تماس بگیرید و این موضوع را اطلاع بدید تا آدرس محل جدید کسب و کارتان در پلتفرم آی رسانه نیز بروز بشه. قرارداد رسانه داری شما به قوت
+                  خودش باقیه.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="500">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-6" class="collapsed">
+                من میتونم هم رسانه دار و هم رسانه خواه باشم؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-6" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  بله برای این موضوع کافه به سایت آی رسانه برید و در قسمت رسانه خواه هم ثبت نام کنید.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" style="background-color: #f3f5fa;" data-aos-delay="500">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-7" class="collapsed">
+                در مجموعه من بیش از یک دستگاه تلوزیون LED موجود است آیا هر دستگاه یک رسانه حساب میشه؟
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-7" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  این مورد وابسته به نوع کسب و کار شماست. مثلاً اگر کسب و کار شما دارای سالن های متعدد با مراجعه کنندگان متعدد می باشد؛ بله هر دستگاه شما یک رسانه مستقل محاسبه میشه.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>تماس با ما</h2>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-5 d-flex align-items-stretch">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>مکان:</h4>
+
+                <p>
+                  {% include 'home/companyaddress.html' %}
+                </p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>ایمیل:</h4>
+                <p><a href="mailto:info@irasane.com">info@irasane.com</a></p>
+
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>تلفن:</h4>
+                <p>
+                  <a href="tel://982191302592">
+                    {% include 'home/companyphone.html' %}
+                  </a>
+                </p>
+              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.7723739306057!2d51.396230315260844!3d35.75639918017683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2f1f1b4678d641fd!2zMzXCsDQ1JzIzLjAiTiA1McKwMjMnNTQuMyJF!5e0!3m2!1sen!2s!4v1652864961950!5m2!1sen!2s"
+                width="600" style="border:0; width: 100%; height: 290px;" allowfullscreen allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form"> -->
+            <form method="post" class="email-form" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-md-12">
+                  {{ form.title|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6">
+                  {{ form.firstname|as_crispy_field }}
+
+                </div>
+                <div class="form-group col-md-6">
+                  {{ form.lastname|as_crispy_field }}
+
+                </div>
+                <div class="form-group col-md-6">
+                  {{ form.role|as_crispy_field }}
+
+                </div>
+                <div class="form-group col-md-6">
+                  {{ form.mphone|as_crispy_field }}
+
+                </div>
+                <div class="form-group col-md-12">
+                  {{ form.description|as_crispy_field }}
+                </div>
+              </div>
+              {% if messages %}
+              {% for message in messages %}
+              <div class="text-right alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+              {% endfor %}
+              {% endif %}
+              <!-- <button name="contact" class="btn btn-success">ارسال</button> -->
+              <div class="text-center">
+                <button name="contact" type="submit">ارسال پیام</button>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'home/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'home/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'home/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'home/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'home/assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'home/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'home/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'home/assets/js/main.js' %}"></script>
+  <script src="{% static 'home/assets/js/owl.carousel.js' %}"></script>
+  <script src="jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(".flip").click(function() {
+      $(this).parents(".card14").toggleClass("flipped");
+    });
+    $(".clickcard").click(function() {
+      $(this).toggleClass("flipped");
+    });
+  </script>
+  <script type="text/javascript">
+    window.addEventListener("scroll", function() {
+      var elementTarget1 = document.getElementById("why-us");
+      var elementTarget2 = document.getElementById("ctaaa");
+      var elementTarget3 = document.getElementById("strgoal");
+
+      var pish = document.getElementById("pish");
+      var start = document.getElementById("start");
+      var goal = document.getElementById("goal");
+
+
+      if (window.scrollY > (elementTarget1.offsetTop)) {
+        pish.classList.remove("disabled");
+        pish.classList.add("complete");
+        // alert("You've scrolled past the second div");
+      }
+      if (window.scrollY > (elementTarget2.offsetTop)) {
+        start.classList.remove("disabled");
+        start.classList.add("complete");
+        // alert("You've scrolled past the second div");
+      }
+      if (window.scrollY > (elementTarget3.offsetTop)) {
+        goal.classList.remove("disabled");
+        goal.classList.add("complete");
+        // alert("You've scrolled past the second div");
+      }
+      // ----------------------//
+      if (window.scrollY < (elementTarget1.offsetTop)) {
+        pish.classList.add("disabled");
+        pish.classList.remove("complete");
+        // alert("You've scrolled past the second div");
+      }
+      if (window.scrollY < (elementTarget2.offsetTop)) {
+        start.classList.add("disabled");
+        start.classList.remove("complete");
+        // alert("You've scrolled past the second div");
+      }
+      if (window.scrollY < (elementTarget3.offsetTop)) {
+        goal.classList.add("disabled");
+        goal.classList.remove("complete");
+        // alert("You've scrolled past the second div");
+      }
+
+
+    });
+  </script>
+</body>
+
+
+</html>

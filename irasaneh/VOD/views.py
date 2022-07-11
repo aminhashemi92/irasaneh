@@ -12,7 +12,7 @@ from account.models import CustomUser
 class ResanehList(ListAPIView):
     queryset = Resaneh.objects.all()
     serializer_class = ResanehSerializer
-    # permission_classes = (IsSuperUser,)
+    permission_classes = (IsSuperUser,)
 
 class ResanehDetail(RetrieveAPIView):
     queryset = Resaneh.objects.all()
