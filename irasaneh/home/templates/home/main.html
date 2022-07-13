@@ -193,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         {% else%}
-        <a href="{% url 'account:login_register' %}" class="nav-link text-white border border-white rounded">عضویت/ ورود</a>
+        <a href="{% url 'account:login' %}" class="nav-link text-white border border-white rounded">عضویت/ ورود</a>
 
         {% endif %}
       </div>
@@ -277,8 +277,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2 text-right">حساب‌کاربری</h2>
             <ul class="list-unstyled text-right pr-0">
-              <li><a href="{% url 'account:login_register' %}"><span class=""></span>ورود</a></li>
-              <li><a href="{% url 'account:login_register' %}"><span class=""></span>عضویت</a></li>
+              <li><a href="{% url 'account:login' %}"><span class=""></span>ورود</a></li>
+              <li><a href="{% url 'account:register' %}"><span class=""></span>عضویت</a></li>
             {% if user.is_authenticated %}
               <li><a href="{% url 'dashboard:profile' %}"><span class=""></span>حساب کاربری</a></li>
               <li><a href="{% url 'dashboard:dashboard' %}"><span class=""></span>داشبورد</a></li>

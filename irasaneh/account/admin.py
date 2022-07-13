@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile, Company
+from .models import Profile, Company, Code
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
@@ -45,3 +45,5 @@ class CompanyAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 admin.site.register(Company,CompanyAdmin)
+
+admin.site.register(Code)

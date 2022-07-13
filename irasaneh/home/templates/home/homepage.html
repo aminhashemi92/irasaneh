@@ -91,11 +91,11 @@
           <!-- <h1 class="mb-4">کاوشگر <span>هوشمند</span> رسانه <span></span></h1> -->
           <p>
             {% if not user.is_authenticated %}
-            <a href="{% url 'account:login_register' %}" class="btn btn-white btn-outline-white py-2 px-4 mb-2">ورود/عضویت</a>
+            <a href="{% url 'account:login' %}" class="btn btn-white btn-outline-white py-2 px-4 mb-2">ورود/عضویت</a>
             {% endif %}
             <a href="{% url 'home:contact' %}" class="btn btn-primary py-2 px-4 mb-2">تماس با ما</a>
             <a href="{% url 'home:about' %}" class="btn btn-white btn-outline-white py-2 px-4 mb-2">درباره ما</a>
-            <!-- <a href="{% url 'account:login_register' %}" class="btn btn-primary py-2 px-4 mb-2">ورود/عضویت</a> -->
+            <!-- <a href="{% url 'account:login' %}" class="btn btn-primary py-2 px-4 mb-2">ورود/عضویت</a> -->
           </p>
         </div>
       </div>

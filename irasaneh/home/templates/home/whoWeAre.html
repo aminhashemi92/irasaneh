@@ -5,24 +5,41 @@
 <html lang="en" dir="rtl">
 
 <head>
-    <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TNRDTXX');
+  </script>
   <!-- End Google Tag Manager -->
 
   <!-- Hotjar Tracking Code for https://irasane.com/ -->
   <script>
-  (function(h,o,t,j,a,r){
-      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-      h._hjSettings={hjid:3050464,hjsv:6};
-      a=o.getElementsByTagName('head')[0];
-      r=o.createElement('script');r.async=1;
-      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+    (function(h, o, t, j, a, r) {
+      h.hj = h.hj || function() {
+        (h.hj.q = h.hj.q || []).push(arguments)
+      };
+      h._hjSettings = {
+        hjid: 3050464,
+        hjsv: 6
+      };
+      a = o.getElementsByTagName('head')[0];
+      r = o.createElement('script');
+      r.async = 1;
+      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
       a.appendChild(r);
-  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
   </script>
 
   <meta charset="utf-8">
@@ -67,10 +84,9 @@
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX"
-   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-   <!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
 
   <!-- ======= Header ======= -->
@@ -957,7 +973,9 @@
                 </p>
 
                 <div class="social">
-                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+
+                  <button type="button" name="button" class="btn-primary" data-bs-toggle="modal" href="#portfolioModal1">مطالعه بیشتر</button>
+
                 </div>
               </div>
             </div>
@@ -1209,7 +1227,45 @@
 
       </div>
     </section><!-- End Contact Section -->
+    <!-- Portfolio Modals-->
+    <!-- Portfolio item 1 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <button type="button" class="btn-close p-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="modal-body text-center">
+                  <!-- Project details-->
+                  <h2 class="text-uppercase">آی‌رسانه در رستوران‌ها</h2>
+                  <img class="img-fluid d-block mx-auto" src="{% static 'home/images/present/restaurant.png'%}" alt="..." />
+                  <p style="direction:rtl;">خلاصه مباحث عنوان شده :</p>
+                  <ul class="list-inline">
+                    <li>
+                      <strong style="direction:rtl;">تمرین هفته اول :</strong>
+                      <a href="media/advideos/movie.mp4">دانلود</a>
+                    </li>
+                  </ul>
 
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <video width="100%" controls>
+                  <source src="media/advideos/movie.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+
+              </div>
+              <!-- <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                <i class="fas fa-times me-1"></i>
+                بستن
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main><!-- End #main -->
 
   <!-- Vendor JS Files -->

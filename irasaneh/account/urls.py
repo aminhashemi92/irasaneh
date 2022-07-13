@@ -3,7 +3,10 @@ from .views import *
 
 app_name = "account"
 urlpatterns = [
-    path('login_register', login_register, name='login_register'),
+    path('login', login, name='login'),
+    path('register', register, name='register'),
+    path('phoneOtp', phoneOtp, name='phoneOtp'),
+    path('codeOtp', codeOtp, name='codeOtp'),
     path('logout_page',logoutUser,name="logout_page"),
 
 ]

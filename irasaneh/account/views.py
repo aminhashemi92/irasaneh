@@ -1,35 +1,28 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth import login, logout
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 
-from .forms import UserAdminCreationForm
+from .forms import *
 from .decorators import unathenticated_user
 from .models import CustomUser, Profile
-
+from extensions.utils import send_otp
 
 
 
 # Create your views here.
-# @unathenticated_user
-def login_register(request):
-    form = UserAdminCreationForm()
-    # if request.method == 'POST':
-    #     phone = request.POST.get('phone')
-    #     password = request.POST.get('password')
-    #     user = authenticate(request, username=phone, password=password)
-    #     if user is not None:
-    #         login(request,user)
-    #         return redirect('/')
-    if(len(request.POST) == 3):
+@unathenticated_user
+def login(request):
+    if request.POST :
         phone = request.POST.get('phone')
         password = request.POST.get('password')
         user = authenticate(request, username=phone, password=password)
         if user is not None:
-            login(request,user)
+            auth_login(request,user)
             try:
                 profile = Profile.objects.get(user=user)
             except Profile.DoesNotExist:
@@ -41,56 +34,88 @@ def login_register(request):
                 return redirect('dashboard:profile')
         else:
             messages.info(request, "نام‌کاربری یا رمز عبور اشتباه است!")
-            return redirect('account:login_register')
-    elif(len(request.POST) == 4):
+            return redirect('account:login')
+
+    return render(request,"account/login.html")
+
+
+@unathenticated_user
+def register(request):
+    form = UserAdminCreationForm()
+    if request.POST :
         form = UserAdminCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             phone = form.cleaned_data.get('phone')
             messages.success(request, phone + ' کاربر جدید با موفقیت اضافه شد! ' )
-            return redirect('account:login_register')
+            return redirect('account:login')
         else:
-            messages.info(request, "نام‌کاربری و یا رمزعبور مناسب انتخاب نشده‌است!")
-			# messages.info(request, "نام‌کاربری تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است.")
-
-    # form = CreateUserForm()
-	# if request.method == 'POST':
-	# 	if(len(request.POST) == 3):
-	# 		username = request.POST.get('username')
-	# 		password = request.POST.get('password')
-	# 		user = authenticate(request, username=username, password=password)
-	# 		if user is not None:
-	# 			login(request,user)
-	# 			return redirect('/')
-	# 		else:
-	# 			messages.info(request, "نام‌کاربری یا رمز عبور اشتباه است!")
-	# 			return redirect('register_login:register_login')
-	# 	elif(len(request.POST) == 5):
-	# 		form = CreateUserForm(request.POST)
-	# 		if form.is_valid():
-	# 			user = form.save()
-	# 			username = form.cleaned_data.get('username')
-	# 			messages.success(request,'کاربر جدید با موفقیت اضافه شد!' + username)
-	# 			return redirect('register_login:register_login')
-	# 		else:
-	# 			# messages.info(request, "نام‌کاربری تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است.")
-	# 			messages.info(request, "نام کاربری یا  تکراری می‌باشد و یا رمز عبور مناسب انتخاب نشده‌است!")
-
-
+            pass
+            # messages.info(request, "نام‌کاربری و یا رمزعبور مناسب انتخاب نشده‌است!")
     context={'form':form}
-    return render(request,"account/login_register.html", context)
-	# return render(request,"account/login_register.html")
+    return render(request,"account/register.html", context)
 
-
-# def register_login(request):
-# 	context={}
-# 	return render(request,"register_login/register_login.html", context)
 
 def logoutUser(request):
     logout(request)
     return redirect('/')
 
+@unathenticated_user
+def phoneOtp(request):
+    if request.POST :
+        phone = request.POST.get('phone')
+        try:
+            user = CustomUser.objects.get(phone=phone)
+        except CustomUser.DoesNotExist:
+            user = None
+        # user = get_object_or_404(CustomUser, phone=phone)
+        if user is not None:
+            request.session['phone'] = phone
+            return redirect('account:codeOtp')
+        else:
+            messages.info(request, "کاربری با این شماره‌ی تلفن وجود ندارد")
+            return redirect('account:phoneOtp')
+
+    return render(request,"account/phoneOtp.html")
 #
+@unathenticated_user
+def codeOtp(request):
+    form = CodeForm(request.POST or None)
+    phone = request.session.get('phone')
+
+    phone2 = 'None'
+    if phone:
+        phone2 = phone[:4] + "****" + phone[8:]
+        user = CustomUser.objects.get(phone=phone)
+        code = user.code
+        code_user = f"{user.code}"
+        if not request.POST:
+            send_otp(code_user, user.phone)
+            # print(code_user)
+        if form.is_valid():
+            num = form.cleaned_data.get('number')
+            if str(code) == num:
+                code.save()
+                auth_login(request,user)
+                try:
+                    profile = Profile.objects.get(user=user)
+                except Profile.DoesNotExist:
+                    profile = None
+
+                if profile != None:
+                    return redirect('/')
+                else:
+                    return redirect('dashboard:profile')
+
+            else:
+                messages.info(request, "کد واردشده صحیح نیست!")
+                return redirect('account:codeOtp')
+
+    context={
+        'phone':phone2,
+        'form':form,
+    }
+    return render(request,"account/codeOtp.html", context)
 # @login_required
 # def changeprofile(request):
 # 	user = request.user

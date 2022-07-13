@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Company
-
+from .models import Profile, Company, Code
+from django import forms
 class UserAdminCreationForm(UserCreationForm):
     """
     A Custom form for creating new users.
@@ -19,6 +19,7 @@ class UserAdminCreationForm(UserCreationForm):
         self.fields['phone'].widget.attrs.pop('autofocus', None)
         self.fields['phone'].widget.attrs['placeholder'] = '09123456789'
 
+    error_css_class = 'error'
         # widgets = {
         #     'phone': TextInput(attrs={
         #         'placeholder': "09123456789",
@@ -38,3 +39,11 @@ class CompanyForm(ModelForm):
     class Meta:
         model = Company
         fields = ['name', 'logo', 'sphone', 'mphone']
+
+
+
+class CodeForm(ModelForm):
+    number = forms.CharField(label='کد تایید',widget=forms.TextInput(attrs={'placeholder': '- - - - -', 'class': 'input1', }) )
+    class Meta:
+        model = Code
+        fields = ('number', )

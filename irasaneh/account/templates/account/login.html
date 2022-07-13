@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+        <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
+    <!-- End Google Tag Manager -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="{% static 'home/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'home/css/login.css' %}" rel="stylesheet">
+  <title>آی‌رسانه|ورود و عضویت</title>
+  <link rel="icon" type="image/svg" href="{% static '/home/images/iconlogo.png' %} ">
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+  <!-- ===============================================-->
+  <!--     yektanet-->
+  <!-- ===============================================-->
+    <script> !function (t, e, n) { t.yektanetAnalyticsObject = n, t[n] = t[n] || function () { t[n].q.push(arguments) }, t[n].q = t[n].q || []; var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(), c = e.getElementsByTagName("script")[0], s = e.createElement("script"); s.id = "ua-script-X6VbzgGP"; s.dataset.analyticsobject = n; s.async = 1; s.type = "text/javascript"; s.src = "https://cdn.yektanet.com/rg_woebegone/scripts_v3/X6VbzgGP/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c) }(window, document, "yektanet"); </script>
+
+
+</head>
+
+<body>
+        <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+  <div class="container"  id="mobile-form">
+    <div class="row justify-content-center">
+      <a href="{% url 'home:homepage' %}"><img class="mb-5" src="{% static 'home/images/colorlogo.png' %}" height="70" alt="logo"></a>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-md-offset-3 ml-0">
+        <div class="panel panel-login pt-3 px-3 mb-2">
+          <div class="panel-heading">
+            <div class="row d-flex justify-content-around">
+              <div class="col-xs-6">
+                <a href="{% url 'account:login' %}" class="active" id="login-form-link">ورود</a>
+              </div>
+              <div class="col-xs-6">
+                <a href="{% url 'account:register' %}" id="register-form-link">عضویت</a>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="panel-body pt-3">
+            <div class="row">
+              <div class="col-lg-12">
+                <form id="login-form" action="" method="POST" role="form">
+                  {% csrf_token %}
+                  <div class="form-group text-right">
+                    <span class="span1">تلفن همراه</span>
+                    <input type="text" name="phone" id="username" tabindex="1" class="input1" placeholder="09123456789" value="">
+                  </div>
+                  <div class="form-group text-right">
+                    <span class="span1">رمز ورود</span>
+                    <input type="password" name="password" id="password" tabindex="2" class="input1" placeholder="رمز ورود">
+                  </div>
+                  {% for message in messages %}
+                  <p class="forgot-pass messages text-danger">{{message}}</p>
+                  {% endfor %}
+                  <div class="form-group">
+                    <div class="row d-flex justify-content-center">
+                      <div class="">
+                        <button type="submit" form="login-form" value="Submit" class="submit subbut">ورود</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="text-center">
+                          <a href="#" tabindex="5" class="forgot-password">رمز عبور خود را فراموش کردید؟</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="form-group ">
+                  <div class="row d-flex justify-content-center">
+                    <div class="">
+                      <a href="{% url 'account:phoneOtp' %}"> <button class="subbut btn btn-success mt-0 pt-0">ورود با کد پیامکی</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===============================================-->
+  <!--    Main Content-->
+  <!-- ===============================================-->
+
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+
+
+
+
+
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+
+</body>
+
+</html>

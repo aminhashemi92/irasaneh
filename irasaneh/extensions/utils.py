@@ -1,5 +1,7 @@
 from . import jalali
 from django.utils import timezone
+import os
+from ippanel import Client
 
 def Persian_numbers_converter(mystr):
     numbers = {
@@ -119,3 +121,42 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+
+def send_otp(user_code, phone_number):
+    api_key = "aBqsW_avX_AlBFvTMKWzAOj53Z1F4Lm97WDhbAQnXos="
+    sms = Client(api_key)
+    credit = sms.get_credit()
+    phone_number = "+98" + phone_number[1:]
+
+
+    # message = f"آی‌رسانه /n کد ورود شما به آی‌رسانه : {user_code}"
+    # print(message)
+    # bulk_id = sms.send("+9850004150113011",[phone_number],user_code)
+    # print(bulk_id)
+
+    # pattern = sms.create_pattern(r"کد تأیید شما: %code% آی‌رسانه",False)
+    # print(pattern.code)
+
+
+
+    # ---- send sms -----
+
+    pattern_values = {
+        "code": user_code,
+    }
+
+    bulk_id = sms.send_pattern(
+        'poyavylj70hwvkx',    # pattern code
+        "+98100020400",      # originator
+        phone_number,  # recipient
+        pattern_values,  # pattern values
+    )
+
+    message = sms.get_message(bulk_id)
+    # print(message)
+    # print(message.status)  # get message status
+    # print(message.cost)    # get message cost
+
+    # ---- send sms -----
