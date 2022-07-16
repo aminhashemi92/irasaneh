@@ -51,7 +51,7 @@ class CustomUser(AbstractUser):
 class Company(models.Model):
     name = models.CharField(max_length=200, null=True, verbose_name="نام",  blank=True)
     date_created = models.DateTimeField(auto_now_add = True, null=True, verbose_name="تاریخ ایجاد",  blank=True)
-    logo = models.ImageField(upload_to="companyimages", null=True, verbose_name="لوگو", default="profileimages/profi.png")
+    logo = models.ImageField(upload_to="companyimages", null=True, verbose_name="لوگو", default="profileimages/profi.png", blank=True)
     sphone = models.CharField(max_length=200, null=True, verbose_name="تلفن ثابت", blank=True)
     mphone = models.CharField(max_length=200, null=True, verbose_name="تلفن همراه", blank=True)
 
@@ -86,7 +86,7 @@ class Profile(models.Model):
     role = models.CharField(max_length=1, null=True, choices = ROLE_CHOICES, verbose_name="نقش", blank=True, default="k")
     position = models.CharField(max_length=1, null=True, choices = POSITION_CHOICES, verbose_name="جایگاه", blank=True, default='c')
     date_created = models.DateTimeField(auto_now_add = True, null=True, verbose_name="تاریخ ایجاد",  blank=True)
-    pic = models.ImageField(upload_to="profileimages", null=True, verbose_name="تصویر", default="profileimages/profi.png")
+    pic = models.ImageField(upload_to="profileimages", null=True, verbose_name="تصویر", default="profileimages/profi.png", blank=True)
     sphone = models.CharField(max_length=200, null=True, verbose_name="تلفن ثابت", blank=True)
     mphone = models.CharField(max_length=200, null=True, verbose_name="تلفن همراه", blank=True)
     status = models.BooleanField(default=False, verbose_name="درخواست رسانه‌دار شدن")
@@ -97,7 +97,7 @@ class Profile(models.Model):
         verbose_name_plural = "حساب‌های کاربری"
 
     def __str__(self):
-        return str(self.company)
+        return str(self.user)
 
 
     def pic_tag(self):

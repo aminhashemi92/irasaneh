@@ -29,6 +29,9 @@ class ResanehFilter(django_filters.FilterSet):
     showtype = django_filters.ModelMultipleChoiceFilter(queryset=ShowType.objects.all(), widget=forms.CheckboxSelectMultiple)
     structuretype = django_filters.ModelMultipleChoiceFilter(queryset=StructureType.objects.all(), widget=forms.CheckboxSelectMultiple)
     place = django_filters.ModelMultipleChoiceFilter(queryset=Place.objects.all(), widget=forms.CheckboxSelectMultiple)
+    gender = django_filters.ModelMultipleChoiceFilter(queryset=Gender.objects.all(), widget=forms.CheckboxSelectMultiple)
+    ages = django_filters.ModelMultipleChoiceFilter(queryset=Ages.objects.all(), widget=forms.CheckboxSelectMultiple)
+    incometithe = django_filters.ModelMultipleChoiceFilter(queryset=IncomeTithe.objects.all(), widget=forms.CheckboxSelectMultiple)
 
     q = django_filters.CharFilter(method='my_search',label="Search", widget=forms.TextInput(attrs={'class': 'form-control text-center' , 'placeholder':'جستجو ...'}))
 

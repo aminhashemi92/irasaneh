@@ -60,7 +60,7 @@
                       <!---->
                     </button>
 
-                    <input type="text" name="margin" value="" id="margin" style="display:none;">
+                    <input type="text" name="margin" value="7_days_ago" id="margin" style="display:none;">
 
                     <button type="button" class="btn btn-light last_item" id="pick-date">
                       <!---->
@@ -130,11 +130,15 @@
               </div>
 
             </form>
+          {% if chart %}
             <div class="" id="counterChart">
               <div class="chart" >
                 {{chart|safe}}
               </div>
             </div>
+          {% else %}
+            <p class="text-danger">محتوایی برای نمایش وجود ندارد</p>
+          {% endif %}
           </div>
           <!-- /.card-body -->
         </div>

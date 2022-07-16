@@ -134,6 +134,53 @@ class StructureType(models.Model):
         return self.title
 
 
+class IncomeTithe(models.Model):
+    parent = models.ForeignKey('self', default=None, null=True, blank=True, on_delete=models.SET_NULL ,related_name='children' ,verbose_name='زیرشاخه')
+    title = models.CharField(max_length=200, verbose_name="عنوان دسته‌بندی")
+    slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس دسته‌بندی")
+    status = models. BooleanField(default=True, verbose_name="نمایش داده شود؟")
+    position = models.IntegerField(verbose_name="پوزیشن", default=1)
+
+    class Meta:
+        verbose_name = "دهک درآمدی"
+        verbose_name_plural = "دهک‌های درآمدی"
+        ordering = ['parent__id','position']
+
+    def __str__(self):
+        return self.title
+
+
+class Ages(models.Model):
+    parent = models.ForeignKey('self', default=None, null=True, blank=True, on_delete=models.SET_NULL ,related_name='children' ,verbose_name='زیرشاخه')
+    title = models.CharField(max_length=200, verbose_name="عنوان دسته‌بندی")
+    slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس دسته‌بندی")
+    status = models. BooleanField(default=True, verbose_name="نمایش داده شود؟")
+    position = models.IntegerField(verbose_name="پوزیشن", default=1)
+
+    class Meta:
+        verbose_name = "رده‌ی سنی"
+        verbose_name_plural = "رده‌های سنی"
+        ordering = ['parent__id','position']
+
+    def __str__(self):
+        return self.title
+
+
+class Gender(models.Model):
+    parent = models.ForeignKey('self', default=None, null=True, blank=True, on_delete=models.SET_NULL ,related_name='children' ,verbose_name='زیرشاخه')
+    title = models.CharField(max_length=200, verbose_name="عنوان دسته‌بندی")
+    slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس دسته‌بندی")
+    status = models. BooleanField(default=True, verbose_name="نمایش داده شود؟")
+    position = models.IntegerField(verbose_name="پوزیشن", default=1)
+
+    class Meta:
+        verbose_name = "جنسیت"
+        verbose_name_plural = "جنسیت‌ها"
+        ordering = ['parent__id','position']
+
+    def __str__(self):
+        return self.title
+
 
 class Resaneh(models.Model):
     STATUS_CHOICES = (
@@ -182,6 +229,9 @@ class Resaneh(models.Model):
     category = models.ManyToManyField(Category, verbose_name="نوع رسانه", blank=True, related_name="resaneh")
     showtype = models.ManyToManyField(ShowType, verbose_name="نوع نمایش", blank=True, related_name="resaneh")
     structuretype = models.ForeignKey(StructureType, verbose_name="نوع سازه", blank=True, null=True, on_delete=models.SET_NULL, related_name="resaneh")
+    gender = models.ManyToManyField(Gender, verbose_name="جنسیت", blank=True, related_name="resaneh")
+    incometithe = models.ManyToManyField(IncomeTithe, verbose_name="دهک درآمدی", blank=True, related_name="resaneh")
+    ages = models.ManyToManyField(Ages, verbose_name="رده‌ی سنی", blank=True, related_name="resaneh")
 
     comments = GenericRelation(Comment)
     viewed = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')

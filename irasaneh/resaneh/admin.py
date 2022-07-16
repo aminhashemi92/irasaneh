@@ -143,6 +143,36 @@ class StructureTypeAdmin(admin.ModelAdmin):
 admin.site.register(StructureType,StructureTypeAdmin)
 
 
+class GenderAdmin(admin.ModelAdmin):
+    list_display = ('position', 'title', 'slug', 'status')
+    list_filter = (['status', 'title'])
+    search_fields = ('title', 'slug')
+    prepopulated_fields = {'slug':('title',)}
+    actions = [make_active, make_diactive]
+
+admin.site.register(Gender,GenderAdmin)
+
+
+class IncomeTitheAdmin(admin.ModelAdmin):
+    list_display = ('position', 'title', 'slug', 'status')
+    list_filter = (['status', 'title'])
+    search_fields = ('title', 'slug')
+    prepopulated_fields = {'slug':('title',)}
+    actions = [make_active, make_diactive]
+
+admin.site.register(IncomeTithe,IncomeTitheAdmin)
+
+
+class AgesAdmin(admin.ModelAdmin):
+    list_display = ('position', 'title', 'slug', 'status')
+    list_filter = (['status', 'title'])
+    search_fields = ('title', 'slug')
+    prepopulated_fields = {'slug':('title',)}
+    actions = [make_active, make_diactive]
+
+admin.site.register(Ages,AgesAdmin)
+
+
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('resaneh', 'jstart', 'jend', 'jcreated', 'status', 'is_active')
     list_filter = (['status',])

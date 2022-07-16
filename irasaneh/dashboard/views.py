@@ -16,6 +16,12 @@ import plotly.express as px
 from collections import Counter
 from extensions.utils import jalali_converter2, Persian_numbers_converter, gregorian_converter
 from datetime import datetime, timedelta
+
+
+
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth import update_session_auth_hash
+
 # Create your views here.
 @login_required
 @profile_complete_needed
@@ -58,7 +64,6 @@ def dashboard(request):
 @login_required
 def profile(request):
     user = request.user
-
     try:
         profile = Profile.objects.get(user=user)
     except Profile.DoesNotExist:
@@ -67,62 +72,104 @@ def profile(request):
     if profile != None:
         company = user.profile.company
         form1 = ProfileForm(instance = profile)
-        form2 = CompanyForm(instance = company)
+
         if 'profile' in request.POST:
+            mphone = request.POST.get("mphone")
             form1 = ProfileForm(request.POST, request.FILES, instance=profile)
             if form1.is_valid():
+                profile.mphone = mphone
+                profile.save()
                 form1.save()
-                messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
-                # return redirect('/dashboard')
-
-        elif 'company' in request.POST:
-            form2 = CompanyForm(request.POST, request.FILES, instance=company)
-            if form2.is_valid():
-                form2.save()
                 messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
 
         elif 'req' in request.POST:
             profile.status = True
             profile.save()
             return redirect('dashboard:profile')
-                # return redirect('/dashboard')
-        # update = form.save(commit=False)
-    	# 	update.user = request.user
-    	# 	update.save()
 
         context={
         "form1": form1,
-        "form2": form2,
         }
         return render(request,"dashboard/profile.html", context)
     else:
         form1 = ProfileForm()
-        form2 = CompanyForm()
         if 'profile' in request.POST:
-            print("profile")
+            mphone = request.POST.get("mphone")
             form1 = ProfileForm(request.POST, request.FILES, instance=profile)
             if form1.is_valid():
                 obj = form1.save()
+                obj.mphone = mphone
                 obj.user = request.user
                 obj.save()
                 messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
-                # return redirect('/dashboard')
 
-        elif 'company' in request.POST:
+        context={
+        "form1": form1,
+        }
+        return render(request,"dashboard/profile.html", context)
+
+
+
+@login_required
+def company(request):
+    user = request.user
+
+    try:
+        profile = Profile.objects.get(user=user)
+    except Profile.DoesNotExist:
+        profile = None
+
+    if profile != None:
+        company = user.profile.company
+        form2 = CompanyForm(instance = company)
+        if request.POST:
+            mphone = request.POST.get("mphone")
+            form2 = CompanyForm(request.POST, request.FILES, instance=company)
+            if form2.is_valid():
+                obj = form2.save()
+                profile.company = obj
+                obj.mphone = mphone
+                obj.save()
+                profile.save()
+                messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
+
+        context={
+        "form2": form2,
+        }
+        return render(request,"dashboard/company.html", context)
+    else:
+        form2 = CompanyForm()
+        if request.POST:
+            mphone = request.POST.get("mphone")
             form2 = CompanyForm(request.POST, request.FILES, instance=company)
             if form2.is_valid():
                 form2.save()
                 messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
-                # return redirect('/dashboard')
-        # update = form.save(commit=False)
-    	# 	update.user = request.user
-    	# 	update.save()
 
         context={
-        "form1": form1,
         "form2": form2,
         }
-        return render(request,"dashboard/profile.html", context)
+        return render(request,"dashboard/company.html", context)
+
+
+@login_required
+def changepass(request):
+    if request.method == 'POST':
+        form = SetPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
+            # return redirect('/')
+        else:
+            messages.error(request, '')
+    else:
+        form = SetPasswordForm(request.user)
+    return render(request, 'dashboard/changepass.html', {'form': form})
+
+
+
+
 
 @login_required
 @profile_complete_needed
@@ -443,90 +490,68 @@ def charts(request):
         else:
             videos = user.advideo.all()
 
-    boxes = AdBox.objects.filter(videos__in=videos)
-    events = AdEvent.objects.filter(media__in=boxes)
 
-    resanehs_id = events.values_list('resaneh', flat=True).distinct()
-
-    resanehs = Resaneh.objects.filter(id__in = resanehs_id)
-
-    qs = AdVideoCounterLog.objects.filter(created__gte=datetime.now()-timedelta(days=7)).filter(resaneh__in=resanehs).filter(video__in=videos)
-
-    qs = qs.order_by('created')
-    qs = qs.values_list('created', flat=True).distinct()
-    video_list = qs.values_list('video', flat=True).distinct()
-    days = [x.date() for x in qs]
-    days = [jalali_converter2(x) for x in qs]
-    # MyList = AdVideoCounterLog.objects.values('created')
-    # MyList = ["a", "b", "a", "c", "c", "a", "c"]
-    days_counter = dict(Counter(days))
-    counter = list(days_counter.values())
-    # print(type(counter[0]))
-    day = list(days_counter.keys())
-
-
-    # print(a)
-    # da = []
-    # for d in vc:
-    #     dd = d.created.date()
-    #     if dd not in da:
-    #         da.append(dd)
-    #
-    # ca = []
-    # for i in da:
-    #     c = vc.filter(created__contains=i).count()
-    #     ca.append(c)
-    # print(type(da[0]))
-
-
-
-    # print(type(vc[0].created.date()))
-    # print(vc[0].created.date())
-    fig = px.bar(
-        x = day,
-        y = counter,
-        # color=day,
-        # color_discrete_sequence=["yellow", ],
-        title="تعداد بازدید ویدیو‌ها",
-        # x=[c.created.date() for c in vc],
-        # y=[c.created.date() for c in vc],
-    )
-
-    fig.add_scatter(x=day,y=counter)
-    # fig.add_bar(x=day,y=counter)
-
-    fig.update_layout(
-        plot_bgcolor='rgba(0,0,0,0)',
-        xaxis_title="روز",
-        yaxis_title="تعداد بازید",
-        showlegend=False,
-        hovermode=False,
-        font_family="Shabnam",
-        title={
-            'font_size':22,
-            'xanchor':'center',
-            'x':0.5,
-        }
-        # bgcolor='rgba(255, 255, 255, 0)',
-        # bordercolor='rgba(255, 255, 255, 0)'
-        # ),
-        # barmode='group',
-        # bargap=0.15, # gap between bars of adjacent location coordinates.
-        # bargroupgap=0.1,
-    )
-    fig.update_xaxes(showline=True, linewidth=2, linecolor='gray')
-    fig.update_yaxes(showline=True, linewidth=2, gridcolor='gray')
-
-    fig.update_traces(marker_color='rgb(105,208,221)', marker_line_color='rgb(23,162,184)',
-                  marker_line_width=1.5, opacity=0.6,)
-
-    chart = fig.to_html()
     context={
-        'chart':chart,
         'videos':videos,
-        'resanehs':resanehs,
     }
-    # print(vc.count())
+
+    if videos:
+        boxes = AdBox.objects.filter(videos__in=videos)
+        events = AdEvent.objects.filter(media__in=boxes)
+
+        resanehs_id = events.values_list('resaneh', flat=True).distinct()
+        resanehs = Resaneh.objects.filter(id__in = resanehs_id)
+
+        qs = AdVideoCounterLog.objects.filter(created__gte=datetime.now()-timedelta(days=7)).filter(resaneh__in=resanehs).filter(video__in=videos)
+        if qs:
+            qs = qs.order_by('created')
+            qs = qs.values_list('created', flat=True).distinct()
+            video_list = qs.values_list('video', flat=True).distinct()
+            days = [x.date() for x in qs]
+            days = [jalali_converter2(x) for x in qs]
+
+            days_counter = dict(Counter(days))
+            counter = list(days_counter.values())
+
+            day = list(days_counter.keys())
+
+
+            fig = px.bar(
+                x = day,
+                y = counter,
+                title="تعداد بازدید ویدیو‌ها",
+            )
+
+            fig.add_scatter(x=day,y=counter)
+
+            fig.update_layout(
+                plot_bgcolor='rgba(0,0,0,0)',
+                xaxis_title="روز",
+                yaxis_title="تعداد بازید",
+                showlegend=False,
+                hovermode=False,
+                font_family="Shabnam",
+                title={
+                    'font_size':22,
+                    'xanchor':'center',
+                    'x':0.5,
+                }
+
+            )
+            fig.update_xaxes(showline=True, linewidth=2, linecolor='gray')
+            fig.update_yaxes(showline=True, linewidth=2, gridcolor='gray')
+
+            fig.update_traces(marker_color='rgb(105,208,221)', marker_line_color='rgb(23,162,184)',
+                          marker_line_width=1.5, opacity=0.6,)
+
+            chart = fig.to_html()
+
+            context['chart'] = chart
+            context['resanehs'] = resanehs
+
+
+
+
     return render(request, "dashboard/charts.html", context)
 
 
@@ -542,127 +567,130 @@ def load_counterChart(request):
         else:
             videos = user.advideo.all()
 
-    boxes = AdBox.objects.filter(videos__in=videos)
-    events = AdEvent.objects.filter(media__in=boxes)
+    context = {}
 
-    resanehs_id = events.values_list('resaneh', flat=True).distinct()
+    if videos:
+        boxes = AdBox.objects.filter(videos__in=videos)
+        events = AdEvent.objects.filter(media__in=boxes)
 
-    resanehs = Resaneh.objects.filter(id__in = resanehs_id)
+        resanehs_id = events.values_list('resaneh', flat=True).distinct()
 
-    qs = AdVideoCounterLog.objects.filter(resaneh__in=resanehs).filter(video__in=videos)
+        resanehs = Resaneh.objects.filter(id__in = resanehs_id)
 
+        qs = AdVideoCounterLog.objects.filter(resaneh__in=resanehs).filter(video__in=videos)
 
-    if request.GET:
-        margin = request.GET.get("margin")
-        video = request.GET.get("video")
-        media = request.GET.get("media")
-        start = request.GET.get("start")
-        end = request.GET.get("end")
-        if margin:
-            if margin == "30_days_ago":
-                qs = qs.filter(created__gte=datetime.now()-timedelta(days=30))
-            if margin == "7_days_ago":
-                qs = qs.filter(created__gte=datetime.now()-timedelta(days=7))
-            if margin == "yesterday":
-                qs = qs.filter(created__date=datetime.now()-timedelta(days=1))
-            if margin == "today":
-                qs = qs.filter(created__gte=datetime.now()-timedelta(days=0))
+        if qs:
+            if request.GET:
+                margin = request.GET.get("margin")
+                video = request.GET.get("video")
+                media = request.GET.get("media")
+                start = request.GET.get("start")
+                end = request.GET.get("end")
+                if margin:
+                    if margin == "30_days_ago":
+                        qs = qs.filter(created__gte=datetime.now()-timedelta(days=30))
+                    if margin == "7_days_ago":
+                        qs = qs.filter(created__gte=datetime.now()-timedelta(days=7))
+                    if margin == "yesterday":
+                        qs = qs.filter(created__date=datetime.now()-timedelta(days=1))
+                    if margin == "today":
+                        qs = qs.filter(created__gte=datetime.now()-timedelta(days=0))
 
-        if start and end:
-            start = gregorian_converter(start)
-            end = gregorian_converter(end)
-            qs = qs.filter(created__gte=start, created__lte=end)
-            # print(gregorian_converter(start))
-            # print("salam")
+                if start and end:
+                    start = gregorian_converter(start)
+                    end = gregorian_converter(end)
+                    qs = qs.filter(created__gte=start, created__lte=end)
+                    # print(gregorian_converter(start))
+                    # print("salam")
 
-        if video:
-            qs = qs.filter(video__id__exact=video)
-            # qs = AdVideoCounterLog.objects.filter(video__id__contains=video)
-
-
-        if media:
-            qs = qs.filter(resaneh__id__exact=media)
-            # qs = AdVideoCounterLog.objects.filter(created__gte=start)
-            # qs = AdVideoCounterLog.objects.filter(video=15)
-            # qs = AdVideoCounterLog.objects.filter(video=16)
-            # print(qs)
-            # print(qs)
-
-        # if start:
-        #     qs = AdVideoCounterLog.objects.all().order_by('created')
-        # if end:
-        #     qs = AdVideoCounterLog.objects.all().order_by('created')
-    # else:
-    #     qs = AdVideoCounterLog.objects.all().order_by('created')
-    qs = qs.order_by('created')
-    qs = qs.values_list('created', flat=True).distinct()
-    days = [x.date() for x in qs]
-    days = [jalali_converter2(x) for x in qs]
-    # MyList = AdVideoCounterLog.objects.values('created')
-    # MyList = ["a", "b", "a", "c", "c", "a", "c"]
-    days_counter = dict(Counter(days))
-    counter = list(days_counter.values())
-    # print(type(counter[0]))
-    day = list(days_counter.keys())
+                if video:
+                    qs = qs.filter(video__id__exact=video)
+                    # qs = AdVideoCounterLog.objects.filter(video__id__contains=video)
 
 
-    # print(a)
-    # da = []
-    # for d in vc:
-    #     dd = d.created.date()
-    #     if dd not in da:
-    #         da.append(dd)
-    #
-    # ca = []
-    # for i in da:
-    #     c = vc.filter(created__contains=i).count()
-    #     ca.append(c)
-    # print(type(da[0]))
+                if media:
+                    qs = qs.filter(resaneh__id__exact=media)
+                    # qs = AdVideoCounterLog.objects.filter(created__gte=start)
+                    # qs = AdVideoCounterLog.objects.filter(video=15)
+                    # qs = AdVideoCounterLog.objects.filter(video=16)
+                    # print(qs)
+                    # print(qs)
+
+                # if start:
+                #     qs = AdVideoCounterLog.objects.all().order_by('created')
+                # if end:
+                #     qs = AdVideoCounterLog.objects.all().order_by('created')
+            # else:
+            #     qs = AdVideoCounterLog.objects.all().order_by('created')
+            qs = qs.order_by('created')
+            qs = qs.values_list('created', flat=True).distinct()
+            days = [x.date() for x in qs]
+            days = [jalali_converter2(x) for x in qs]
+            # MyList = AdVideoCounterLog.objects.values('created')
+            # MyList = ["a", "b", "a", "c", "c", "a", "c"]
+            days_counter = dict(Counter(days))
+            counter = list(days_counter.values())
+            # print(type(counter[0]))
+            day = list(days_counter.keys())
+
+
+            # print(a)
+            # da = []
+            # for d in vc:
+            #     dd = d.created.date()
+            #     if dd not in da:
+            #         da.append(dd)
+            #
+            # ca = []
+            # for i in da:
+            #     c = vc.filter(created__contains=i).count()
+            #     ca.append(c)
+            # print(type(da[0]))
 
 
 
-    # print(type(vc[0].created.date()))
-    # print(vc[0].created.date())
-    fig = px.bar(
-        x = day,
-        y = counter,
-        # color=day,
-        # color_discrete_sequence=["yellow", ],
-        title="تعداد بازدید ویدیو‌ها",
-        # x=[c.created.date() for c in vc],
-        # y=[c.created.date() for c in vc],
-    )
+            # print(type(vc[0].created.date()))
+            # print(vc[0].created.date())
+            fig = px.bar(
+                x = day,
+                y = counter,
+                # color=day,
+                # color_discrete_sequence=["yellow", ],
+                title="تعداد بازدید ویدیو‌ها",
+                # x=[c.created.date() for c in vc],
+                # y=[c.created.date() for c in vc],
+            )
 
-    fig.add_scatter(x=day,y=counter)
-    # fig.add_bar(x=day,y=counter)
+            fig.add_scatter(x=day,y=counter)
+            # fig.add_bar(x=day,y=counter)
 
-    fig.update_layout(
-        plot_bgcolor='rgba(0,0,0,0)',
-        xaxis_title="روز",
-        yaxis_title="تعداد بازید",
-        showlegend=False,
-        hovermode=False,
-        font_family="Shabnam",
-        title={
-            'font_size':22,
-            'xanchor':'center',
-            'x':0.5,
-        }
-        # bgcolor='rgba(255, 255, 255, 0)',
-        # bordercolor='rgba(255, 255, 255, 0)'
-        # ),
-        # barmode='group',
-        # bargap=0.15, # gap between bars of adjacent location coordinates.
-        # bargroupgap=0.1,
-    )
-    fig.update_xaxes(showline=True, linewidth=2, linecolor='gray')
-    fig.update_yaxes(showline=True, linewidth=2, gridcolor='gray')
+            fig.update_layout(
+                plot_bgcolor='rgba(0,0,0,0)',
+                xaxis_title="روز",
+                yaxis_title="تعداد بازید",
+                showlegend=False,
+                hovermode=False,
+                font_family="Shabnam",
+                title={
+                    'font_size':22,
+                    'xanchor':'center',
+                    'x':0.5,
+                }
+                # bgcolor='rgba(255, 255, 255, 0)',
+                # bordercolor='rgba(255, 255, 255, 0)'
+                # ),
+                # barmode='group',
+                # bargap=0.15, # gap between bars of adjacent location coordinates.
+                # bargroupgap=0.1,
+            )
+            fig.update_xaxes(showline=True, linewidth=2, linecolor='gray')
+            fig.update_yaxes(showline=True, linewidth=2, gridcolor='gray')
 
-    fig.update_traces(marker_color='rgb(105,208,221)', marker_line_color='rgb(23,162,184)',
-                  marker_line_width=1.5, opacity=0.6,)
+            fig.update_traces(marker_color='rgb(105,208,221)', marker_line_color='rgb(23,162,184)',
+                          marker_line_width=1.5, opacity=0.6,)
 
-    chart = fig.to_html()
-    context={'chart':chart}
+            chart = fig.to_html()
+            context={'chart':chart}
     # print(vc.count())
     return render(request, "dashboard/counterChart.html", context)
 

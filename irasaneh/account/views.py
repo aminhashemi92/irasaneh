@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 
@@ -11,6 +12,7 @@ from .forms import *
 from .decorators import unathenticated_user
 from .models import CustomUser, Profile
 from extensions.utils import send_otp
+
 
 
 
@@ -148,3 +150,20 @@ def codeOtp(request):
 #     return render(request, 'register_login/changepassword.html', {
 #         'form': form
 #     })
+
+
+def changepassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            # messages.success(request, 'پسورد شما با موفقیت تغییر کرد!')
+            return redirect('/')
+        else:
+            messages.error(request, '')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'register_login/changepassword.html', {
+        'form': form
+    })

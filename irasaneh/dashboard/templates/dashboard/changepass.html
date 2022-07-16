@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{%block title%}|تغییر رمز ورود
+{% endblock %}
+
+{% block sidebar %}
+{% include 'dashboard/sidebar.html' %}
+{% endblock %}
+
+{% block header %}
+تغییر رمز ورود
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+<div class="col-md-12">
+  <div class="card card-danger">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">تغییر رمز</h3>
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+
+        <button name="profile" class="btn btn-success">ارسال</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

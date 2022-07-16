@@ -7,11 +7,22 @@
 
 <head>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TNRDTXX');</script>
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TNRDTXX');
+  </script>
   <!-- End Google Tag Manager -->
 
   <!-- ===============================================-->
@@ -72,7 +83,22 @@
   <!-- ===============================================-->
   <!--     yektanet-->
   <!-- ===============================================-->
-    <script> !function (t, e, n) { t.yektanetAnalyticsObject = n, t[n] = t[n] || function () { t[n].q.push(arguments) }, t[n].q = t[n].q || []; var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(), c = e.getElementsByTagName("script")[0], s = e.createElement("script"); s.id = "ua-script-X6VbzgGP"; s.dataset.analyticsobject = n; s.async = 1; s.type = "text/javascript"; s.src = "https://cdn.yektanet.com/rg_woebegone/scripts_v3/X6VbzgGP/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c) }(window, document, "yektanet"); </script>
+  <script>
+    ! function(t, e, n) {
+      t.yektanetAnalyticsObject = n, t[n] = t[n] || function() {
+        t[n].q.push(arguments)
+      }, t[n].q = t[n].q || [];
+      var a = new Date,
+        r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(),
+        c = e.getElementsByTagName("script")[0],
+        s = e.createElement("script");
+      s.id = "ua-script-X6VbzgGP";
+      s.dataset.analyticsobject = n;
+      s.async = 1;
+      s.type = "text/javascript";
+      s.src = "https://cdn.yektanet.com/rg_woebegone/scripts_v3/X6VbzgGP/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c)
+    }(window, document, "yektanet");
+  </script>
 
 
 
@@ -80,9 +106,8 @@
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNRDTXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   {% block modal %}
 
@@ -208,8 +233,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item active"><a href="{% url 'home:homepage' %}" class="nav-link">خانه</a></li> -->
-          <li class="align-self-center"><a href="{% url 'home:whoWeAre' %}" class="nav-link text-black" style="background-color:#29eec5; opacity:80%; color:black !important; border-radius:50px; padding: 0.5rem 1rem !important;">سفر با آی‌رسانه</a></li>
+          <li class="align-self-center"><a href="{% url 'home:whoWeAre' %}" class="nav-link text-black" style="background-color:#29eec5; opacity:80%; color:black !important; border-radius:50px; padding: 0.5rem 1rem !important;">سفر با آی‌رسانه</a>
+          </li>
+          <li class="nav-item active"><a href="{% url 'home:homepage' %}" class="nav-link">خانه</a></li>
 
 
           <li class="nav-item active"><a href="{% url 'resaneh:resaneh' %}" class="nav-link">رسانه‌ها</a></li>
@@ -224,7 +250,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="nav-item active"><a href="https://blog.irasane.com" class="nav-link">وبلاگ</a></li>
           <!-- <li class="nav-item active"><a href="#" class="nav-link">مشاوره</a></li> -->
           <li class="nav-item active"><a href="{% url 'home:contact' %}" class="nav-link">تماس با‌ما</a></li>
-          <li class="nav-item active"><a href="{% url 'home:about' %}" class="nav-link">درباره‌ی ما</a></li>
+          <li class="nav-item active d-none"><a href="{% url 'home:about' %}" class="nav-link">درباره‌ی ما</a></li>
+          <li class="nav-item active"><a href="{% url 'home:termsAndconditions' %}" class="nav-link">قوانین و مقررات</a></li>
           <li class="nav-item active"><a href="{% url 'home:faq' %}" class="nav-link">پرسش‌های متداول</a></li>
 
           <!-- <li class="nav-item dropdown active">
@@ -279,10 +306,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <ul class="list-unstyled text-right pr-0">
               <li><a href="{% url 'account:login' %}"><span class=""></span>ورود</a></li>
               <li><a href="{% url 'account:register' %}"><span class=""></span>عضویت</a></li>
-            {% if user.is_authenticated %}
+              {% if user.is_authenticated %}
               <li><a href="{% url 'dashboard:profile' %}"><span class=""></span>حساب کاربری</a></li>
               <li><a href="{% url 'dashboard:dashboard' %}"><span class=""></span>داشبورد</a></li>
-            {% endif %}
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -331,15 +358,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-
-            <p class="mb-0" style="color: rgba(255,255,255,.5);">
-
-              Copyright &copy;<script>
-                document.write(new Date().getFullYear());
-              </script>
-              <!-- All rights reserved | This template is made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-               -->
-            </p>
+            <img referrerpolicy='origin' id='rgvjjxlzwlaosizpjzpefukz' style='cursor:pointer'
+              onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=314976&p=xlaorfthaodspfvljyoegvka", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
+              alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=314976&p=qftinbpdshwlbsiyyndtwlbq' />
           </div>
         </div>
       </div>

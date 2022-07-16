@@ -974,7 +974,7 @@
 
                 <div class="social">
 
-                  <button type="button" name="button" class="btn-primary" data-bs-toggle="modal" href="#portfolioModal1">مطالعه بیشتر</button>
+                  <button type="button" name="button" class="btn-primary m-0 mt-5" data-bs-toggle="modal" href="#portfolioModal1">مطالعه بیشتر</button>
 
                 </div>
               </div>
@@ -991,7 +991,7 @@
                   هتل‌ها چجوری می‌تونن از آی‌رسانه استفاده کنن؟
                 </p>
                 <div class="social">
-                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                  <button type="button" name="button" class="btn-primary m-0 mt-5" data-bs-toggle="modal" href="#portfolioModal2">مطالعه بیشتر</button>
                 </div>
               </div>
             </div>
@@ -1007,7 +1007,7 @@
                   آی‌رسانه برای باشگاه‌ها هم برنامه داره!
                 </p>
                 <div class="social">
-                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                  <button type="button" name="button" class="btn-primary m-0 mt-5" data-bs-toggle="modal" href="#portfolioModal3">مطالعه بیشتر</button>
                 </div>
               </div>
             </div>
@@ -1023,7 +1023,7 @@
                   سالن‌های آرایشی مردانه و زنانه هم می‌توانند از آی‌رسانه استفاده کنن!
                 </p>
                 <div class="social " data-bs-toggle="modal" href="">
-                  <button type="button" name="button" class="btn-primary">مطالعه بیشتر</button>
+                  <button type="button" name="button" class="btn-primary m-0 mt-5" data-bs-toggle="modal" href="#portfolioModal4">مطالعه بیشتر</button>
                 </div>
               </div>
             </div>
@@ -1239,33 +1239,131 @@
                 <div class="modal-body text-center">
                   <!-- Project details-->
                   <h2 class="text-uppercase">آی‌رسانه در رستوران‌ها</h2>
-                  <img class="img-fluid d-block mx-auto" src="{% static 'home/images/present/restaurant.png'%}" alt="..." />
-                  <p style="direction:rtl;">خلاصه مباحث عنوان شده :</p>
-                  <ul class="list-inline">
-                    <li>
-                      <strong style="direction:rtl;">تمرین هفته اول :</strong>
-                      <a href="media/advideos/movie.mp4">دانلود</a>
-                    </li>
-                  </ul>
+                  <p class="text-justify">
+                    اصلا رستوران ها یکی از بهترین محل ها برای تبلیغات محیطی هستن. میگین چرا؟ خب شما چند تا جا رو میشناسی که یه عده‌ی زیادی بهمراه خانواده و دوستاشون بیان و برای یه مدت نسبتاً طولانی یه جا بشینن؟ به خاطر همین رستوران ها محیط های خوبی
+                    هستن برای اینکه تبلیغات، نظر مخاطب ها رو به خودش جلب کنه و حتی فرصت داشته باشن درموردش صحبت کنن.
+                  </p>
+                  <img class="img-fluid d-block mx-auto" src="{% static 'home/images/present/restaurant.png'%}" alt="..." / width="200">
+                  <p class="text-justify">
+                    شما هم اگه صاحب رستوران هستی بدون که سرمایه خیلی خوبی داری و میتونی ازش کسب درآمد مازاد داشته باشی. با آی‌رسانه در ارتباط باش تا کمکت کنیم این سرمایه رو تبدیل به درآمد کنی و حتی بتونی تبلیغات رستوران خودت رو هم برای مشتری ها پخش
+                    کنی. منتظرتیم!
+                  </p>
 
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6 align-self-center">
                 <video width="100%" controls>
                   <source src="media/advideos/movie.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-
               </div>
-              <!-- <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                <i class="fas fa-times me-1"></i>
-                بستن
-              </button> -->
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- end modal1 -->
+
+    <!-- Portfolio item 2 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <button type="button" class="btn-close p-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="modal-body text-center">
+                  <!-- Project details-->
+                  <h2 class="text-uppercase">آی‌رسانه در هتل‌ها</h2>
+                  <p class="text-justify">
+                    مگه میشه از لابی هتل ها برای پخش تبلیغات گذشت؟! در طول هفته، تعداد زیادی مشتری دارن و توی ایام تعطیلات، نه تنها این تعداد کم نمیشه؛ بلکه پاخور بیشتری هم دارن.
+                  </p>
+                  <img class="img-fluid d-block mx-auto" src="{% static 'home/images/present/hotel.png'%}" alt="..." / width="200">
+                  <p class="text-justify">
+                    شما فکر کن توی مناسبت های خاص، یه کسب و کاری می خواد یه کمپین تبلیغاتی بره (کمپین رو بالاتر توضیح دادیم). هتل ها برای این کسب و کار محیط خیلی خوبی برای تبلیغ محسوب میشن. به خصوص که اکثر مشتری هاشون هم، افرادی هستن که از یه شهر (یا حتی کشور!) دیگه اومدن و خیلی راحت و بدون صرف هزینه بیشتر، می تونن تبلیغاتشون رو سوغات سفر مشتری ها کنن. هتل دارا ! باهامون در تماس باشید تا بهتون کمک کنیم از فضای هتل تون کسب درآمد کنید. منتظرتون هستیما !
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-lg-6 align-self-center">
+                <video width="100%" controls>
+                  <source src="media/advideos/movie1.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end modal1 -->
+
+    <!-- Portfolio item 3 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <button type="button" class="btn-close p-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="modal-body text-center">
+                  <!-- Project details-->
+                  <h2 class="text-uppercase">آی‌رسانه در باشگاه‌ها</h2>
+
+                  <img class="img-fluid d-block mx-auto" src="{% static 'home/images/present/gym.png'%}" alt="..." / width="200">
+                  <p class="text-justify">
+                    باشگاه دارا بجنبین که ای رسانه براتون یه پیشنهاد خوب داره. میدونید خیلی ها هستن که در طول روز، حداقل یکساعت رو توی باشگاه ورزش می کنن. همین موضوع، باشگاه ها رو تبدیل به محیط هایی می کنه که میشه ازشون به عنوان محیط های تبلیغاتی
+                    استفاده کرد. با ای رسانه می تونید از این فضای عالی که در اختیار دارید کسب درآمد کنید و حتی خودتون هم برای مشتری های خودتون تبلیغات داشته باشین. منتظرتون هستیم!
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-lg-6 align-self-center">
+                <video width="100%" controls>
+                  <source src="media/advideos/movie2.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end modal1 -->
+
+    <!-- Portfolio item 4 modal popup-->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <button type="button" class="btn-close p-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="modal-body text-center">
+                  <!-- Project details-->
+                  <h2 class="text-uppercase">آی‌رسانه در آرایشگاه‌ها</h2>
+                  <p class="text-justify">
+                    تعداد مشتری های زیاد در طول روز که زمان نسبتاً خوبی رو هم توی آرایشگه هستن. دیگه شما از یه محیط تبلیغاتی خوب چی می خواین؟ یه خوبی دیگه ارایشگاه ها اینه که مخاطب هاشون فقط آقایون یا فقط خانم ها هستن و برای کسب و کار هایی که کالا یا خدمتی ارائه میدن که فقط مخصوص یکی از این گروه هاست، ارایشگاه ها براشون بهترین انتخابه.
+                  </p>
+                  <img class="img-fluid d-block mx-auto" src="{% static 'home/images/present/hair.png'%}" alt="..." / width="200">
+                  <p class="text-justify">
+                      شما هم اگه سالن آرایش (مردونه یا زنونه) داری، بدون که میتونی که توی سالن ارایشگاهت تبلیغات پخش کنی و ازش کسب درآمد داشته باشی. باهامون در ارتباط باش تا بهت بگیم چجوری... . منتظرتونیم!
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-lg-6 align-self-center">
+                <video width="100%" controls>
+                  <source src="media/advideos/movie3.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end modal1 -->
   </main><!-- End #main -->
 
   <!-- Vendor JS Files -->

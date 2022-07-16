@@ -72,6 +72,12 @@ def contact(request):
 def faq(request):
     return render(request, "home/faq.html")
 
+
+def termsAndconditions(request):
+    return render(request, "home/termsAndconditions.html")
+
+
+
 def whoWeAre(request):
     form = ContactUsForm()
     # form.fields['ip_address'].initial = ip_address

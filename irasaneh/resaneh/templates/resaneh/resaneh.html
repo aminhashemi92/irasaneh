@@ -63,10 +63,13 @@
               <div style="display:None;">
 
                 {{filter.form.q}}
-                {{filter.form.company}}
+
                 {{filter.form.industry}}
-                {{filter.form.showtype}}
-                {{filter.form.structuretype}}
+                {{filter.form.gender}}
+                {{filter.form.incometithe}}
+                {{filter.form.ages}}
+
+
                 {{filter.form.place}}
                 {{filter.form.price_l}}
                 {{filter.form.price_g}}
@@ -113,7 +116,7 @@
                   <p class="product-description">
                     {{resaneh.address}}
                   </p>
-                  <p class="">
+                  <p class="d-none">
                     {{resaneh.company}}
                   </p>
                   <span class="price text-danger">
@@ -128,7 +131,7 @@
                     {% endfor %}
                     {% endif %}</span>
 
-                  <div class="product-colors mt-2">
+                  <div class="product-colors mt-2 d-none">
                     <div class="">
                       {% ratings resaneh read_only=True template_name='star_ratings/widgetresaneh.html' %}
                     </div>
@@ -254,22 +257,7 @@
 
 
 
-                <li>
-                  <a href="#company" data-toggle="collapse" aria-expanded="false" class="text-center">رسانه‌دارها <span class="fa fa-chevron-down"></span></a>
-                  <ul class="collapse list-unstyled py-3" id="company" >
-                    <div class="overflow-auto pb-1" style="max-height:270px;">
-                    {% for company in filter.form.company %}
 
-                    <li class="text-right">
-                      <div class="form-check">
-                        {{company}}
-                      </div>
-                    </li>
-                    {% endfor %}
-                    </div>
-
-                  </ul>
-                </li>
                 <li>
                   <a href="#industry" data-toggle="collapse" aria-expanded="false" class="text-center">صنعت‌ها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="industry">
@@ -285,35 +273,7 @@
 
                   </ul>
                 </li>
-                <li>
-                  <a href="#showtype" data-toggle="collapse" aria-expanded="false" class="text-center">نوع نمایش <span class="fa fa-chevron-down"></span></a>
-                  <ul class="collapse list-unstyled py-3" id="showtype">
-                    <div class="overflow-auto pb-1" style="max-height:270px;">
-                    {% for showtype in filter.form.showtype %}
-                    <li class="text-right">
-                      <div class="form-check">
-                        {{showtype}}
-                      </div>
-                    </li>
-                    {% endfor %}
-                    </div>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#structuretype" data-toggle="collapse" aria-expanded="false" class="text-center">نوع سازه <span class="fa fa-chevron-down"></span></a>
-                  <ul class="collapse list-unstyled py-3" id="structuretype">
-                    <div class="overflow-auto pb-1" style="max-height:270px;">
-                    {% for structuretype in filter.form.structuretype %}
-                    <li class="text-right">
-                      <div class="form-check">
-                        {{structuretype}}
-                      </div>
-                    </li>
-                    {% endfor %}
-                    </div>
 
-                  </ul>
-                </li>
                 <li>
                   <a href="#place" data-toggle="collapse" aria-expanded="false" class="text-center">جایگاه‌ها <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="place">
@@ -329,6 +289,59 @@
 
                   </ul>
                 </li>
+
+
+                <li>
+                  <a href="#gender" data-toggle="collapse" aria-expanded="false" class="text-center">جنسیت<span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="gender">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
+                    {% for gender in filter.form.gender %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{gender}}
+                      </div>
+                    </li>
+                    {% endfor %}
+                    </div>
+
+                  </ul>
+                </li>
+
+
+                <li>
+                  <a href="#ages" data-toggle="collapse" aria-expanded="false" class="text-center">رده‌های سنی<span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="ages">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
+                    {% for ages in filter.form.ages %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{ages}}
+                      </div>
+                    </li>
+                    {% endfor %}
+                    </div>
+
+                  </ul>
+                </li>
+
+
+                <li>
+                  <a href="#incometithe" data-toggle="collapse" aria-expanded="false" class="text-center">دهک‌های درآمدی<span class="fa fa-chevron-down"></span></a>
+                  <ul class="collapse list-unstyled py-3" id="incometithe">
+                    <div class="overflow-auto pb-1" style="max-height:270px;">
+                    {% for incometithe in filter.form.incometithe %}
+                    <li class="text-right">
+                      <div class="form-check">
+                        {{incometithe}}
+                      </div>
+                    </li>
+                    {% endfor %}
+                    </div>
+
+                  </ul>
+                </li>
+
+
                 <li style="display:none;">
                   <a href="#price" data-toggle="collapse" aria-expanded="false" class="text-center">قیمت <span class="fa fa-chevron-down"></span></a>
                   <ul class="collapse list-unstyled py-3" id="price">

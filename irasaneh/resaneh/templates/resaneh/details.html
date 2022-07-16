@@ -98,7 +98,7 @@
 
         <h4 class="d-flex justify-content-center py-3 text-center">{{resaneh.name}}</h4>
 
-        <div class="row d-flex justify-content-center">
+        <div class="row justify-content-center d-none">
           <!-- <p class="text-center"> -->
             {% ratings resaneh template_name='star_ratings/widgetresaneh.html' %}
             <!-- <a href="#" class="mr-2">5.0</a> -->
@@ -109,17 +109,17 @@
 
 
 
-          <p class="text-left">
+          <p class="text-left d-none">
             <a href="#" class="mx-1" style="color: #000; font-size:12.8px;"><span style="color: #bbb; ">تعداد بازدید: </span> {% get_hit_count for resaneh %} </a>
           </p>
-          <p class="text-left mr-4">
+          <p class="text-left mr-4 d-none">
             <a href="#" class="mx-2" style="color: #000; font-size:12.8px;"><span style="color: #bbb;">تعداد نظرات: </span> {% get_comments_count resaneh user %} </a>
           </p>
         </div>
 
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center d-none">
           <a href="{% url 'resaneh:comparison' resaneh.slug %} ">
             <button class="btn btn-primary"><i class="bi bi-collection-fill"></i> | مقایسه</button>
           </a>

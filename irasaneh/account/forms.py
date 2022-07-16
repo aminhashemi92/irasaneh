@@ -30,7 +30,7 @@ class UserAdminCreationForm(UserCreationForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['firstname', 'lastname', 'company', 'role', 'pic', 'sphone', 'mphone']
+        fields = ['firstname', 'lastname', 'company', 'role', 'pic', 'sphone']
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['role'].widget.attrs['disabled'] = True
@@ -38,7 +38,7 @@ class ProfileForm(ModelForm):
 class CompanyForm(ModelForm):
     class Meta:
         model = Company
-        fields = ['name', 'logo', 'sphone', 'mphone']
+        fields = ['name', 'logo', 'sphone',]
 
 
 

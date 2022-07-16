@@ -19,7 +19,7 @@ class AdVideoType(models.Model):
         verbose_name_plural = "انواع ویدیو"
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class AdVideo(models.Model):
@@ -46,7 +46,7 @@ class AdVideo(models.Model):
         verbose_name_plural = "ویدیوها"
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def mstatus(self):
         if self.status == True:
@@ -89,7 +89,7 @@ class AdBox(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     # def save(self, *args, **kwargs):
     #     super(AdBox, self).save(*args, **kwargs)
@@ -134,7 +134,7 @@ class AdEvent(models.Model):
         verbose_name_plural = "رویدادها"
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def jstartDate(self):
         return jalali_converter(self.startDate).split(',')[0]

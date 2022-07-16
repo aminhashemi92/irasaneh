@@ -3,7 +3,7 @@
 
 {% load static %}
 
-{%block title%}|مشخصات من
+{%block title%}|شرکت من
 {% endblock %}
 
 {% block sidebar %}
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block header %}
-مشخصات من
+شرکت من
 {% endblock %}
 
 {% block content %}
@@ -22,37 +22,25 @@
 {% endfor %}
 {% endif %}
 
+
+{% if user.profile.position == 'm' %}
 <div class="col-md-12">
-  <div class="card card-primary">
+  <div class="card card-warning">
     <div class="card-header">
-      <h3 class="card-title mb-0 float-left">مشخصات من</h3>
+      <h3 class="card-title mb-0 float-left">شرکت من</h3>
     </div>
     <div class="card-body">
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
           <div class="col-6">
-            {{ form1.firstname|as_crispy_field }}
+            {{ form2.name|as_crispy_field }}
           </div>
           <div class="col-6">
-            {{ form1.lastname|as_crispy_field }}
+            {{ form2.logo|as_crispy_field }}
           </div>
           <div class="col-6">
-            <!-- {{ form1.company|as_crispy_field }} -->
-            <div class="form-group">
-              <label>
-                شرکت
-              </label>
-              <div>
-                <input type="text" class="textinput textInput form-control" value="{{user.profile.company.name}}" readonly>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            {{ form1.role|as_crispy_field }}
-          </div>
-          <div class="col-6">
-            {{ form1.sphone|as_crispy_field }}
+            {{ form2.sphone|as_crispy_field }}
           </div>
           <div class="col-6">
             <div class="form-group">
@@ -64,47 +52,15 @@
               </div>
             </div>
           </div>
-          <div class="col-6">
-            {{ form1.pic|as_crispy_field }}
-          </div>
 
         </div>
-        <button name="profile" class="btn btn-success">ارسال</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-{% if user.profile.role == 'k' %}
-<div class="col-md-12">
-  <div class="card card-danger">
-    <div class="card-header">
-      <h3 class="card-title mb-0 float-left">درخواست رسانه‌دار شدن</h3>
-    </div>
-    <div class="card-body">
-      {% if user.profile.status == False %}
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row text-bold">
-          اگر می‌خواهید به عنوان رسانه‌دار فعالیت کنید، درخواست خود را ارسال نمایید.
-        </div>
-        <br>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-          ارسال
-        </button>
+        <button name="company" class="btn btn-success">ارسال</button>
 
       </form>
-      {% else %}
-      <div class="row text-bold">
-        درخواست شما در دست بررسی است.
-      </div>
-      {% endif %}
     </div>
   </div>
 </div>
 {% endif %}
-
 
 
 

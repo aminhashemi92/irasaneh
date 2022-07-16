@@ -50,7 +50,7 @@
           </div>
 
         </div>
-        <input type="submit" name="" value="بارگزاری" class="btn btn-primary">
+        <input type="submit" name="" value="بارگذاری" class="btn btn-primary">
       </form>
     </div>
   </div>
@@ -125,7 +125,7 @@
         success: function(response) {
           // imgBox.innerHTML = `<img src="${url}" width="100px">`
           if (response.data == "Data Uploaded") {
-            alertBox.innerHTML = `<div class="alert alert-success" role="alert">با موفقیت بارگزاری شد</div>`
+            alertBox.innerHTML = `<div class="alert alert-success" role="alert">با موفقیت بارگذاری شد</div>`
             uploadForm.reset()
             progress_bar.classList.add('not-visible')
             cancleBtn.classList.add('not-visible')
@@ -139,7 +139,7 @@
           console.log(response.data);
         },
         error: function(err) {
-            alertBox.innerHTML = `<div class="alert alert-danger" role="alert">لغو بارگزاری</div>`
+            alertBox.innerHTML = `<div class="alert alert-danger" role="alert">لغو بارگذاری</div>`
         },
         cache: false,
         contentType: false,
