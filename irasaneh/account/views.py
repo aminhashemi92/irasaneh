@@ -30,7 +30,7 @@ def login(request):
             except Profile.DoesNotExist:
                 profile = None
 
-            if profile != None:
+            if profile.is_completed:
                 return redirect('/')
             else:
                 return redirect('dashboard:profile')

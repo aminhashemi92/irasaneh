@@ -37,6 +37,7 @@
           <div class="col-6">
             {{ form1.lastname|as_crispy_field }}
           </div>
+        {% if user.profile.is_completed %}
           <div class="col-6">
             <!-- {{ form1.company|as_crispy_field }} -->
             <div class="form-group">
@@ -48,6 +49,7 @@
               </div>
             </div>
           </div>
+          {% endif %}
           <div class="col-6">
             {{ form1.role|as_crispy_field }}
           </div>
@@ -76,35 +78,36 @@
 </div>
 
 
-{% if user.profile.role == 'k' %}
-<div class="col-md-12">
-  <div class="card card-danger">
-    <div class="card-header">
-      <h3 class="card-title mb-0 float-left">درخواست رسانه‌دار شدن</h3>
-    </div>
-    <div class="card-body">
-      {% if user.profile.status == False %}
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row text-bold">
-          اگر می‌خواهید به عنوان رسانه‌دار فعالیت کنید، درخواست خود را ارسال نمایید.
-        </div>
-        <br>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-          ارسال
-        </button>
-
-      </form>
-      {% else %}
-      <div class="row text-bold">
-        درخواست شما در دست بررسی است.
+{% if request.user.profile.is_completed %}
+  {% if user.profile.role == 'k' %}
+  <div class="col-md-12">
+    <div class="card card-danger">
+      <div class="card-header">
+        <h3 class="card-title mb-0 float-left">درخواست رسانه‌دار شدن</h3>
       </div>
-      {% endif %}
+      <div class="card-body">
+        {% if user.profile.status == False %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row text-bold">
+            اگر می‌خواهید به عنوان رسانه‌دار فعالیت کنید، درخواست خود را ارسال نمایید.
+          </div>
+          <br>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+            ارسال
+          </button>
+
+        </form>
+        {% else %}
+        <div class="row text-bold">
+          درخواست شما در دست بررسی است.
+        </div>
+        {% endif %}
+      </div>
     </div>
   </div>
-</div>
+  {% endif %}
 {% endif %}
-
 
 
 
@@ -133,7 +136,7 @@
                   <form method="post" enctype="multipart/form-data" id="myform">
                     {% csrf_token %}
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" checked="" required>
+                      <input class="form-check-input" type="checkbox" required>
                       <label class="form-check-label">قوانین بالا را مطالعه کرده و می‌پذیرم.</label>
                     </div>
                   </form>
@@ -153,6 +156,7 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+
 </div>‍
 
 

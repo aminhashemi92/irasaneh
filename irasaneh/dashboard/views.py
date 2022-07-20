@@ -14,8 +14,8 @@ from VOD.models import *
 from django.utils import timezone
 import plotly.express as px
 from collections import Counter
-from extensions.utils import jalali_converter2, Persian_numbers_converter, gregorian_converter
-from datetime import datetime, timedelta
+from extensions.utils import jalali_converter2, Persian_numbers_converter, gregorian_converter, send_request_resanehdar_sms
+from datetime import datetime, timedelta, time
 
 
 
@@ -74,39 +74,43 @@ def profile(request):
         form1 = ProfileForm(instance = profile)
 
         if 'profile' in request.POST:
-            mphone = request.POST.get("mphone")
+            # mphone = request.POST.get("mphone")
             form1 = ProfileForm(request.POST, request.FILES, instance=profile)
             if form1.is_valid():
-                profile.mphone = mphone
-                profile.save()
+                # profile.mphone = mphone
+                # profile.is_completed = True
+                # profile.save()
                 form1.save()
                 messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
+                return redirect('dashboard:profile')
 
         elif 'req' in request.POST:
             profile.status = True
             profile.save()
+            send_request_resanehdar_sms(profile.mphone, profile.firstname)
+            # print(profile.mphone, profile.firstname)
             return redirect('dashboard:profile')
 
         context={
         "form1": form1,
         }
         return render(request,"dashboard/profile.html", context)
-    else:
-        form1 = ProfileForm()
-        if 'profile' in request.POST:
-            mphone = request.POST.get("mphone")
-            form1 = ProfileForm(request.POST, request.FILES, instance=profile)
-            if form1.is_valid():
-                obj = form1.save()
-                obj.mphone = mphone
-                obj.user = request.user
-                obj.save()
-                messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
-
-        context={
-        "form1": form1,
-        }
-        return render(request,"dashboard/profile.html", context)
+    # else:
+    #     form1 = ProfileForm()
+    #     if 'profile' in request.POST:
+    #         # mphone = request.POST.get("mphone")
+    #         form1 = ProfileForm(request.POST, request.FILES, instance=profile)
+    #         if form1.is_valid():
+    #             obj = form1.save()
+    #             # obj.mphone = mphone
+    #             # obj.user = request.user
+    #             obj.save()
+    #             messages.success(request,'اطلاعات شما با موفقیت ثبت گردید')
+    #
+    #     context={
+    #     "form1": form1,
+    #     }
+    #     return render(request,"dashboard/profile.html", context)
 
 
 
@@ -594,7 +598,11 @@ def load_counterChart(request):
                     if margin == "yesterday":
                         qs = qs.filter(created__date=datetime.now()-timedelta(days=1))
                     if margin == "today":
-                        qs = qs.filter(created__gte=datetime.now()-timedelta(days=0))
+                        today = datetime.now().date()
+                        tomorrow = today + timedelta(1)
+                        today_start = datetime.combine(today, time())
+                        today_end = datetime.combine(tomorrow, time())
+                        qs = qs.filter(created__lte=today_end , created__gte=today_start)
 
                 if start and end:
                     start = gregorian_converter(start)

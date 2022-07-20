@@ -17,7 +17,7 @@ class UserAdminCreationForm(UserCreationForm):
             visible.field.widget.attrs['class'] = 'input1'
 
         self.fields['phone'].widget.attrs.pop('autofocus', None)
-        self.fields['phone'].widget.attrs['placeholder'] = '09123456789'
+        self.fields['phone'].widget.attrs['placeholder'] = '*********09'
 
     error_css_class = 'error'
         # widgets = {

@@ -173,7 +173,7 @@
           <!-- <i class="bi bi-person-circle" style="color:white; font-size:2rem;"></i> -->
         </a>
         <div class="dropdown-menu dropdown-menu-lef text-right">
-          {% if request.user.profile %}
+          {% if request.user.profile.is_completed %}
           <a class="dropdown-item d-flex align-items-center px-2 py-3" href="#">
             <div class="img" style="background-image: url('{{user.profile.pic.url}}' ); border-radius:50%;"></div>
             <div class="text text-center">

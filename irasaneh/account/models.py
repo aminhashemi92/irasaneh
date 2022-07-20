@@ -90,8 +90,8 @@ class Profile(models.Model):
     sphone = models.CharField(max_length=200, null=True, verbose_name="تلفن ثابت", blank=True)
     mphone = models.CharField(max_length=200, null=True, verbose_name="تلفن همراه", blank=True)
     status = models.BooleanField(default=False, verbose_name="درخواست رسانه‌دار شدن")
-
-
+    is_completed = models.BooleanField(default=False, verbose_name="پروفایل تکمیل شده؟")
+    
     class Meta:
         verbose_name = "حساب کاربری"
         verbose_name_plural = "حساب‌های کاربری"
