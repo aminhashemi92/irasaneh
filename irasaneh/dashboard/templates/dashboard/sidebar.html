@@ -176,38 +176,7 @@
         </li> -->
 
 
-        <li class="nav-item has-treeview" style="display:None;">
-          <a href="#" class="nav-link
-          {% if request.resolver_match.url_name == 'reaports' %}
-          active
-          {% endif %}">
-            <i class="nav-icon fas fa-edit"></i>
-            <p>
-              گزارش‌ها
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/forms/general.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>فروش</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/forms/advanced.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>خرید</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/forms/editors.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>زمان‌بندی</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+
 
         {% if request.user.profile.position == 'm' %}
         <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'employee' %}
@@ -249,9 +218,11 @@
         </li>
         {% endif %}
         <!-- <li class="nav-header">EXAMPLES</li> -->
-        <li class="nav-item has-treeview" style="display:None">
+        <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'charts' or  request.resolver_match.url_name == 'lastlog' %}
+        menu-open
+        {% endif %} ">
           <a href="#" class="nav-link
-          {% if request.resolver_match.url_name == 'plots' %}
+          {% if request.resolver_match.url_name == 'charts'  or request.resolver_match.url_name == 'lastlog' %}
           active
           {% endif %}">
             <i class="nav-icon fas fa-chart-pie"></i>
@@ -262,38 +233,26 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{% url 'dashboard:chartjs' %}" class="nav-link">
+              <a href="{% url 'dashboard:charts'%}" class="nav-link   {% if request.resolver_match.url_name == 'charts' %}
+                active
+                {% endif %}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>تجمیعی</p>
+                <p>نمودار بازدید</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'dashboard:flot' %}" class="nav-link">
+              <a href="{% url 'dashboard:lastlog' %}" class="nav-link  {% if request.resolver_match.url_name == 'lastlog' %}
+                active
+                {% endif %}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>فردی</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'dashboard:inline' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>سالیانه</p>
+                <p>جدول آخرین وضعیت</p>
               </a>
             </li>
           </ul>
         </li>
 
 
-        <li class="nav-item" >
-          <a href="{% url 'dashboard:charts'%}" class="nav-link
-          {% if request.resolver_match.url_name == 'charts' %}
-          active
-          {% endif %}">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>
-              گزارش‌ها
-            </p>
-          </a>
-        </li>
+
 
         <li class="nav-item has-treeview {% if request.resolver_match.url_name == 'VideoAdd' or request.resolver_match.url_name == 'Videos' or request.resolver_match.url_name == 'VideoUpdate' %}
         menu-open

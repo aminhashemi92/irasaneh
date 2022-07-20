@@ -30,6 +30,7 @@ urlpatterns = [
     path('vodEventDelete/<int:pk>', vodEventDelete, name="vodEventDelete"),
 
     path('charts', charts, name="charts"),
+    path('lastlog', lastlog, name="lastlog"),
     path('chartjs', chartjs, name="chartjs"),
     path('flot', flot, name="flot"),
     path('inline', inline, name="inline"),

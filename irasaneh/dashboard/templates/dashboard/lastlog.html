@@ -1,0 +1,253 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{%block title%}|داشبورد من
+{% endblock %}
+
+{% block sidebar %}
+{% include 'dashboard/sidebar.html' %}
+{% endblock %}
+
+{% block header %}
+جدول آخرین وضعیت
+{% endblock %}
+
+{% block moreheader %}
+
+{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- AREA CHART -->
+        <div class="card card-primary">
+          <div class="card-header align-items-center">
+            <div class="card-tools" style="float:left;">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div>
+            <h3 class="card-title mb-0" style="float:right;">جدول آخرین وضعیت رسانه‌ها</h3>
+          </div>
+          <div class="card-body">
+
+
+            <div class="" id="counterChart">
+              <div class="chart">
+                <div class="card">
+
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>نام رسانه</th>
+                          <th>فعال بودن رسانه در یک‌ساعت گذشته</th>
+                          <th>آخرین وضعیت</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for resaneh in resanehs %}
+                        <tr>
+                          <td>{{resaneh.name}}</td>
+                          {% if resaneh.log %}
+                          <td>
+                            <span class="not-visible">True</span>
+                            <img src='/static/admin/img/icon-yes.svg' alt='True' width="25">
+                          </td>
+                          <!-- <td ><i class="icon fas fa-check alert alert-success"></i></td> -->
+                          {% else %}
+                          <td>
+                            <span class="not-visible">False</span>
+                            <img src='/static/admin/img/icon-no.svg' alt='False' width="25">
+                          </td>
+                          <!-- <td ><i class="icon fas fa-exclamation-triangle alert alert-danger"></i></td> -->
+                          {% endif %}
+                          <td>{{resaneh.time}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>نام رسانه</th>
+                          <th>فعال بودن رسانه در یک‌ساعت گذشته</th>
+                          <th>آخرین وضعیت</th>
+
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+
+      </div>
+
+      <!-- /.col (RIGHT) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+<script>
+  $(function() {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "primary": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(".margin-button").click(function() {
+    var els = document.getElementsByClassName("margin-button");
+    if ($(this).hasClass("btn-light")) {
+      for (var i = 0; i < els.length; i++) {
+        els[i].classList.remove('btn-primary');
+        els[i].classList.add('btn-light');
+      };
+      $(this).removeClass("btn-light");
+      $(this).addClass("btn-primary");
+      $('#pick-date').removeClass("btn-primary");
+      $('#pick-date').addClass("btn-light");
+      $('#date1').prop('disabled', true);
+      $('#date2').prop('disabled', true);
+      $('#date1').val('');
+      $('#date2').val('');
+      // for(var i = 0; i < els.length; i++)
+      // {
+      //   // console.log(els[i]);
+      //   if (els[i].classList.contains("btn-light")) {
+      //       els[i].classList.remove('btn-light');
+      //       // els[i].classList.remove('btn-primary');}
+      //       els[i].classList.add('btn-primary');}
+      //       // box1.classList.contains('active'); //true
+      //       console.log("asdsd");
+      //
+      // }
+    };
+    var margin = $(this).data("margin");
+    $('#margin').val(margin)
+
+  });
+  //   $( ".margin-button").each(function(index) {
+  //     console.log(index);
+  //     $(this).on("click", function(){
+  //       if ($(this).hasClass("btn-light")) {
+  //         $(this).removeClass('btn-light');
+  //         $(this).addClass('btn-primary');}
+  //         // For the boolean value
+  //         // var boolKey = $(this).data('selected');
+  //         // For the mammal value
+  //         // var mammalKey = $(this).attr('id');
+  //     });
+  // });
+
+  // $( ".margin-button" ).click(function() {
+  //   $('.margin-button').each(function(i){
+  //         $(this).removeClass('btn-primary');
+  //   }
+  //   if ($(this).hasClass("btn-light")) {
+  //     $(this).removeClass('btn-light');
+  //     $(this).addClass('btn-primary');}
+  // $('.margin-button').each(function(i){
+  //       $(this).removeClass('btn-primary');
+  // }
+  // console.log($(this));
+
+  // });
+  // $('.margin-button').each(function(){
+  //       $(this).removeClass('btn-primary');
+  // var languages= $(this).addClass('btn-primary');
+  // console.log(languages);
+  // });
+</script>
+<script>
+  $("#submitButton").click(function(ev) {
+    var form = $("#formId");
+    var url = "{% url 'dashboard:ajax_load_counterChart' %}";
+    // console.log(url);
+    $.ajax({
+      type: "GET",
+      url: url,
+      data: form.serialize(),
+      success: function(data) {
+        $("#counterChart").html(data);
+        // Ajax call completed successfully
+        // alert("Form Submited Successfully");
+
+      },
+      error: function(data) {
+
+        // Some error in ajax call
+        alert("اطلاعاتی مناسب با فیلترهای انتخاب شده وجود ندارد!");
+      }
+    });
+  });
+</script>
+
+<link rel="stylesheet" href="{% static 'home/css/kamadatepicker.min.css' %}">
+<script src="{% static 'home/js/kamadatepicker.min.js' %}"></script>
+<script type="text/javascript">
+  var customOptions = {
+    placeholder: "روز-ماه-سال",
+    twodigit: false,
+    closeAfterSelect: true,
+    nextButtonIcon: "/static/home/images/icons/timeir_next.png",
+    previousButtonIcon: "/static/home/images/icons/timeir_prev.png",
+    buttonsColor: "blue",
+    forceFarsiDigits: true,
+    markToday: true,
+    markHolidays: true,
+    highlightSelectedDay: true,
+    sync: true,
+    gotoToday: true
+  }
+  kamaDatepicker('date1', customOptions);
+  kamaDatepicker('date2', customOptions);
+</script>
+
+<script type="text/javascript">
+  $("#pick-date").click(function(ev) {
+    var els = document.getElementsByClassName("margin-button");
+    if ($(this).hasClass("btn-light")) {
+      for (var i = 0; i < els.length; i++) {
+        els[i].classList.remove('btn-primary');
+        els[i].classList.add('btn-light');
+      };
+      $(this).removeClass("btn-light");
+      $(this).addClass("btn-primary");
+      $('#date1').prop('disabled', false);
+      $('#date2').prop('disabled', false);
+      $('#margin').val('')
+      console.log("saaa");
+    };
+
+
+  });
+</script>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -703,6 +703,55 @@ def load_counterChart(request):
     return render(request, "dashboard/counterChart.html", context)
 
 
+
+def lastlog(request):
+    user = request.user
+    profile = user.profile
+    if profile.position == 'c':
+        videos = user.advideo.all()
+    elif profile.position == 'm':
+        if profile.company:
+            videos = profile.company.advideo.all()
+        else:
+            videos = user.advideo.all()
+
+
+    context={
+        'videos':videos,
+    }
+
+    if videos:
+        boxes = AdBox.objects.filter(videos__in=videos)
+        events = AdEvent.objects.filter(media__in=boxes)
+
+        resanehs_id = events.values_list('resaneh', flat=True).distinct()
+        resanehs = Resaneh.objects.filter(id__in = resanehs_id)
+
+        context['resanehs'] = resanehs
+
+
+    rdata = []
+    for resaneh in resanehs:
+        resaneh_last_connection_log = AdConnectionLog.objects.filter(resaneh=resaneh).last()
+        if resaneh_last_connection_log:
+            resaneh_last_connection_time = resaneh_last_connection_log.created
+            resaneh_last_connection_log = resaneh_last_connection_log.jcreated
+            now = datetime.now(timezone.utc)
+            diff =  now - resaneh_last_connection_time
+            log = False
+            if diff.seconds < 3600:
+                log = True
+        else:
+            log = False
+            resaneh_last_connection_log = 'اطلاعاتی وجود ندارد'
+
+        dic = {'name':resaneh.name, 'log':log, 'time':resaneh_last_connection_log}
+        rdata.append(dic)
+
+
+    return render(request, "dashboard/lastlog.html", {"resanehs":rdata})
+
+
 def chartjs(request):
     return render(request, "dashboard/chartjs.html")
 

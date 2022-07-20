@@ -160,6 +160,10 @@ class AdConnectionLog(models.Model):
     detail = models.TextField(verbose_name="جزییات بیشتر", blank=True)
     created = models.DateTimeField(default=timezone.now,verbose_name="زمان ایجاد", blank=True)
 
+    def jcreated(self):
+        return jalali_converter(self.created)
+    jcreated.short_description = "زمان ایجاد"
+
 
 class AdApplicationLog(models.Model):
     resaneh = models.ForeignKey(Resaneh,verbose_name="رسانه",blank=True,on_delete=models.SET_NULL, related_name="adapplicationlog", null=True)
